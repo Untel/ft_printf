@@ -6,12 +6,13 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/20 20:23:43 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/20 20:42:22 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include <stdarg.h>
 
-int ft_printf(const char *, ...);
+int ft_printf(const char *str, ...);
 #endif

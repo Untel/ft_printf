@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/28 19:41:23 by adda-sil         ###   ########.fr       */
+/*   Created: 2019/10/28 19:22:15 by adda-sil          #+#    #+#             */
+/*   Updated: 2019/10/28 19:40:43 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdarg.h>
+#ifndef TEST_H
+# define TEST_H
 # include <stdio.h>
-# include "libft.h"
-
-int ft_printf(const char *str, ...);
+# include "ft_printf.h"
+# ifndef ORIGIN_PRINTF
+#  define ORIGIN_PRINTF
+#  define PRINT printf
+# else
+#  define PRINT ft_printf
+# endif
 #endif

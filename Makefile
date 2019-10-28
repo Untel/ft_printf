@@ -1,6 +1,8 @@
 SRC_DIR			= ./srcs
 
-INCLUDES_DIR	= ./includes
+TEST_DIR		= ./.test
+
+INCLUDES_DIR	= ${SRC_DIR}
 
 SRC_FILES		= ft_printf.c ft_printf_utils.c
 
@@ -15,6 +17,8 @@ TEST_OBJS		= $(TEST_FILES:.c=.o)
 CFLAGS			= -Wall -Wextra -Werror -I $(INCLUDES_DIR)
 
 TEST_FLAGS		= -g3 -fsanitize=address
+
+LIBFT			= -L ./libft/lft
 
 CC				= gcc
 

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/28 21:51:44 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/28 21:55:10 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include "test.h"
 
-#define PRINT(x, ...) (printf("ft_print(%s) =>\t\t", x#__VA_ARGS__) && ft_printf(x, __VA_ARGS__) && printf("\tVS\t") && printf(x, __VA_ARGS__) && printf("\n"))
+#define PRINT(x, ...) (printf("ft_print(%s, %s) =>\t", x, #__VA_ARGS__) && ft_printf(x, __VA_ARGS__) && printf("\tVS\t") && printf(x, __VA_ARGS__) && printf("\n"))
 
 int main(int ac, char **av)
 {

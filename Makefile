@@ -8,7 +8,7 @@ LIBFT			= libft.a
 
 INCLUDES_DIR	= ${SRC_DIR}
 
-SRC_FILES		= ft_printf.c ft_printf_utils.c
+SRC_FILES		= *.c
 
 TEST_FILES		= .main.c
 
@@ -34,17 +34,20 @@ NAME_TEST		= .ft_printf_test.out
 
 LIBFT_MAKE		= ${MAKE} -C ${LIBFT_DIR}
 
+LIBFT			= -L${LIBFT_DIR} -lft
+
 $(NAME):		$(OBJS)
 				${CC} ${CFLAGS} ${OBJS} -o ${NAME}
 
 all:			$(NAME)
 
 test:			libft $(OBJS) $(TEST_OBJS)
-				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} -L${LIBFT_DIR} -lft -o ${NAME_TEST}
+				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
 				./${NAME_TEST}					
 
 libft:			
 				git submodule init
+				git submodule update
 				${LIBFT_MAKE}
 
 clean:

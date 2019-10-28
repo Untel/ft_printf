@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/21 20:41:42 by adda-sil         ###   ########.fr       */
+/*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
+/*   Updated: 2019/10/27 18:22:30 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdlib.h>
 #include <stdio.h>
 
-int		ft_printf(const char *str, ...)
+int main(int ac, char **av)
 {
-	va_list args;
-
-	va_start(args, str);
-	printf("str: %s\n", str);
-	printf("el: %d\n", va_arg(args, int));
-	va_end(args);
-	return (1);
+    (void)ac;
+    (void)av;
+    ft_printf("hello%t", 4200);
 }

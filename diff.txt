@@ -1,0 +1,20 @@
+==== PRINTF ====
+print(Hi %d)	Hi %d -yo	Hi 42
+print(Bonjour %d)	Bonjour %d	Bonjour 42
+print(Yop %d)	Yop %d	Yop 42
+==== PRINTF ====
+print(Hi %d)		Hi %d -yo	Hi 42
+print(Bonjour %d)		Bonjour %d	Bonjour 42
+print(Yop %d)		Yop %d	Yop 42
+==== PRINTF ====
+ft_print(Hi %d) =>		Hi %d -yo	Hi 42
+ft_print(Bonjour %d) =>		Bonjour %d	Bonjour 42
+ft_print(Yop %d) =>		Yop %d	Yop 42
+==== PRINTF ====
+ft_print(Hi %d) =>		Hi %d -yo	VS	Hi 42
+ft_print(Bonjour %d) =>		Bonjour %d	VS	Bonjour 42
+ft_print(Yop %d) =>		Yop %d	VS	Yop 42
+==== PRINTF ====
+ft_print(Hi %d42) =>		Hi %d -yo	VS	Hi 42
+ft_print(Bonjour %d42) =>		Bonjour %d	VS	Bonjour 42
+ft_print(Yop %d42) =>		Yop %d	VS	Yop 42

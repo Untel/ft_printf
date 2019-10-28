@@ -38,9 +38,11 @@ LIBFT_MAKE		= ${MAKE} -C ${LIBFT_DIR}
 
 LIBFT			= -L${LIBFT_DIR} -lft
 
-TEST_1			= test1.txt
+TEST_1			= test1.test
 
-TEST_2			= test2.txt
+TEST_2			= test2.test
+
+DIFF			= diff --text --expand-tabs --left-column --side-by-side
 
 $(NAME):		libft $(OBJS)
 				${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
@@ -54,13 +56,10 @@ run:			test
 				./${NAME_TEST}
 
 compare:		test
-				${RM} ${TEST_1} ${TEST_2}
-				./${NAME_TEST} >> ${TEST_1}
-				${RM} ${NAME_TEST}
-				${CC} ${CFLAGS} ${TEST_FLAGS} -D ORIGIN_PRINTF=1 ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
-				./${NAME_TEST} >> ${TEST_2}
-				diff --text --side-by-side ${TEST_1} ${TEST_2} > diff.txt
-				${RM} ${TEST_1} ${TEST_2}
+				./${NAME_TEST} >> diff.txt
+				# ./${NAME_TEST} "1" > ${TEST_2}
+				# $(DIFF) ${TEST_1} ${TEST_2}
+				# $(RM) $(TEST_1) $(TEST_2)
 
 libft:			
 				git submodule init

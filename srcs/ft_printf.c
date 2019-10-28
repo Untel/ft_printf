@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/28 15:51:40 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/28 16:16:53 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			strsub(str, j, (i - j));
-			j = 
+			// strsub(str, j, (i - j));
+			j = 0;
 		}
 	}
 	return (1);

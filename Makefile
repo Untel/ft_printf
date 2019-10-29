@@ -8,7 +8,7 @@ LIBFT			= libft.a
 
 INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR} -I ${SRC_DIR}
 
-SRC_FILES		= ft_printf.c ft_printf_utils.c
+SRC_FILES		= ft_printf.c ft_printf_utils.c ft_extract_flags.c
 
 TEST_FILES		= main.c
 

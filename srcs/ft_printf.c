@@ -6,14 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/29 19:36:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/29 20:28:12 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
  * Converters: "cspdiuxX%"
@@ -22,42 +19,8 @@
  * Modifiers_bonus: "l ll h hh ’# +"
  */
 
-const char *converters = "cspdiuxX%";
-const char *modifiers = "-0.*123456789";
-
 static int
-	convert(char conv, t_modifiers mods, t_list **lst, va_list args)
-{
-	char *res = 0;
-	(void)mods;
-
-	if (conv == 'd')
-		res = ft_itoa((int)va_arg(args, int));
-
-	if (res)
-		ft_lstadd_back(lst, ft_lstnew(res));
-	return (1);
-}
-
-static int
-	extract_flags(const char *str, t_list **lst, va_list args)
-{
-	int			i;
-	t_modifiers mods;
-
-	mods = (t_modifiers){ .padding = 0, .margin = 0, .show_sign = 0 };
-
-	i = 0;
-	while (str[i] && ft_strchr(modifiers, str[i]))
-		i++;
-
-	// if (ft_strchr(converters, str[i]))
-	convert(str[i], mods, lst, args);
-	return (i + 1);
-}
-
-static int
-	split_to_list(const char *str, t_list **lst, va_list args)
+	ft_split_to_list(const char *str, t_list **lst, va_list args)
 {
 	int		i;
 	int		j;
@@ -76,7 +39,7 @@ static int
 				return (0);
 			ft_lstadd_back(lst, el);
 			if (str[++i])
-				i += extract_flags(&str[i], lst, args);
+				i += ft_extract_flags(&str[i], lst, args);
 			j = i;
 		}
 		i++;
@@ -99,8 +62,8 @@ int
 	
 	len = 0;
 	va_start(args, str);
-	split_to_list(str, &el, args);
-	ft_lstprint(el, "Main");
+	ft_split_to_list(str, &el, args);
+	ft_lstprint(el, "NODES");
 	while (el)
 	{
 		// printf("%s", (char *)el->content);
@@ -108,6 +71,7 @@ int
 		ft_putstr_fd((char *)el->content, 1);
 		el = el->next;
 	}
+	// printf("\nTotal length %d\n", (int)len);
 	va_end(args);
 	return (1);
 }

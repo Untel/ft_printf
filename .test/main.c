@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/29 19:25:44 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/29 20:10:27 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int main(int ac, char **av)
     (void)ac;
 
     PRINT("Hi %d you", 42);
+    PRINT("Hi you %d", 42);
+    PRINT("Hi you %05d", 42);
     // PRINT("Bonjour %d", 42);
     // PRINT("%d yo", 42);
 }

@@ -32,7 +32,7 @@ RM				= rm -f
 
 NAME			= ft_printf.out
 
-NAME_TEST		= .ft_printf_test.out
+NAME_TEST		= a.out
 
 LIBFT_MAKE		= ${MAKE} -C ${LIBFT_DIR}
 
@@ -53,10 +53,9 @@ test:			libft $(OBJS) $(TEST_OBJS)
 				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
 
 run:			test
-				./${NAME_TEST}
+				./${NAME_TEST} << NULL
 
 compare:		test
-				echo "=======================";
 				./${NAME_TEST}
 
 # ./${NAME_TEST} "1" > ${TEST_2}

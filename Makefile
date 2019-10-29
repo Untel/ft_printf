@@ -56,10 +56,12 @@ run:			test
 				./${NAME_TEST}
 
 compare:		test
-				./${NAME_TEST} >> diff.txt
-				# ./${NAME_TEST} "1" > ${TEST_2}
-				# $(DIFF) ${TEST_1} ${TEST_2}
-				# $(RM) $(TEST_1) $(TEST_2)
+				echo "=======================";
+				./${NAME_TEST}
+
+# ./${NAME_TEST} "1" > ${TEST_2}
+# $(DIFF) ${TEST_1} ${TEST_2}
+# $(RM) $(TEST_1) $(TEST_2)
 
 libft:			
 				git submodule init

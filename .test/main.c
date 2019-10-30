@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/30 18:46:55 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:58:46 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int main(int ac, char **av)
     PRINT("Hi \'%5d\' you", -42);
     PRINT("Hi \'%.6d\' you", -42);
     PRINT("Hi \'%06d\' you", -42);
+    PRINT("Hi \'%.1d\' you", -42);
+    PRINT("Hi \'%+6.d\' you", 42);
+    PRINT("Hi \'%+09.4d\' you", 42);
     // PRINT("Bonjour %d", 42);
     // PRINT("%d yo", 42);
 }

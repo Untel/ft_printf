@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/30 18:43:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:57:54 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,8 @@ static size_t
 {
 	if (conv != 'f' && mods->precision != -1)
 	{
-		mods->padding = mods->precision != -2 ? mods->precision : 0;
+		mods->padding = mods->precision != -2 ? mods->precision : mods->padding;
 		mods->align_left = 0;
-		mods->padchar = '0';
 	}
 }
 
@@ -82,7 +81,7 @@ int
 	int			i;
 	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = '\0', .align_left = 0, .precision = -1 };
+	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = '\0', .align_left = 0, .precision = 0 };
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')

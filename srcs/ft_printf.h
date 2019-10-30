@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/29 20:34:46 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:28:44 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@
 
 typedef	struct	s_modifiers
 {
-	int			padding;
-	int			precision;
+	size_t		padding;
 	char		padchar;
-	int			show_sign;
+	int			align_left;
+	int			precision;
+	char		sign;
 }				t_modifiers;
-
+void	*ft_then_free(void *ptr, void *res);
+char	*ft_char_to_str(char c);
+int		ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args);
 int		ft_extract_flags(const char *str, t_list **lst, va_list args);
-int 	ft_parseint(const char *str, ...);
 int		ft_printf(const char *str, ...);
+char	*ft_fill_padding(char *str, t_modifiers mods, char conv);
 #endif

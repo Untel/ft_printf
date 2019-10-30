@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/29 21:21:16 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:43:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@
 
 #include "ft_printf.h"
 
-const char *converters = "cspdiuxX%";
-const char *modifiers = "-0.*123456789";
-
 static size_t
 	ft_handle_padding_zero(t_modifiers *mods)
 {
-	mods->padding = '0';
+	mods->padchar = '0';
 	return (1);
 }
 
@@ -42,30 +39,41 @@ static size_t
 }
 
 static size_t
+	ft_handle_jusitfy_side(t_modifiers *mods)
+{
+	mods->align_left = 1;
+	mods->padchar = ' ';
+	return (1);
+}
+
+static size_t
 	ft_handle_precision_size(const char *str, t_modifiers *mods, va_list args)
 {
 	str += 1;
 	if (*str == '*')
 	{
 		mods->precision = (int)va_arg(args, int);
+		return (2);
+	}
+	if (!ft_isdigit(*str))
+	{
+		mods->precision = -2;
 		return (1);
 	}
+		
 	mods->precision = ft_atoi(str);
 	return (1 + ft_strlen(ft_itoa(mods->padding)));
 }
 
-static int
-	ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args)
+static size_t
+	ft_handle_special_cases(char conv, t_modifiers *mods, va_list args)
 {
-	char *res = 0;
-	(void)mods;
-
-	if (conv == 'd')
-		res = ft_itoa((int)va_arg(args, int));
-
-	if (res)
-		ft_lstadd_back(lst, ft_lstnew(res));
-	return (1);
+	if (conv != 'f' && mods->precision != -1)
+	{
+		mods->padding = mods->precision != -2 ? mods->precision : 0;
+		mods->align_left = 0;
+		mods->padchar = '0';
+	}
 }
 
 int
@@ -74,7 +82,7 @@ int
 	int			i;
 	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .show_sign = 0 };
+	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = '\0', .align_left = 0, .precision = -1 };
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')
@@ -83,10 +91,13 @@ int
 			i += ft_handle_padding_size(&str[i], &mods, args);
 		else if (str[i] == '.')
 			i += ft_handle_precision_size(&str[i], &mods, args);
+		else if (str[i] == '-')
+			i += ft_handle_jusitfy_side(&mods);
+		else if (str[i] == '+' || str[i] == ' ')
+			mods.sign = str[i++];
 		else
 			break;
-
-	// if (ft_strchr(converters, str[i]))
+	ft_handle_special_cases(str[i], &mods, args);	
 	ft_convert(str[i], mods, lst, args);
 	return (i + 1);
 }

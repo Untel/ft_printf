@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/29 20:10:27 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/10/30 18:46:55 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,30 @@
 #include <unistd.h>
 #include "test.h"
 
-#define PRINT(x, ...) (printf("\t-----\nft_printf(%s, %s)\n", x, #__VA_ARGS__) && printf("'") && ft_printf(x, __VA_ARGS__) && printf("'") && printf("\t\tVS\t\t") && printf("'") && printf(x, __VA_ARGS__) && printf("'") && printf("\n"))
+#define PRINT(x, ...) (printf("======================================================\nft_printf(\"%s\", %s)\n------------------------------------------------------\n", x, #__VA_ARGS__) && ft_printf(x, __VA_ARGS__) && printf("\t\tVS\t\t") && printf(x, __VA_ARGS__) && printf("\n------------------------------------------------------\n"))
 
 int main(int ac, char **av)
 {
     (void)av;
     (void)ac;
 
-    PRINT("Hi %d you", 42);
-    PRINT("Hi you %d", 42);
-    PRINT("Hi you %05d", 42);
+    PRINT("Hi \'%d\' you", 42);
+    PRINT("Hi \'%5d\' you", 42);
+    PRINT("Hi \'%05d\' you", 42);
+    PRINT("Hi \'% 05d\' you", 42);
+    PRINT("Hi \'% 0*d\' you", 5, 42);
+    // PRINT("Hi \'%-5s\' you", "yo");
+    PRINT("Hi \'%05s\' you", "yo");
+    PRINT("Hi \'%.10s\' you", "yo");
+    PRINT("Hi \'%.s\' you", "yo");
+
+	PRINT("Hi \'%.5d\' you", 42);
+    PRINT("Hi \'%.*d\' you", 5, 42);
+    PRINT("Hi \'%+5d\' you", 42);
+    PRINT("Hi \'%+5d\' you", -42);
+    PRINT("Hi \'%5d\' you", -42);
+    PRINT("Hi \'%.6d\' you", -42);
+    PRINT("Hi \'%06d\' you", -42);
     // PRINT("Bonjour %d", 42);
     // PRINT("%d yo", 42);
 }

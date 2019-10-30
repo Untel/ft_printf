@@ -8,7 +8,7 @@ LIBFT			= libft.a
 
 INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR} -I ${SRC_DIR}
 
-SRC_FILES		= ft_printf.c ft_printf_utils.c ft_extract_flags.c
+SRC_FILES		= ft_printf.c ft_printf_utils.c ft_extract_flags.c ft_convert.c
 
 TEST_FILES		= main.c
 
@@ -20,7 +20,7 @@ OBJS			= $(SRC:.c=.o)
 
 TEST_OBJS		= $(TESTER:.c=.o)
 
-CFLAGS			= -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS			= $(INCLUDES)
 
 TEST_FLAGS		= -g3 -fsanitize=address
 
@@ -45,7 +45,7 @@ TEST_2			= test2.test
 DIFF			= diff --text --expand-tabs --left-column --side-by-side
 
 $(NAME):		libft $(OBJS)
-				${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+				${AR} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
 
 all:			$(NAME)
 
@@ -58,9 +58,9 @@ run:			test
 compare:		test
 				./${NAME_TEST}
 
-# ./${NAME_TEST} "1" > ${TEST_2}
-# $(DIFF) ${TEST_1} ${TEST_2}
-# $(RM) $(TEST_1) $(TEST_2)
+				# ./${NAME_TEST} "1" > ${TEST_2}
+				# $(DIFF) ${TEST_1} ${TEST_2}
+				# $(RM) $(TEST_1) $(TEST_2)
 
 libft:			
 				git submodule init
@@ -75,6 +75,7 @@ fclean:			clean
 				${LIBFT_MAKE} fclean
 
 re:				fclean all
+				${LIBFT_MAKE} re
 
 retest:			fclean test
 

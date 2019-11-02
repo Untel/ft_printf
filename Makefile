@@ -8,7 +8,7 @@ LIBFT			= libft.a
 
 INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR} -I ${SRC_DIR}
 
-SRC_FILES		= ft_printf.c ft_printf_utils.c ft_extract_flags.c ft_convert.c
+SRC_FILES		= ft_printf.c ft_printf_utils.c ft_extract_flags.c ft_convert.c ft_convert_base.c
 
 TEST_FILES		= main.c
 
@@ -20,9 +20,9 @@ OBJS			= $(SRC:.c=.o)
 
 TEST_OBJS		= $(TESTER:.c=.o)
 
-CFLAGS			= $(INCLUDES)
+CFLAGS			= -Werror -Wextra -Wall -w -g3 -fsanitize=address $(INCLUDES)
 
-TEST_FLAGS		= -g3 -fsanitize=address
+TEST_FLAGS		= 
 
 CC				= gcc
 

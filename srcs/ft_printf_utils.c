@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/30 18:36:32 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/02 15:13:05 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void
 char
 	*ft_char_to_str(char c)
 {
-	char str[2];
+	char *str;
 
+	str = malloc(sizeof(char) * 2);
 	str[0] = c;
 	str[1] = 0;
 	return (str);
@@ -38,14 +39,15 @@ char
 	size_t	n;
 
 	if (!((initial_len = ft_strlen(str)) < mods.padding))
-		return (ft_strdup(str));
+		return (str);
 	if (!(new_str = malloc(sizeof(char) * (mods.padding + 1))))
 		return (NULL);
 	i = 0;
 	n = 0;
 	new_str[mods.padding] = '\0';
 	if (mods.padchar == '0' && ((*str == '-' || mods.sign)
-		|| (conv == 'p' && *str == '0' && (new_str[i++] = *str++))))
+		|| (conv == 'p' && *str == '0' && str[1] == 'x'
+		&& (new_str[i++] = *str++))))
 		new_str[i++] = *str++;
 	while (!mods.align_left && n++ < (mods.padding - initial_len))
 		new_str[i++] = mods.padchar;

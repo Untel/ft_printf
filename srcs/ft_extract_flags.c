@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/30 18:57:54 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/02 14:18:30 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int
 			mods.sign = str[i++];
 		else
 			break;
-	ft_handle_special_cases(str[i], &mods, args);	
+	// ft_handle_special_cases(str[i], &mods, args);
 	ft_convert(str[i], mods, lst, args);
 	return (i + 1);
 }

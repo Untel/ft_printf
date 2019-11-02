@@ -49,7 +49,7 @@ $(NAME):		libft $(OBJS)
 
 all:			$(NAME)
 
-test:			libft $(OBJS) $(TEST_OBJS)
+test:			libft $(OBJS) $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
 				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
 
 run:			test

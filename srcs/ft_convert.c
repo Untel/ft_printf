@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/02 16:43:10 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/02 16:58:29 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ char*
 	char *res;
 
 	if (conv != 'u')
+	{
 		res = ft_itoa((int)va_arg(args, int));
+		if (mods.sign && *res != '-')
+			res = ft_strjoin(ft_char_to_str(mods.sign), res);
+	}
 	else
 		res = ft_uitoa((unsigned int)va_arg(args, unsigned int));
-	if (mods.sign && *res != '-')
-		res = ft_strjoin(ft_char_to_str(mods.sign), res);
 	res = ft_fill_padding(res, mods, conv);
 	return (res);
 }
@@ -55,9 +57,7 @@ char*
 {
 	char *res;
 
-	res = malloc(sizeof(char) * 2);
-	res[0] = ((char)va_arg(args, int));
-	res[1] = 0;
+	res = ft_char_to_str((char)va_arg(args, int));
 	res = ft_fill_padding(res, mods, 'c');
 	return (res);
 }

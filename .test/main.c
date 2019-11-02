@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/02 16:46:29 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:46:11 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ int main(int ac, char **av)
     PRINT("Hi \'%05d\' you", 42);
     PRINT("Hi \'% 05d\' you", 42);
     PRINT("Hi \'% 0*d\' you", 5, 42);
+    PRINT("Hi \'%*.*d\' you", -5, -5, 42);
+    PRINT("Hi \'%*d\' you", -5, 42);
+    PRINT("Hi \'%*d\' you", -5, 42);
+	return (1);
     // PRINT("Hi \'%-5s\' you", "yo");
     // PRINT("Hi \'%05s\' you", "yo");
     PRINT("Hi \'%.10s\' you", "yo");
     PRINT("Hi \'%.s\' you", "yo");
-
 	PRINT("Hi \'%.5d\' you", 42);
     PRINT("Hi \'%.*d\' you", 5, 42);
     PRINT("Hi \'%+5d\' you", 42);
@@ -53,6 +56,11 @@ int main(int ac, char **av)
     PRINT("Hi \'%u\' you", 3);
     PRINT("Hi \'%u\' you", 333343);
     PRINT("Hi \'%u\' you", INT32_MAX);
+    PRINT("Hi \'%c\' you", 'k');
+    PRINT("Hi \'%c\' you", '\0');
+    PRINT("Hi \'%05c\' you", '\0');
+    PRINT("Hi \'%05c\' you", 'c');
+    // PRINT("Hi \'%c\' you", '\n');
     // PRINT("Bonjour %d", 42);
     // PRINT("%d yo", 42);
 }

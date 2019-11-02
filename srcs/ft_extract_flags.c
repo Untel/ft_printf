@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/02 14:18:30 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:49:46 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,17 @@ static size_t
 static size_t
 	ft_handle_padding_size(const char *str, t_modifiers *mods, va_list args)
 {
+	int s;
 	if (*str == '*')
 	{
-		mods->padding = va_arg(args, int);
+		s = va_arg(args, int);
+		if (s >= 0)
+			mods->padding = (size_t)s;
+		else
+		{
+			mods->align_left = 1;
+			mods->padding = (size_t)(s * -1);
+		}
 		return (1);
 	}
 	mods->padding = ft_atoi(str);

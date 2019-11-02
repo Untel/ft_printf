@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/02 16:38:55 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/02 17:41:17 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include "libft.h"
 # include <stdlib.h>
+
 typedef	struct	s_modifiers
 {
 	size_t		padding;

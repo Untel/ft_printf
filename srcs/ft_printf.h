@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 20:50:49 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/03 22:25:23 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "libft.h"
 # include <stdlib.h>
 
+typedef enum	e_argsize
+{
+	N, L, LL, H, HH
+}				t_argsize;
 typedef	struct	s_modifiers
 {
 	size_t		padding;
@@ -24,6 +28,7 @@ typedef	struct	s_modifiers
 	int			align_left;
 	int			precision;
 	int			alt;
+	t_argsize	size;
 	char		sign;
 }				t_modifiers;
 void	*ft_then_free(void *ptr, void *res);
@@ -31,7 +36,7 @@ char	*ft_char_to_str(char c);
 int		ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args);
 int		ft_extract_flags(const char *str, t_list **lst, va_list args);
 int		ft_printf(const char *str, ...);
-char	*ft_nbrbase(int nbr, char *base, unsigned int base_size);
+char	*ft_nbrbase(uintptr_t nbr, char *base, unsigned int base_size);
 
 char	*ft_fill_padding(char *str, t_modifiers mods, char conv);
 char	*ft_fill(char *str, size_t count, char c, int align_left);

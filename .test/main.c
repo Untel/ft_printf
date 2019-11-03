@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 21:11:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/03 22:05:53 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,35 @@ int	run_char_tests()
     PRINT("Hi \'%0*.c\' you", 5, 'c');
 }
 
-int	run_pointer_tests()
+int	run_hex_tests()
 {
-	char *init = "BONJOUR A TOUSF";
-	char uninit;
-
     PRINT("Hi \'%x\' you", 15);
-    PRINT("Hi \'%x\' you", -750);
+    PRINT("Hi \'%X\' you", INT64_MAX);
+    PRINT("Hi \'%x\' you", INT64_MAX + 1);
+	PRINT("Hi \'%X\' you", INT64_MIN);
+    PRINT("Hi \'%x\' you", INT64_MIN - 1);
+    PRINT("Hi \'%X\' you", INT32_MAX);
     PRINT("Hi \'%X\' you", 750);
     PRINT("Hi \'%#x\' you", 750);
     PRINT("Hi \'%#10.7x\' you", 750);
     PRINT("Hi \'%-5X\' you", 750);
     PRINT("Hi \'%-10.3X\' you", 75000);
+}
+int	run_pointer_tests()
+{
+	char *init = "BONJOUR A TOUSF";
+	char uninit;
+
     PRINT("Hi \'%p\' you", init);
     PRINT("Hi \'%.5p\' you", init);
     PRINT("Hi \'%.10p\' you", init);
     PRINT("Hi \'%p\' you", uninit);
     PRINT("Hi \'%-10.3p\' you", uninit);
     PRINT("Hi \'%#-10.3p\' you", uninit);
+    PRINT("Hi \'%p\' you", INT64_MAX);
+    PRINT("Hi \'%llx\' you", INT64_MAX);
+    PRINT("Hi \'%lx\' you", INT64_MAX);
+    PRINT("Hi \'%hx\' you", INT64_MAX);
     // PRINT("Hi \'%020p\' you", init);
     // PRINT("Hi \'%020p\' you", uninit);
     // PRINT("Hi \'%25.20p\' you", init);
@@ -122,6 +133,8 @@ int main(int ac, char **av)
 		else if (strcmp(*av, "string") == 0)
 			run_string_tests();
 		else if (strcmp(*av, "pointer") == 0)
+			run_pointer_tests();
+		else if (strcmp(*av, "hex") == 0)
 			run_pointer_tests();
 		
 }

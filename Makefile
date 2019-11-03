@@ -53,25 +53,30 @@ $(NAME):		libft $(OBJS)
 all:			$(NAME)
 
 test:			libft $(OBJS) $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
-				${CC} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
+				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
 
-run-int:		test
+run/int:		test
 				./${NAME_TEST} int
 
-run-char:		test
+run/char:		test
 				./${NAME_TEST} char
 
-run-pointer:	test
+run/pointer:	test
 				./${NAME_TEST} pointer
+
+
+run/hex:		test
+				./${NAME_TEST} hex
 				
-run-string:		test
+run/string:		test
 				./${NAME_TEST} string
 
-run-all:
-				run-int
-				run-string
-				run-char
-				run-pointer
+run/all:
+				run/int
+				run/string
+				run/char
+				run/pointer
+				run/hex
 
 compare:		test
 				./${NAME_TEST}

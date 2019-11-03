@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 20:21:41 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/03 22:29:39 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,26 @@ static size_t
 {
 	mods->padchar = '0';
 	return (1);
+}
+
+static size_t
+	ft_handle_size(const char *str, t_modifiers *mods)
+{
+	size_t ret;
+
+	ret = 1;
+	if (*str == 'l')
+		if (str[1] == 'l' && ret++)
+			mods->size = LL;
+		else
+			mods->size = L;
+	else
+		if (str[1] == 'h' && ret++)
+			mods->size = HH;
+		else
+			mods->size = H;
+
+	return (ret);
 }
 
 static size_t
@@ -89,7 +109,7 @@ int
 	int			i;
 	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0 };
+	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0, .size = N };
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')
@@ -104,6 +124,8 @@ int
 			mods.sign = str[i++];
 		else if (str[i] == '#')
 			(mods.alt = 1) && i++;
+		else if (str[i] == 'l' || str[i] == 'h')
+			i += ft_handle_size(&str[i], &mods);			
 		else
 			break;
 	// ft_handle_special_cases(str[i], &mods, args);

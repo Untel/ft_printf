@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/02 17:49:46 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/03 20:21:41 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ static size_t
 	}
 	if (!ft_isdigit(*str))
 	{
-		mods->precision = -2;
+		mods->precision = 0;
 		return (1);
 	}
 		
 	mods->precision = ft_atoi(str);
-	return (1 + ft_strlen(ft_itoa(mods->padding)));
+	return (1 + ft_strlen(ft_itoa(mods->precision)));
 }
 
 static size_t
@@ -89,7 +89,7 @@ int
 	int			i;
 	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = '\0', .align_left = 0, .precision = 0 };
+	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0 };
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')
@@ -102,6 +102,8 @@ int
 			i += ft_handle_jusitfy_side(&mods);
 		else if (str[i] == '+' || str[i] == ' ')
 			mods.sign = str[i++];
+		else if (str[i] == '#')
+			(mods.alt = 1) && i++;
 		else
 			break;
 	// ft_handle_special_cases(str[i], &mods, args);

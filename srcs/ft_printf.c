@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/10/30 15:24:52 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/03 17:39:38 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int
 	if (!(el = ft_lstnew((void *)ptr)))
 		return (0);
 	ft_lstadd_back(lst, el);
-	// ft_lstprint(el, "In split fct");
+	// ft_lstprint(lst, "In split fct");
 	return (1);
 }
 

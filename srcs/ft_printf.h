@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 22:25:23 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 09:55:37 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ char	*ft_parse_int(t_modifiers mods, va_list args, char conv);
 char	*ft_parse_char(t_modifiers mods, va_list args);
 char	*ft_parse_string(t_modifiers mods, va_list args);
 char	*ft_parse_base(t_modifiers mods, va_list args, char conv);
+char	*ft_parse_float(t_modifiers mods, va_list args, char conv);
 // char	*ft_parse_address(t_modifiers mods, va_list args);
 #endif

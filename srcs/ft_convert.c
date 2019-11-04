@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 21:07:54 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 09:55:23 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int
 		res = ft_parse_base(mods, args, conv);
 	// else if (conv == 'p')
 	// 	res = ft_parse_address(mods, args);
+	else if (conv == 'f')
+		res = ft_parse_float(mods, args, conv);
 	if (res)
 		ft_lstadd_back(lst, ft_lstnew(res));
 	return (1);

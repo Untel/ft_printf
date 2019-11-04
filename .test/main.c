@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 22:05:53 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 10:16:21 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ int	run_pointer_tests()
     // PRINT("Hi \'%14.5p\' you", uninit);
 }
 
+int	run_float_tests()
+{
+    PRINT("Hi \'%f\' you", 3.999);
+}
+
 int main(int ac, char **av)
 {
     (void)ac;
@@ -136,5 +141,6 @@ int main(int ac, char **av)
 			run_pointer_tests();
 		else if (strcmp(*av, "hex") == 0)
 			run_pointer_tests();
-		
+		else if (strcmp(*av, "float") == 0)
+			run_float_tests();
 }

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 22:18:51 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:22:55 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char
 	res = str;
 	if (mods.precision != -1)
 		res = ft_fill(res, mods.precision, '0', 0);
-	if (conv == 'p' || (mods.alt && conv == "x"))
+	if (conv == 'p' || (mods.alt && conv == 'x'))
 		res = ft_strjoin("0x", res);
-	if (mods.alt && conv == "X")
+	if (mods.alt && conv == 'X')
 		res = ft_strjoin("0X", res);
-	if (mods.alt && conv == "o")
+	if (mods.alt && conv == 'o')
 		res = ft_strjoin("0", res);
 	res = ft_fill(res, mods.padding, mods.padchar, mods.align_left);
 	return (res);
@@ -38,7 +38,10 @@ char
 	char		*tmp;
 	uintptr_t	val;
 
-	val = va_arg(args, uintptr_t);
+	if (conv == 'p')
+		val = va_arg(args, uintptr_t);
+	else
+		val = (uintptr_t)va_arg(args, unsigned int);
 	if (conv == 'x' || conv == 'p')
 		res = ft_nbrbase(val, "0123456789abcdef", 16);
 	else if (conv == 'X')

@@ -90,7 +90,6 @@ compare:		test
 
 libft:			
 				git submodule init
-				git submodule update
 				${LIBFT_MAKE}
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 17:30:45 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:03:10 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char
 		return (str);
 	if (!(new_str = malloc(sizeof(char) * (count + 1))))
 		return (NULL);
-	new_str[count] = 0;
 	while (!align_left && i < (count - initial_len))
 		new_str[i++] = c;
 	while (*str)

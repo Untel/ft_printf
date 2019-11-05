@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 10:16:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:30:59 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	run_int_tests()
     // PRINT("Hi \'%*.*d\' you", -5, -5, 42);
     PRINT("Hi \'%*d\' you", -5, 42);
     PRINT("Hi \'%*d\' you", -5, 42);
+    PRINT("Hi \'%*u\' you", -5, -42);
+    PRINT("Hi \'%04d\' you", -42);
     // PRINT("Hi \'%*.*d\' you", 5, 5, 42);
     // PRINT("Hi \'%d\' you", INT32_MAX + 3);
     // PRINT("Hi \'%u\' you", 3);
@@ -87,6 +89,7 @@ int	run_char_tests()
 int	run_hex_tests()
 {
     PRINT("Hi \'%x\' you", 15);
+    PRINT("Hi \'%x\' you", -15);
     PRINT("Hi \'%X\' you", INT64_MAX);
     PRINT("Hi \'%x\' you", INT64_MAX + 1);
 	PRINT("Hi \'%X\' you", INT64_MIN);
@@ -124,6 +127,19 @@ int	run_pointer_tests()
 int	run_float_tests()
 {
     PRINT("Hi \'%f\' you", 3.999);
+    PRINT("Hi \'%.f\' you", 3.999);
+    PRINT("Hi \'%.f\' you", 3.123);
+    PRINT("Hi \'%.3f\' you", 3.999);
+    PRINT("Hi \'%.3f\' you", -3.999);
+    PRINT("Hi \'%.3e\' you", -31.1);
+    PRINT("Hi \'%.4e\' you", -31.991);
+    PRINT("Hi \'%.10f\' you", 3.999);
+    PRINT("Hi \'%.20g\' you", 3.999);
+    PRINT("Hi \'%.15g\' you", 3.999999999999999);
+    PRINT("Hi \'%.15f\' you", 3.999999999999999);
+    PRINT("Hi \'%.15f\' you", 3.999999999999999);
+    PRINT("Hi \'%020f\' you", -127.32435);
+    PRINT("Hi \'%.f\' you", -127.32435);
 }
 
 int main(int ac, char **av)
@@ -140,7 +156,7 @@ int main(int ac, char **av)
 		else if (strcmp(*av, "pointer") == 0)
 			run_pointer_tests();
 		else if (strcmp(*av, "hex") == 0)
-			run_pointer_tests();
+			run_hex_tests();
 		else if (strcmp(*av, "float") == 0)
 			run_float_tests();
 }

@@ -6,25 +6,44 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 10:25:07 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:36:36 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 char
+	ft_float_to_array()
+{
+	
+}
+
+char
 	*ft_stringify_float(double val, size_t dig)
 {
-	char	*str = "";
 	int		whole;
 	double	decim;
+	char*	join[3];
+	long long int pow;
 
+	if (dig > 15)
+		dig = 15;
+	pow = ft_pow(10, dig);
 	whole = (int)val;
 	decim = val - whole;
-	printf("%d | %f: %f\n", whole, decim, val);
-	decim *= ft_pow(dig, 10);
-	printf("%d | %f: %f\n", whole, decim, val);
-	return (str);
+	if (decim < 0.0)
+		decim = -decim;
+	decim *= pow;
+	decim += 0.5;
+	join[1] = dig == 0 ? "" : ".";
+	join[2] = dig == 0 ? "" : "0";;
+	if ((long long int)decim == pow)
+		whole++;
+	else
+		join[2] = ft_llitoa((long long int)decim);
+	join[0] = ft_itoa(whole);
+	printf("as it %d '%s' \n", dig, join[0]);
+	return (ft_strmjoin(3, (char **)join, ""));
 }
 
 char
@@ -57,14 +76,14 @@ char
 	*ft_parse_float(t_modifiers mods, va_list args, char conv)
 {
 	char	*res;
+	int		digits;
 
-	res = ft_stringify_float(va_arg(args, double), 3);
-	// if (conv != 'u')
-	// 	res = ft_itoa((int)va_arg(args, int));
-	// else
-	// 	res = ft_uitoa((unsigned int)va_arg(args, unsigned int));
-	// if (*res == '-' && res++)
-	// 	mods.sign = '-';
-	// return (ft_apply_int_flags(res, mods));
-	return (res);
+	digits = mods.precision == -1 ? 6 : mods.precision;
+	if (mods.alt)
+		res = ft_itoa(va_arg(args, int));
+	else
+		res = ft_stringify_float(va_arg(args, double), digits);
+	if (*res == '-' && res++)
+		mods.sign = '-';
+	return (ft_apply_float_flags(res, mods));
 }

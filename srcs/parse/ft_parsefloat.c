@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 10:33:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:49:09 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ char
 	return (res);
 }
 
-char
-	*ft_parse_float(t_modifiers mods, va_list args, char conv)
+size_t
+	ft_parse_float(char buff[BUFFER_SIZE],
+		t_modifiers mods, va_list args, char conv)
 {
-	char	*res;
 	int		digits;
+	char	*res;
 
 	digits = mods.precision == -1 ? 6 : mods.precision;
 	if (mods.alt)
@@ -86,5 +87,8 @@ char
 		res = ft_stringify_float(va_arg(args, double), digits);
 	if (*res == '-' && res++)
 		mods.sign = '-';
-	return (ft_apply_float_flags(res, mods));
+	ft_strcpy(buff, res);
+	free(res);
+	res = ft_apply_float_flags(res, mods);
+	return (ft_strcpy(buff, res));
 }

@@ -47,7 +47,7 @@ DIFF			= diff --text --expand-tabs --left-column --side-by-side
 
 ARGS			= int char string pointer hex float exp other
 
-$(NAME):		libft $(OBJS)
+$(NAME):		libft $(OBJS) ./srcs/ft_printf.h
 				cp ${LIBFT_PATH} ${NAME}
 				${AR} ${NAME} ${OBJS}
 				ranlib ${NAME}

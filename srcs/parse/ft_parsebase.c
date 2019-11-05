@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 14:22:55 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:54:53 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ char
 	return (res);
 }
 
-char
-	*ft_parse_base(t_modifiers mods, va_list args, char conv)
+size_t
+	ft_parse_base(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args, char conv)
 {
 	char		*res;
 	char		*tmp;
@@ -49,7 +50,8 @@ char
 	else if (conv == 'o')
 		res = ft_nbrbase(val, "01234567", 8);
 	tmp = ft_apply_base_flags(res, mods, conv);
-	return (tmp);
+	free(res);
+	return (ft_strcpy(buff, tmp));
 }
 
 /* to-delete ?*/

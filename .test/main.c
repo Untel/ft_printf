@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 17:42:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:14:50 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,7 @@ int main(int ac, char **av)
 			HEADER(*av, run_float_tests);
 		else if (strcmp(*av, "other") == 0)
 			HEADER(*av, run_other_tests);
-
 	printf("\e[0;36mTotal\e[0m: %*s%d/%d\n\e[0m", 49, g_okcount == g_total ? "\e[0;32m" : "\e[0;31m", g_okcount, g_total);
 	printf("======================================================\n");
-	system("leaks a.out");
+	// system("leaks a.out");
 }

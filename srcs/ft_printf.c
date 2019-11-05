@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 16:33:39 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 21:03:11 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int
 		{
 			if (!(ptr = ft_substr(str, j, (i - j))))
 				return (0);
-			if (!(el = ft_lstnew((void *)ptr)))
+			if (!(el = ft_lstnew((void *)ptr, i - j)))
 				return (0);
 			ft_lstadd_back(lst, el);
 			if (str[++i])
@@ -46,10 +46,9 @@ static int
 	}
 	if (!(ptr = ft_substr(str, j, (i - j))))
 		return (0);
-	if (!(el = ft_lstnew((void *)ptr)))
+	if (!(el = ft_lstnew((void *)ptr, i - j)))
 		return (0);
 	ft_lstadd_back(lst, el);
-	// ft_lstprint(lst, "In split fct");
 	return (1);
 }
 
@@ -80,7 +79,7 @@ int
 	ft_split_to_list(str, &el, args);
 	while (el)
 	{
-		len += ft_strlen(el->content);
+		len += el->size;
 		ft_putstr_fd((char *)el->content, OUTPUT_FD);
 		el = el->next;
 	}
@@ -108,7 +107,8 @@ int
 		str = (char *)el->content;
 		if (!*str)
 			break;
-		while (*str)
+		printf("%s | %d \n", el->content, el->size);
+		while (el->size-- > 0)
 			buff[i++] = *str++;
 		el = el->next;
 	}

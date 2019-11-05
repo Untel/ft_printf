@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 17:00:59 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:50:24 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,16 @@ char	*ft_nbrbase(uintptr_t nbr, char *base, unsigned int base_size);
 char	*ft_fill_padding(char *str, t_modifiers mods, char conv);
 char	*ft_fill(char *str, size_t count, char c, int align_left);
 
-char	*ft_parse_int(t_modifiers mods, va_list args, char conv);
-char	*ft_parse_char(t_modifiers mods, va_list args);
-char	*ft_parse_string(t_modifiers mods, va_list args);
-char	*ft_parse_base(t_modifiers mods, va_list args, char conv);
-char	*ft_parse_float(t_modifiers mods, va_list args, char conv);
+size_t	ft_parse_int(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args, char conv);
+size_t	ft_parse_char(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args);
+size_t	ft_parse_string(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args);
+size_t	ft_parse_base(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args, char conv);
+size_t	ft_parse_float(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args, char conv);
 // char	*ft_parse_address(t_modifiers mods, va_list args);
 int		ft_printf(const char *str, ...);
 int		ft_sprintf(char *buffer, const char *str, ...);

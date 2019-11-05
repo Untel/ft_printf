@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 16:45:47 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:46:35 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ char
 	return (res);
 }
 
-char
-	*ft_parse_int(t_modifiers mods, va_list args, char conv)
+size_t
+	ft_parse_int(char buff[BUFFER_SIZE],
+	t_modifiers mods, va_list args, char conv)
 {
 	char	*res;
 
@@ -49,5 +50,6 @@ char
 		res = ft_uitoa((unsigned int)va_arg(args, unsigned int));
 	if (*res == '-' && res++)
 		mods.sign = '-';
-	return (ft_apply_int_flags(res, mods));
+	res = ft_apply_int_flags(res, mods);
+	return (ft_strcpy(buff, res));
 }

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 16:30:59 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:58:57 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,11 @@ int	run_float_tests()
     PRINT("Hi \'%.15f\' you", 3.999999999999999);
     PRINT("Hi \'%020f\' you", -127.32435);
     PRINT("Hi \'%.f\' you", -127.32435);
+}
+
+int	run_exp_tests()
+{
+    PRINT("Hi \'%e\' you", 3.999);
 }
 
 int main(int ac, char **av)

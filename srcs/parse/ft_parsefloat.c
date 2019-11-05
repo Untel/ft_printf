@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 16:36:36 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:33:21 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,29 @@ char
 char
 	*ft_stringify_float(double val, size_t dig)
 {
-	int		whole;
-	double	decim;
-	char*	join[3];
-	long long int pow;
+	int				whole;
+	double			decim;
+	char*			join[3];
+	long long int	pow;
 
 	if (dig > 15)
 		dig = 15;
-	pow = ft_pow(10, dig);
 	whole = (int)val;
+	join[0] = ft_itoa(whole);
+	if (dig == 0)
+		return (ft_strdup(join[0]));
 	decim = val - whole;
 	if (decim < 0.0)
 		decim = -decim;
+	pow = ft_pow(10, dig);
 	decim *= pow;
 	decim += 0.5;
 	join[1] = dig == 0 ? "" : ".";
-	join[2] = dig == 0 ? "" : "0";;
+	join[2] = dig == 0 ? "" : "0";
 	if ((long long int)decim == pow)
 		whole++;
 	else
 		join[2] = ft_llitoa((long long int)decim);
-	join[0] = ft_itoa(whole);
-	printf("as it %d '%s' \n", dig, join[0]);
 	return (ft_strmjoin(3, (char **)join, ""));
 }
 
@@ -61,7 +62,7 @@ char
 	*ft_apply_float_flags(char *res, t_modifiers mods)
 {
 	if (mods.precision != -1)
-		return (ft_apply_int_precision(res, mods));
+		return (ft_apply_float_precision(res, mods));
 	else
 	{
 		res = ft_fill(res, (mods.sign ? mods.padding - 1 : mods.padding),

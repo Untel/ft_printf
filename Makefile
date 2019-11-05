@@ -74,6 +74,9 @@ run/string:		test
 run/float:		test
 				./${NAME_TEST} float
 
+run/exp:		test
+				./${NAME_TEST} exp
+
 run/all:
 				run/int
 				run/string

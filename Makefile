@@ -45,6 +45,8 @@ TEST_2			= test2.test
 
 DIFF			= diff --text --expand-tabs --left-column --side-by-side
 
+ARGS			= int char string pointer hex float exp other
+
 $(NAME):		libft $(OBJS)
 				cp ${LIBFT_PATH} ${NAME}
 				${AR} ${NAME} ${OBJS}
@@ -55,34 +57,8 @@ all:			$(NAME)
 test:			libft $(OBJS) $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
 				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
 
-run/int:		test
-				./${NAME_TEST} int
-
-run/char:		test
-				./${NAME_TEST} char
-
-run/pointer:	test
-				./${NAME_TEST} pointer
-
-
-run/hex:		test
-				./${NAME_TEST} hex
-				
-run/string:		test
-				./${NAME_TEST} string
-
-run/float:		test
-				./${NAME_TEST} float
-
-run/exp:		test
-				./${NAME_TEST} exp
-
-run/all:
-				run/int
-				run/string
-				run/char
-				run/pointer
-				run/hex
+run:			test
+				./${NAME_TEST} ${ARGS}
 
 compare:		test
 				./${NAME_TEST}

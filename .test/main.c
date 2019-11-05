@@ -6,16 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 10:58:57 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:42:21 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft.h"
-#include <unistd.h>
 #include "test.h"
-
-#define PRINT(x, ...) (printf("======================================================\nft_printf(\"%s\", %s)\n------------------------------------------------------\n", x, #__VA_ARGS__) && ft_printf(x, __VA_ARGS__) && printf("\t\tVS\t\t") && printf(x, __VA_ARGS__) && printf("\n------------------------------------------------------\n"))
 
 int	run_int_tests()
 {
@@ -29,6 +24,8 @@ int	run_int_tests()
     PRINT("Hi \'%*d\' you", -5, 42);
     PRINT("Hi \'%*u\' you", -5, -42);
     PRINT("Hi \'%04d\' you", -42);
+    PRINT("Hi \'%-04d\' you", -42);
+    PRINT("Hi \'%-010.6d\' you", -42);
     // PRINT("Hi \'%*.*d\' you", 5, 5, 42);
     // PRINT("Hi \'%d\' you", INT32_MAX + 3);
     // PRINT("Hi \'%u\' you", 3);
@@ -67,6 +64,7 @@ int	run_string_tests()
     PRINT("Hi \'%*s\' you", -5, "yo");
     PRINT("Hi \'% s\' you", "yo");
     PRINT("Hi \'%+s\' you", "yo");
+    PRINT("Hi \'%020s\' you", "-Bonjour a tous");
 }
 int	run_char_tests()
 {
@@ -103,8 +101,8 @@ int	run_hex_tests()
 }
 int	run_pointer_tests()
 {
-	char *init = "BONJOUR A TOUSF";
-	char uninit;
+	char *init = "BONJOUR A TOUS";
+	char *uninit;
 
     PRINT("Hi \'%p\' you", init);
     PRINT("Hi \'%.5p\' you", init);
@@ -142,6 +140,11 @@ int	run_float_tests()
     PRINT("Hi \'%.f\' you", -127.32435);
 }
 
+int	run_other_tests()
+{
+    PRINT("Hi \'%s\' %s %d you %s", "how", "are", 42, "doing?");
+}
+
 int	run_exp_tests()
 {
     PRINT("Hi \'%e\' you", 3.999);
@@ -150,18 +153,27 @@ int	run_exp_tests()
 int main(int ac, char **av)
 {
     (void)ac;
-
+	memset(g_flush1, 0, BUFFER_SIZE);
+	memset(g_flush2, 0, BUFFER_SIZE);
 	while (*++av)
 		if (strcmp(*av, "int") == 0)
-			run_int_tests();
+			HEADER(*av, run_int_tests);
 		else if (strcmp(*av, "char") == 0)
-			run_char_tests();
+			HEADER(*av, run_char_tests);
 		else if (strcmp(*av, "string") == 0)
-			run_string_tests();
+			HEADER(*av, run_string_tests);
 		else if (strcmp(*av, "pointer") == 0)
-			run_pointer_tests();
+			HEADER(*av, run_pointer_tests);
 		else if (strcmp(*av, "hex") == 0)
-			run_hex_tests();
+			HEADER(*av, run_hex_tests);
 		else if (strcmp(*av, "float") == 0)
-			run_float_tests();
+			HEADER(*av, run_float_tests);
+		else if (strcmp(*av, "exp") == 0)
+			HEADER(*av, run_float_tests);
+		else if (strcmp(*av, "other") == 0)
+			HEADER(*av, run_other_tests);
+
+	printf("\e[0;36mTotal\e[0m: %*s%d/%d\n\e[0m", 49, g_okcount == g_total ? "\e[0;32m" : "\e[0;31m", g_okcount, g_total);
+	printf("======================================================\n");
+	system("leaks a.out");
 }

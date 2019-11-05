@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 22:29:39 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:11:33 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static size_t
 		mods->precision = 0;
 		return (1);
 	}
-		
 	mods->precision = ft_atoi(str);
 	return (1 + ft_strlen(ft_itoa(mods->precision)));
 }

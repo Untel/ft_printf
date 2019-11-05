@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 17:39:38 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 16:33:39 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,65 @@ static int
 }
 
 int
-	ft_printf(const char *str, ...)
+	ft_get_printed_length(t_list *el)
 {
-	t_list	*el = 0;
-	size_t	len;
-	va_list	args;
-	
+	int len;
+
 	len = 0;
-	va_start(args, str);
-	ft_split_to_list(str, &el, args);
-	// ft_lstprint(el, "NODES");
 	while (el)
 	{
-		// printf("%s", (char *)el->content);
 		len += ft_strlen(el->content);
-		ft_putstr_fd((char *)el->content, 1);
 		el = el->next;
 	}
-	// printf("\nTotal length %d\n", (int)len);
+	return (len);
+}
+
+int
+	ft_printf(const char *str, ...)
+{
+	t_list	*el;
+	int		len;
+	va_list	args;
+	
+	va_start(args, str);
+	len = 0;
+	el = 0;
+	ft_split_to_list(str, &el, args);
+	while (el)
+	{
+		len += ft_strlen(el->content);
+		ft_putstr_fd((char *)el->content, OUTPUT_FD);
+		el = el->next;
+	}
 	va_end(args);
-	return (1);
+	return (len);
+}
+
+int
+	ft_sprintf(char *buff, const char *str, ...)
+{
+	t_list	*el;\
+	va_list	args;
+	char	*ret;
+	size_t	i;
+
+	va_start(args, str);
+	i = 0;
+	el = NULL;
+	ft_split_to_list(str, &el, args);
+	// if (!(ret = (char *)malloc(sizeof(char) * ((len = ft_get_printed_length(&el)) + 1))))
+	// 	return (0);
+	while (el)
+	{
+		// len += ft_strlcat(buff, (const char *)el->content);
+		str = (char *)el->content;
+		if (!*str)
+			break;
+		while (*str)
+			buff[i++] = *str++;
+		el = el->next;
+	}
+	buff[i] = 0;
+	va_end(args);
+	return (i);
 }

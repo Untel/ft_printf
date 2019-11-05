@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 10:56:29 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:00:59 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # define NULLABLE_STR(x) (x ? x : "(NULL)")
 # define DEFAULT_VALUE(x, v) (x != -1 ? x : v)
 # define DEFINED_VALUE(x) (x != -2 ? x : 0)
+# define OUTPUT_FD 1
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
 
 typedef enum	e_argsize
 {
@@ -51,5 +55,6 @@ char	*ft_parse_base(t_modifiers mods, va_list args, char conv);
 char	*ft_parse_float(t_modifiers mods, va_list args, char conv);
 // char	*ft_parse_address(t_modifiers mods, va_list args);
 int		ft_printf(const char *str, ...);
+int		ft_sprintf(char *buffer, const char *str, ...);
 #endif
 

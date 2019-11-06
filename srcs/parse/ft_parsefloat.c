@@ -6,17 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 18:49:09 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/06 15:43:47 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char
-	ft_float_to_array()
-{
-	
-}
 
 char
 	*ft_stringify_float(double val, size_t dig)
@@ -88,7 +82,6 @@ size_t
 	if (*res == '-' && res++)
 		mods.sign = '-';
 	ft_strcpy(buff, res);
-	free(res);
 	res = ft_apply_float_flags(res, mods);
 	return (ft_strcpy(buff, res));
 }

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 18:50:59 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/06 15:45:06 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int
 	else if (conv == 'f' || conv == 'e' || conv == 'g')
 		len = ft_parse_float(buff, mods, args, conv);
 	if (*buff)
-		ft_lstadd_back(lst, ft_lstnew(buff, len));
+		ft_lstadd_back(lst, ft_lstnew(ft_strdup(buff), len));
 	return (1);
 }

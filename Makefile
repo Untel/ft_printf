@@ -21,7 +21,7 @@ OBJS			= $(SRC:.c=.o)
 
 TEST_OBJS		= $(TESTER:.c=.o)
 
-CFLAGS			= -Werror -Wextra -Wall -w -g3 -fsanitize=address $(INCLUDES)
+CFLAGS			= -Werror -Wextra -Wall -w $(INCLUDES) #-g3 -fsanitize=address 
 
 TEST_FLAGS		= 
 
@@ -45,7 +45,7 @@ TEST_2			= test2.test
 
 DIFF			= diff --text --expand-tabs --left-column --side-by-side
 
-ARGS			= int char string pointer hex float exp other
+ARGS			= int uint char string pointer hex float exp other
 
 $(NAME):		libft $(OBJS) ./srcs/ft_printf.h
 				cp ${LIBFT_PATH} ${NAME}
@@ -61,7 +61,7 @@ run:			test
 				./${NAME_TEST} ${ARGS}
 
 compare:		test
-				./${NAME_TEST}
+				./${NAME_TEST} 
 
 				# ./${NAME_TEST} "1" > ${TEST_2}
 				# $(DIFF) ${TEST_1} ${TEST_2}

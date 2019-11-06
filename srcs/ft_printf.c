@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 21:03:11 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/06 18:50:57 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,50 +20,57 @@
  */
 
 static int
+	ft_freesome(void *a, void *b)
+{
+	if (a)
+		free(a);
+	if (b)
+		free(b);
+	return (0);
+}
+
+static void
+	ft_clearfn(t_list *lst)
+{
+	if (lst->content)
+	{
+		free(lst->content);
+	}
+}
+
+static int
 	ft_split_to_list(const char *str, t_list **lst, va_list args)
 {
 	int		i;
 	int		j;
 	char	*ptr;
 	t_list	*el;
+	size_t	len;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i])
-	{
+	len = ft_strlen(str);	
+	while (++i < len)
 		if (str[i] == '%')
 		{
 			if (!(ptr = ft_substr(str, j, (i - j))))
 				return (0);
 			if (!(el = ft_lstnew((void *)ptr, i - j)))
-				return (0);
+				return (ft_freesome(ptr, NULL));
 			ft_lstadd_back(lst, el);
 			if (str[++i])
 				i += ft_extract_flags(&str[i], lst, args);
 			j = i;
 		}
-		i++;
-	}
-	if (!(ptr = ft_substr(str, j, (i - j))))
-		return (0);
-	if (!(el = ft_lstnew((void *)ptr, i - j)))
-		return (0);
-	ft_lstadd_back(lst, el);
-	return (1);
-}
-
-int
-	ft_get_printed_length(t_list *el)
-{
-	int len;
-
-	len = 0;
-	while (el)
+	if (str[j])
 	{
-		len += ft_strlen(el->content);
-		el = el->next;
+		if (!(ptr = ft_substr(str, j, (i - j))))
+			return (0);
+		if (!(el = ft_lstnew((void *)ptr, i - j)))
+			return (ft_freesome(ptr, NULL));
+		ft_lstadd_back(lst, el);
 	}
-	return (len);
+	return (1);
 }
 
 int
@@ -83,6 +90,7 @@ int
 		ft_putstr_fd((char *)el->content, OUTPUT_FD);
 		el = el->next;
 	}
+	ft_lstclear(el, ft_clearfn);
 	va_end(args);
 	return (len);
 }
@@ -90,7 +98,8 @@ int
 int
 	ft_sprintf(char *buff, const char *str, ...)
 {
-	t_list	*el;\
+	t_list	*el;
+	t_list	*fel;
 	va_list	args;
 	char	*ret;
 	size_t	i;
@@ -99,6 +108,8 @@ int
 	i = 0;
 	el = NULL;
 	ft_split_to_list(str, &el, args);
+	fel = el;
+	// ft_lstprint(el, NULL);
 	// if (!(ret = (char *)malloc(sizeof(char) * ((len = ft_get_printed_length(&el)) + 1))))
 	// 	return (0);
 	while (el)
@@ -107,11 +118,12 @@ int
 		str = (char *)el->content;
 		if (!*str)
 			break;
-		printf("%s | %d \n", el->content, el->size);
 		while (el->size-- > 0)
 			buff[i++] = *str++;
 		el = el->next;
 	}
+	// ft_lstprint(fel, NULL);
+	ft_lstclear(&fel, ft_clearfn);
 	buff[i] = 0;
 	va_end(args);
 	return (i);

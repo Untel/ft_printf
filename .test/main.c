@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/05 18:14:50 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/06 22:36:31 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,63 @@
 int	run_int_tests()
 {
 	PRINT("Hi \'%d\' you", 42);
+	PRINT("Hi \'%d\' you", INT32_MAX);
     PRINT("Hi \'%5d\' you", 42);
     PRINT("Hi \'%05d\' you", 42);
     PRINT("Hi \'% 05d\' you", 42);
     PRINT("Hi \'% 0*d\' you", 5, 42);
-    // PRINT("Hi \'%*.*d\' you", -5, -5, 42);
+    PRINT("Hi \'%*.*d\' you", -5, -5, 42);
     PRINT("Hi \'%*d\' you", -5, 42);
     PRINT("Hi \'%*d\' you", -5, 42);
-    PRINT("Hi \'%*u\' you", -5, -42);
-    PRINT("Hi \'%04d\' you", -42);
-    PRINT("Hi \'%-04d\' you", -42);
+	PRINT("Hi \'%.5d\' you", 42);
+    PRINT("Hi \'%.*d\' you", 5, 42);
+    PRINT("Hi \'%+5d\' you", 42);
+    PRINT("Hi \'%+5d\' you", -42);
+    PRINT("Hi \'%5d\' you", -42);
+    PRINT("Hi \'%.6d\' you", -42);
+    PRINT("Hi \'%06d\' you", -42);
+    PRINT("Hi \'%.1d\' you", -42);
+    PRINT("Hi \'%+6.d\' you", 42);
+    PRINT("Hi \'%+09.4d\' you", 42);
+    PRINT("Hi \'%+9.4d\' you", 42);
+    PRINT("Hi \'%9.4d\' you", 42);
+    PRINT("Hi \'% 9.4d\' you", 42);
+    PRINT("Hi \'%+04d\' you", 42);
+    PRINT("Hi \'%.0d\' you", 0);
+    PRINT("Hi \'%.0d\' you", 4);
+    PRINT("Hi \'%.032d\' you", 4);
+    PRINT("Hi \'%*.*d\' you", 5, 5, 42);
     PRINT("Hi \'%-010.6d\' you", -42);
-    // PRINT("Hi \'%*.*d\' you", 5, 5, 42);
+    PRINT("Hi \'%-04d\' you", -42);
+    PRINT("Hi \'%04d\' you", -42);
+    PRINT("Hi \'%#d\' you", 0);
+    PRINT("Hi \'%d\' you", 0);
+    PRINT("Hi \'%lld\' you", INT64_MAX);
+    PRINT("Hi \'%ld\' you", INT64_MAX);
+	PRINT("Hi \'%hd\' you", INT64_MAX);
+    PRINT("Hi \'%hhd\' you", INT64_MAX);
+    PRINT("Hi \'%hd\' you", INT32_MIN - 6000);
+    PRINT("Hi \'%hhd\' you", INT32_MIN - 6000);
+	//TOFIX
     // PRINT("Hi \'%d\' you", INT32_MAX + 3);
-    // PRINT("Hi \'%u\' you", 3);
-    // PRINT("Hi \'%u\' you", 333343);
-    // PRINT("Hi \'%u\' you", INT32_MAX);
-	// PRINT("Hi \'%.5d\' you", 42);
-    // PRINT("Hi \'%.*d\' you", 5, 42);
-    // PRINT("Hi \'%+5d\' you", 42);
-    // PRINT("Hi \'%+5d\' you", -42);
-    // PRINT("Hi \'%5d\' you", -42);
-    // PRINT("Hi \'%.6d\' you", -42);
-    // PRINT("Hi \'%06d\' you", -42);
-    // PRINT("Hi \'%.1d\' you", -42);
-    // PRINT("Hi \'%+6.d\' you", 42);
-    // PRINT("Hi \'%+09.4d\' you", 42);
-    // PRINT("Hi \'%+9.4d\' you", 42);
-    // PRINT("Hi \'%9.4d\' you", 42);
-    // PRINT("Hi \'% 9.4d\' you", 42);
-    // PRINT("Hi \'%+04d\' you", 42);
-    // PRINT("Hi \'%.0d\' you", 0);
-    // PRINT("Hi \'%.0d\' you", 4);
-    // PRINT("Hi \'%.032d\' you", 4);
+}
+
+int	run_uint_tests()
+{
+    PRINT("Hi \'%u\' you", 0);
+    PRINT("Hi \'%u\' you", -4500);
+    PRINT("Hi \'%u\' you", -200);
+    PRINT("Hi \'%u\' you", INT64_MAX);
+    PRINT("Hi \'%llu\' you", INT64_MAX);
+    PRINT("Hi \'%lu\' you", INT64_MAX);
+	PRINT("Hi \'%hu\' you", INT64_MAX);
+    PRINT("Hi \'%hhu\' you", INT64_MAX);
+    PRINT("Hi \'%hu\' you", INT32_MIN + 6000);
+    PRINT("Hi \'%hhu\' you", INT32_MIN + 6000);
+    PRINT("Hi \'%hu\' you", INT32_MIN - 6000);
+    PRINT("Hi \'%hhu\' you", INT32_MIN - 6000);
+	//TOFIX
+    // PRINT("Hi \'%d\' you", INT32_MAX + 3);
 }
 
 int	run_string_tests()
@@ -64,10 +88,19 @@ int	run_string_tests()
     PRINT("Hi \'%*s\' you", -5, "yo");
     PRINT("Hi \'% s\' you", "yo");
     PRINT("Hi \'%+s\' you", "yo");
-    PRINT("Hi \'%020s\' you", "-Bonjour a tous");
+    PRINT("Hi \'%012s\' you", "-Bonjour a tous");
+    PRINT("Hi \'%012.8s\' you", "-Bonjour a tous");
+    PRINT("Hi \'%-012.8s\' you", "-Bonjour a tous");
+    PRINT("Hi \'%12.8s\' you", "-Bonjour a tous");
+    PRINT("Hi \'%12.8hhs\' you", "-Bonjour a tous");
+    PRINT("Hi \'%12.8lls\' you", "-Bonjour a tous");
+    // PRINT("Hi \'%5.5-5s\' you", 10, 16, "bonjour");
 }
 int	run_char_tests()
 {
+    PRINT("Hi \'%05c\' you", '-');
+    PRINT("Hi \'%5.*c\' you", -5, '-');
+    PRINT("Hi \'%*c\' you", -5, '-');
     PRINT("Hi \'%c\' you", 'k');
     PRINT("Hi \'%c\' you", '\0');
     PRINT("Hi \'%05c\' you", '\0');
@@ -98,6 +131,9 @@ int	run_hex_tests()
     PRINT("Hi \'%#10.7x\' you", 750);
     PRINT("Hi \'%-5X\' you", 750);
     PRINT("Hi \'%-10.3X\' you", 75000);
+    PRINT("Hi \'%llx\' you", INT64_MAX);
+    PRINT("Hi \'%lx\' you", INT64_MAX);
+    PRINT("Hi \'%hx\' you", INT64_MAX);
 }
 int	run_pointer_tests()
 {
@@ -109,11 +145,13 @@ int	run_pointer_tests()
     PRINT("Hi \'%.10p\' you", init);
     PRINT("Hi \'%p\' you", uninit);
     PRINT("Hi \'%-10.3p\' you", uninit);
-    PRINT("Hi \'%#-10.3p\' you", uninit);
+    PRINT("Hi \'%#-10.3hhp\' you", uninit);
     PRINT("Hi \'%p\' you", INT64_MAX);
-    PRINT("Hi \'%llx\' you", INT64_MAX);
-    PRINT("Hi \'%lx\' you", INT64_MAX);
-    PRINT("Hi \'%hx\' you", INT64_MAX);
+    PRINT("Hi \'%llp\' you", INT64_MAX);
+    PRINT("Hi \'%lp\' you", INT64_MAX);
+    PRINT("Hi \'%hhp\' you", INT64_MIN);
+    PRINT("Hi \'%hp\' you", INT64_MIN + 600);
+    PRINT("Hi \'%hp\' you", INT64_MIN - 600);
     // PRINT("Hi \'%020p\' you", init);
     // PRINT("Hi \'%020p\' you", uninit);
     // PRINT("Hi \'%25.20p\' you", init);
@@ -129,11 +167,9 @@ int	run_float_tests()
     PRINT("Hi \'%.f\' you", 3.123);
     PRINT("Hi \'%.3f\' you", 3.999);
     PRINT("Hi \'%.3f\' you", -3.999);
-    PRINT("Hi \'%.3e\' you", -31.1);
-    PRINT("Hi \'%.4e\' you", -31.991);
     PRINT("Hi \'%.10f\' you", 3.999);
-    PRINT("Hi \'%.20g\' you", 3.999);
-    PRINT("Hi \'%.15g\' you", 3.999999999999999);
+    // PRINT("Hi \'%.20g\' you", 3.999);
+    // PRINT("Hi \'%.15g\' you", 3.999999999999999);
     PRINT("Hi \'%.15f\' you", 3.999999999999999);
     PRINT("Hi \'%.15f\' you", 3.999999999999999);
     PRINT("Hi \'%020f\' you", -127.32435);
@@ -147,6 +183,8 @@ int	run_other_tests()
 
 int	run_exp_tests()
 {
+    PRINT("Hi \'%.4e\' you", -31.991);
+    PRINT("Hi \'%.3e\' you", -31.1);
     PRINT("Hi \'%e\' you", 3.999);
 }
 
@@ -158,6 +196,8 @@ int main(int ac, char **av)
 	while (*++av)
 		if (strcmp(*av, "int") == 0)
 			HEADER(*av, run_int_tests);
+		else if (strcmp(*av, "uint") == 0)
+			HEADER(*av, run_uint_tests);
 		else if (strcmp(*av, "char") == 0)
 			HEADER(*av, run_char_tests);
 		else if (strcmp(*av, "string") == 0)
@@ -172,7 +212,12 @@ int main(int ac, char **av)
 			HEADER(*av, run_float_tests);
 		else if (strcmp(*av, "other") == 0)
 			HEADER(*av, run_other_tests);
+		else if (strcmp(*av, "leaks") == 0)
+			system("leaks a.out");
 	printf("\e[0;36mTotal\e[0m: %*s%d/%d\n\e[0m", 49, g_okcount == g_total ? "\e[0;32m" : "\e[0;31m", g_okcount, g_total);
 	printf("======================================================\n");
-	// system("leaks a.out");
+	printf("|len=%d\n", printf("%c", 0));
+	printf("|len=%d\n", printf("%05.3%"));
+	printf("Hi \'%20.*-5s\' you", 10, "bonjour");
+	return (0);
 }

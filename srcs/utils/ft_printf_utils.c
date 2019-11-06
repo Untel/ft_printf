@@ -6,16 +6,28 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/04 16:03:10 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/06 19:22:10 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+char *
+	ft_add_sign(char sign, char *str)
+{
+	char *res;
+
+	if (!(res = malloc(sizeof(char) * (ft_strlen(str) + 2))))
+		return (NULL);
+	*res = sign;
+	ft_strcpy(&res[1], str);
+	return (res);
+}
+
 void
 	*ft_then_free(void *ptr, void *res)
 {
-	free(ptr);
+	ft_memdel(&ptr);
 	return (res);
 }
 
@@ -68,7 +80,7 @@ char
 
 	i = 0;
 	if ((initial_len = ft_strlen(str)) >= count)
-		return (str);
+		return (ft_strdup(str));
 	if (!(new_str = malloc(sizeof(char) * (count + 1))))
 		return (NULL);
 	while (!align_left && i < (count - initial_len))

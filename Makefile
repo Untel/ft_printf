@@ -1,8 +1,8 @@
 SRC_DIR			= ./srcs
 TEST_DIR		= .test
 LIBFT_DIR		= ./libft
-LIBFT			= libft.a
-LIBFT_PATH		= $(addprefix $(LIBFT_DIR)/, $(LIBFT))
+LIBFT_NAME		= libft.a
+LIBFT_PATH		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
 INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR} -I ${SRC_DIR}
 

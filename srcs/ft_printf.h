@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 18:09:35 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 19:27:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef	struct	s_modifiers
 	int			alt;
 	t_argsize	size;
 	char		sign;
+	int			trail;
 }				t_modifiers;
 
 void		*ft_then_free(void *ptr, void *res);

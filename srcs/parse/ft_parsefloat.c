@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 18:55:45 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 20:01:47 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char
 	len = ft_strlen(whole);
 	if (decim)
 	{
-		len += digits;
+		// len += digits;
+		len += (mods.trail ? digits : decim_len);
 		decim_len = ft_strlen(decim);
 	}
 	if (decim || mods.alt)
@@ -49,7 +50,7 @@ char
 	if (decim)
 	{
 		ft_strcat(res, decim);
-		while (decim_len++ < digits)
+		while (mods.trail && decim_len++ < digits)
 			ft_strcat(res, "0");
 		ft_memdel(&decim);
 	}
@@ -65,32 +66,46 @@ char
 	long double	decim;
 	char		*wholestr;
 	char		*decimstr;
+	char		prev[999];
 
+	prev[0] = 0;
 	whole = (int64_t)val;
 	decimstr = NULL;
 	decim = val - whole;
 	if (decim < 0.0)
 		decim = -decim;
 	pow = ft_pow(10, dig);
+	while (decim > 0.0 && decim < 1.0)
+	{
+		decim *= 10;
+		dig--;
+		ft_strcat(prev, "0");
+		printf("have to push %s\n", prev);
+	}
 	decim *= pow;
 	decim += 0.5;
+	if (!mods.trail)
+		while ((uint64_t)decim % 10 == 0)
+			decim /= 10;
 	if ((uint64_t)decim == pow)
 		whole++;
 	if (dig > 0)
-		decimstr = ft_lluitoa((uint64_t)decim);
+		decimstr = ft_strjoin(prev, ft_lluitoa((uint64_t)decim));
 	wholestr = ft_itoa_wrapper((uint64_t)(whole < 0 ? -whole : whole),
 		mods.sep, whole < 0);
 	return (ft_join_decim(wholestr, decimstr, dig, mods));
 }
 
 char
-	*ft_stringify_exp(long double arg, size_t dig, t_modifiers mods)
+	*ft_stringify_exp(char conv, long double arg, size_t dig, t_modifiers mods)
 {
 	char		*res;
 	int			exp;
 	char		expstr[BUFFER_SIZE];
 	long double	val;
 
+	if (conv == 'g')
+		mods.trail = 0;
 	exp = 0;
 	val = arg < 0 ? -arg : arg;
 	if (val > 1)
@@ -105,6 +120,9 @@ char
 			val *= 10;
 			exp -= 1;
 		}
+	printf("Initial val is %llg\n", arg);
+	if (conv == 'g' && (exp > -4 || exp >= mods.precision))
+		return (ft_stringify_float(arg, dig, mods));
 	val = arg < 0 ? -val : val;
 	res = ft_stringify_float(val, dig, mods);
 	ft_sprintf(expstr, "e%+03d", exp);
@@ -146,8 +164,8 @@ size_t
 	digits = mods.precision == -1 ? 6 : mods.precision;
 	if (conv == 'f')
 		res = ft_stringify_float(val, digits, mods);
-	else if (conv == 'e')
-		res = ft_stringify_exp(val, digits, mods);
+	else if (conv == 'e' || conv == 'g')
+		res = ft_stringify_exp(conv, val, digits, mods);
 	if (res && *res == '-')
 	{
 		res = ft_then_free(res, ft_strdup(res + 1));

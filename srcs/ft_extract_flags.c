@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 17:46:47 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 19:14:55 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int
 	int			i;
 	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0, .size = N, .sep = '\0' };
+	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0, .size = N, .sep = '\0', .trail = 1};
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')

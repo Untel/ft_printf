@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/06 22:36:31 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 16:51:47 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int	run_int_tests()
     PRINT("Hi \'%hhd\' you", INT64_MAX);
     PRINT("Hi \'%hd\' you", INT32_MIN - 6000);
     PRINT("Hi \'%hhd\' you", INT32_MIN - 6000);
+    PRINT("Hi \'%lld\' you", INT64_MAX);
+    PRINT("Hi \'%'d\' you", 1234567);
+    PRINT("Hi \'%'d\' you", 1234567);
 	//TOFIX
     // PRINT("Hi \'%d\' you", INT32_MAX + 3);
 }
@@ -70,8 +73,9 @@ int	run_uint_tests()
     PRINT("Hi \'%hhu\' you", INT32_MIN + 6000);
     PRINT("Hi \'%hu\' you", INT32_MIN - 6000);
     PRINT("Hi \'%hhu\' you", INT32_MIN - 6000);
+    PRINT("Hi \'%'u\' you", INT32_MIN - 6000);
 	//TOFIX
-    // PRINT("Hi \'%d\' you", INT32_MAX + 3);
+    PRINT("Hi \'%d\' you", INT32_MAX + 3);
 }
 
 int	run_string_tests()
@@ -164,6 +168,9 @@ int	run_float_tests()
 {
     PRINT("Hi \'%f\' you", 3.999);
     PRINT("Hi \'%.f\' you", 3.999);
+    PRINT("Hi \'%#f\' you", 3.999);
+    PRINT("Hi \'%#.f\' you", 3.456);
+    PRINT("Hi \'%#.f\' you", 3.90000);
     PRINT("Hi \'%.f\' you", 3.123);
     PRINT("Hi \'%.3f\' you", 3.999);
     PRINT("Hi \'%.3f\' you", -3.999);
@@ -171,7 +178,9 @@ int	run_float_tests()
     // PRINT("Hi \'%.20g\' you", 3.999);
     // PRINT("Hi \'%.15g\' you", 3.999999999999999);
     PRINT("Hi \'%.15f\' you", 3.999999999999999);
-    PRINT("Hi \'%.15f\' you", 3.999999999999999);
+    PRINT("Hi \'%.15f\' you", 3.9999999999999999);
+    PRINT("Hi \'%.16f\' you", 3.999999999999999);
+    PRINT("Hi \'%.17f\' you", 3.99999999999999999);
     PRINT("Hi \'%020f\' you", -127.32435);
     PRINT("Hi \'%.f\' you", -127.32435);
 }
@@ -187,12 +196,14 @@ int	run_exp_tests()
     PRINT("Hi \'%.3e\' you", -31.1);
     PRINT("Hi \'%e\' you", 3.999);
 }
-
+#include <locale.h>
 int main(int ac, char **av)
 {
     (void)ac;
+	int show_leaks = 0;
 	memset(g_flush1, 0, BUFFER_SIZE);
 	memset(g_flush2, 0, BUFFER_SIZE);
+	setlocale(LC_ALL, "en_US.UTF-8");
 	while (*++av)
 		if (strcmp(*av, "int") == 0)
 			HEADER(*av, run_int_tests);
@@ -213,11 +224,13 @@ int main(int ac, char **av)
 		else if (strcmp(*av, "other") == 0)
 			HEADER(*av, run_other_tests);
 		else if (strcmp(*av, "leaks") == 0)
-			system("leaks a.out");
+			show_leaks = 1;
 	printf("\e[0;36mTotal\e[0m: %*s%d/%d\n\e[0m", 49, g_okcount == g_total ? "\e[0;32m" : "\e[0;31m", g_okcount, g_total);
 	printf("======================================================\n");
-	printf("|len=%d\n", printf("%c", 0));
-	printf("|len=%d\n", printf("%05.3%"));
-	printf("Hi \'%20.*-5s\' you", 10, "bonjour");
+	if (show_leaks)
+		system("leaks a.out");
+	// printf("|len=%d\n", printf("%c", 0));
+	// printf("|len=%d\n", printf("%05.3%"));
+	// printf("Hi \'%20.*-5s\' you", 10, "bonjour");
 	return (0);
 }

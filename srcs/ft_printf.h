@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/06 22:24:17 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 16:02:58 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include "libft.h"
 # include <stdlib.h>
+# include <locale.h>
 # define NULLABLE_STR(x) (x ? x : "(NULL)")
 # define DEFAULT_VALUE(x, v) (x != -1 ? x : v)
 # define DEFINED_VALUE(x) (x != -2 ? x : 0)
@@ -32,6 +33,7 @@ typedef	struct	s_modifiers
 {
 	size_t		padding;
 	char		padchar;
+	char		sep;
 	int			align_left;
 	int			precision;
 	int			alt;

@@ -6,60 +6,81 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/06 22:51:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:06:49 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+long double
+	ft_get_sized_double(va_list args, t_modifiers mods)
+{
+	long double val;
+
+	if (mods.size <= N)
+		val = (long double)va_arg(args, double);
+	else if (mods.size > N)
+		val = va_arg(args, long double);
+	else
+		val = 0;
+	return (val);
+}
+
 char
-	*ft_join_decim(char *whole, char *decim, t_modifiers mods)
+	*ft_join_decim(char *whole, char *decim, int digits, t_modifiers mods)
 {
 	char	*res;
 	size_t	len;
+	size_t	decim_len;
 
-	if (mods.alt && !decim)
-		decim = ft_strdup("0");
 	len = ft_strlen(whole);
 	if (decim)
-		len += ft_strlen(decim) + 1;
+	{
+		len += digits;
+		decim_len = ft_strlen(decim);
+	}
+	if (decim || mods.alt)
+		len += 1;
 	if (!(res = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	ft_strcat(res, whole);
-	ft_strcat(res, ".");
-	ft_strcat(res, decim);
+	if (decim || mods.alt)
+		ft_strcat(res, ".");
+	if (decim)
+	{
+		ft_strcat(res, decim);
+		while (decim_len++ < digits)
+			ft_strcat(res, "0");
+		ft_memdel(&decim);
+	}
 	ft_memdel(&whole);
-	ft_memdel(&decim);
 	return (res);
 }
 
 char
 	*ft_stringify_float(double val, size_t dig, t_modifiers mods)
 {
-	int				whole;
-	double			decim;
-	char			*wholestr;
-	char			*decimstr;
-	long long int	pow;
+	int64_t		whole;
+	long double	decim;
+	char		*wholestr;
+	char		*decimstr;
+	uint64_t	pow;
 
-	if (dig > 15)
-		dig = 15;
-	whole = (int)val;
-	wholestr = ft_itoa(whole);
+	whole = (int64_t)val;
 	decimstr = NULL;
-	if (dig == 0 && !mods.alt)
-		return (ft_then_free(wholestr, ft_strdup(wholestr)));
 	decim = val - whole;
 	if (decim < 0.0)
 		decim = -decim;
 	pow = ft_pow(10, dig);
 	decim *= pow;
 	decim += 0.5;
-	if ((long long int)decim == pow)
+	if ((uint64_t)decim == pow)
 		whole++;
-	else
-		decimstr = ft_llitoa((long long int)decim);
-	return (ft_join_decim(wholestr, decimstr, mods));
+	if (dig > 0)
+		decimstr = ft_lluitoa((uint64_t)decim);
+	wholestr = ft_itoa_wrapper((uint64_t)(whole < 0 ? -whole : whole),
+		mods.sep, whole < 0);
+	return (ft_join_decim(wholestr, decimstr, dig, mods));
 }
 
 char
@@ -99,10 +120,7 @@ size_t
 	size_t	len;
 
 	digits = mods.precision == -1 ? 6 : mods.precision;
-	if (mods.alt)
-		res = ft_itoa(va_arg(args, int));
-	else
-		res = ft_stringify_float(va_arg(args, double), digits, mods);
+	res = ft_stringify_float(ft_get_sized_double(args, mods), digits, mods);
 	if (res && *res == '-')
 	{
 		res = ft_then_free(res, ft_strdup(res + 1));

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/06 19:35:48 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 16:53:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int
 	int			i;
 	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0, .size = N };
+	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0, .size = N, .sep = '\0' };
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')
@@ -124,7 +124,9 @@ int
 		else if (str[i] == '#')
 			(mods.alt = 1) && i++;
 		else if (str[i] == 'l' || str[i] == 'h')
-			i += ft_handle_size(&str[i], &mods);			
+			i += ft_handle_size(&str[i], &mods);
+		else if (str[i] == '\'')
+			(mods.sep = ',') && i++;
 		else
 			break;
 	// ft_handle_special_cases(str[i], &mods, args);

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/06 22:15:48 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 15:01:29 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,15 @@ size_t
 	char	*res;
 	char	*tmp;
 	size_t	len;
+	int64_t li;
 
-	// printf("Conv = %c, size = %d\n", conv, mods.size);
 	if (conv != 'u')
-		res = ft_llitoa(ft_get_sized_int(args, mods));
+	{
+		li = ft_get_sized_int(args, mods);
+		res = ft_itoa_wrapper((uint64_t)(li < 0 ? -li : li), mods.sep, li < 0);
+	}
 	else
-		res = ft_lluitoa(ft_get_sized_uint(args, mods));
+		res = ft_itoa_wrapper(ft_get_sized_uint(args, mods), mods.sep, 0);
 	if (*res == '-')
 	{
 		res = ft_then_free(res, ft_strdup(res + 1));

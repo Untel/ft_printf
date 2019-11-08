@@ -6,13 +6,14 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 01:33:08 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/03 21:06:28 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 00:08:24 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdint.h>
 
-int		ft_nb_char_base(uintptr_t nbr, int base_size)
+int		ft_nb_char_base(uint64_t nbr, int base_size)
 {
 	if (nbr > 0)
 		return (1 + (ft_nb_char_base(nbr / base_size, base_size)));
@@ -20,7 +21,7 @@ int		ft_nb_char_base(uintptr_t nbr, int base_size)
 		return (0);
 }
 
-char	*ft_nbrbase(uintptr_t nb, char *base, unsigned int base_size)
+char	*ft_nbrbase(uint64_t nb, char *base, unsigned int base_size)
 {
 	char	*ptr;
 	char	*save;

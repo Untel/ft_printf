@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 16:53:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:46:47 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,6 @@ static size_t
 	return (1 + ft_intlen(mods->precision));
 }
 
-static size_t
-	ft_handle_special_cases(char conv, t_modifiers *mods, va_list args)
-{
-	if (conv != 'f' && mods->precision != -1)
-	{
-		mods->padding = mods->precision != -2 ? mods->precision : mods->padding;
-		mods->align_left = 0;
-	}
-}
-
 int
 	ft_extract_flags(const char *str, t_list **lst, va_list args)
 {
@@ -129,7 +119,6 @@ int
 			(mods.sep = ',') && i++;
 		else
 			break;
-	// ft_handle_special_cases(str[i], &mods, args);
 	ft_convert(str[i], mods, lst, args);
 	return (i + 1);
 }

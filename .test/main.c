@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 16:51:47 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 18:50:57 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,14 +175,17 @@ int	run_float_tests()
     PRINT("Hi \'%.3f\' you", 3.999);
     PRINT("Hi \'%.3f\' you", -3.999);
     PRINT("Hi \'%.10f\' you", 3.999);
-    // PRINT("Hi \'%.20g\' you", 3.999);
-    // PRINT("Hi \'%.15g\' you", 3.999999999999999);
     PRINT("Hi \'%.15f\' you", 3.999999999999999);
     PRINT("Hi \'%.15f\' you", 3.9999999999999999);
     PRINT("Hi \'%.16f\' you", 3.999999999999999);
     PRINT("Hi \'%.17f\' you", 3.99999999999999999);
     PRINT("Hi \'%020f\' you", -127.32435);
     PRINT("Hi \'%.f\' you", -127.32435);
+    PRINT("Hi \'%'.f\' you", -12744515451.32435);
+    PRINT("Hi \'%'020f\' you", -15451.32435);
+    PRINT("Hi \'%e\' you", 151.32);
+    PRINT("Hi \'%e\' you", -151.32);
+    PRINT("Hi \'%e\' you", 0.000032);
 }
 
 int	run_other_tests()
@@ -232,5 +235,6 @@ int main(int ac, char **av)
 	// printf("|len=%d\n", printf("%c", 0));
 	// printf("|len=%d\n", printf("%05.3%"));
 	// printf("Hi \'%20.*-5s\' you", 10, "bonjour");
+    // printf("Hi \'%'f\' you\n", -12744515451.32435);
 	return (0);
 }

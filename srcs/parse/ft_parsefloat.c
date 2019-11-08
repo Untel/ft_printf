@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 17:06:49 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 18:55:45 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ char
 }
 
 char
-	*ft_stringify_float(double val, size_t dig, t_modifiers mods)
+	*ft_stringify_float(long double val, size_t dig, t_modifiers mods)
 {
 	int64_t		whole;
+	uint64_t	pow;
 	long double	decim;
 	char		*wholestr;
 	char		*decimstr;
-	uint64_t	pow;
 
 	whole = (int64_t)val;
 	decimstr = NULL;
@@ -84,12 +84,39 @@ char
 }
 
 char
+	*ft_stringify_exp(long double arg, size_t dig, t_modifiers mods)
+{
+	char		*res;
+	int			exp;
+	char		expstr[BUFFER_SIZE];
+	long double	val;
+
+	exp = 0;
+	val = arg < 0 ? -arg : arg;
+	if (val > 1)
+		while (val > 10.0)
+		{
+			val /= 10;
+			exp += 1;
+		}
+	else
+		while (val < 1)
+		{
+			val *= 10;
+			exp -= 1;
+		}
+	val = arg < 0 ? -val : val;
+	res = ft_stringify_float(val, dig, mods);
+	ft_sprintf(expstr, "e%+03d", exp);
+	res = ft_then_free(res, ft_strjoin(res, expstr));
+	return (res);
+}
+
+char
 	*ft_apply_float_precision(char *res, t_modifiers mods)
 {
 	if (!(res = ft_strdup(res)))
 		return (NULL);
-	if (mods.precision > 0)
-		res = ft_then_free(res, ft_fill(res, mods.precision, '0', 0));
 	if (mods.sign)
 		res = ft_then_free(res, ft_add_sign(mods.sign, res));
 	res = ft_then_free(res, ft_fill(res, mods.padding, ' ', mods.align_left));
@@ -99,15 +126,10 @@ char
 char
 	*ft_apply_float_flags(char *res, t_modifiers mods)
 {
-	if (mods.precision != -1)
-		return (ft_apply_float_precision(res, mods));
-	else
-	{
-		res = ft_fill(res, (mods.sign ? mods.padding - 1 : mods.padding),
-			mods.padchar, mods.align_left);
-		if (mods.sign)
-			res = ft_then_free(res, ft_add_sign(mods.sign, res));
-	}
+	res = ft_fill(res, (mods.sign && mods.padding > 0 ?
+		mods.padding - 1 : mods.padding), mods.padchar, mods.align_left);
+	if (mods.sign)
+		res = ft_then_free(res, ft_add_sign(mods.sign, res));
 	return (res);
 }
 
@@ -115,19 +137,23 @@ size_t
 	ft_parse_float(char buff[BUFFER_SIZE],
 		t_modifiers mods, va_list args, char conv)
 {
-	int		digits;
-	char	*res;
-	size_t	len;
+	int			digits;
+	char		*res;
+	size_t		len;
+	long double	val;
 
+	val = ft_get_sized_double(args, mods);
 	digits = mods.precision == -1 ? 6 : mods.precision;
-	res = ft_stringify_float(ft_get_sized_double(args, mods), digits, mods);
+	if (conv == 'f')
+		res = ft_stringify_float(val, digits, mods);
+	else if (conv == 'e')
+		res = ft_stringify_exp(val, digits, mods);
 	if (res && *res == '-')
 	{
 		res = ft_then_free(res, ft_strdup(res + 1));
 		mods.sign = '-';
 	}
-	if (!res || !(res = ft_then_free(res, ft_apply_float_flags(res, mods))))
-		return (-1);
+	res = ft_then_free(res, ft_apply_float_flags(res, mods));
 	len = ft_strcpy(buff, res);
 	ft_memdel(&res);
 	return (len);

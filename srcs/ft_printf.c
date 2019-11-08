@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 16:13:43 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/08 18:41:05 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ static int
 	while (++i < len)
 		if (str[i] == '%')
 		{
-			if (!(ptr = ft_substr(str, j, (i - j))))
-				return (0);
-			if (!(el = ft_lstnew((void *)ptr, i - j)))
-				return (ft_freesome(ptr, NULL));
-			ft_lstadd_back(lst, el);
+			if (i - j > 0)
+			{
+				if (!(ptr = ft_substr(str, j, (i - j))))
+					return (0);
+				if (!(el = ft_lstnew((void *)ptr, i - j)))
+					return (ft_freesome(ptr, NULL));
+				ft_lstadd_back(lst, el);
+			}
 			if (str[++i])
 				i += ft_extract_flags(&str[i], lst, args);
 			j = i;
@@ -87,10 +90,10 @@ int
 	while (el)
 	{
 		len += el->size;
-		ft_putstr_fd((char *)el->content, OUTPUT_FD);
+		write(OUTPUT_FD, (char *)el->content, el->size);
 		el = el->next;
 	}
-	ft_lstclear(el, ft_clearfn);
+	ft_lstclear(&el, ft_clearfn);
 	va_end(args);
 	return (len);
 }
@@ -109,12 +112,8 @@ int
 	el = NULL;
 	ft_split_to_list(str, &el, args);
 	fel = el;
-	// ft_lstprint(el, NULL);
-	// if (!(ret = (char *)malloc(sizeof(char) * ((len = ft_get_printed_length(&el)) + 1))))
-	// 	return (0);
 	while (el)
 	{
-		// len += ft_strlcat(buff, (const char *)el->content);
 		str = (char *)el->content;
 		if (!*str)
 			break;
@@ -122,7 +121,6 @@ int
 			buff[i++] = *str++;
 		el = el->next;
 	}
-	// ft_lstprint(fel, NULL);
 	ft_lstclear(&fel, ft_clearfn);
 	buff[i] = 0;
 	va_end(args);

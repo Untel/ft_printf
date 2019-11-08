@@ -25,7 +25,7 @@ CFLAGS			= -Werror -Wextra -Wall -w $(INCLUDES) #-g3 -fsanitize=address
 
 TEST_FLAGS		= 
 
-CC				= gcc
+CC				= clang
 
 AR				= ar rc
 

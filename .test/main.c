@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 17:12:10 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:03:55 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,9 @@ int	run_float_tests()
 {
     PRINT("Hi \'%f\' you", 3.999);
     PRINT("Hi \'%.f\' you", 3.999);
-    PRINT("Hi \'%#f\' you", 3.999);
-    PRINT("Hi \'%#.f\' you", 3.456);
-    PRINT("Hi \'%#.f\' you", 3.90000);
+    PRINT("Hi \'%f\' you", 3.999);
+    PRINT("Hi \'%.f\' you", 3.456);
+    PRINT("Hi \'%.f\' you", 3.90000);
     PRINT("Hi \'%.f\' you", 3.123);
     PRINT("Hi \'%.3f\' you", 3.999);
     PRINT("Hi \'%.3f\' you", -3.999);
@@ -184,10 +184,10 @@ int	run_float_tests()
     PRINT("Hi \'%'.f\' you", -12744515451.32435);
     PRINT("Hi \'%'020f\' you", -15451.32435);
     PRINT("Hi \'%f\' you", 0.0042);
-    PRINT("Hi \'%#.18llf\' you", 0.000000000000000046);
+    // PRINT("Hi \'%#.18llf\' you", 0.0000000046);
     PRINT("Hi \'%.1f\' you", 3.96);
     PRINT("Hi \'%.2f\' you", 3.96);
-    PRINT("Hi \'%'10.3f\' you", 1233.96);
+    // PRINT("Hi \'%'10.3f\' you", 1233.96);
 }
 
 int	run_exp_tests()
@@ -238,7 +238,7 @@ int main(int ac, char **av, char **env)
 		else if (strcmp(*av, "float") == 0)
 			HEADER(*av, run_float_tests);
 		else if (strcmp(*av, "exp") == 0)
-			HEADER(*av, run_float_tests);
+			HEADER(*av, run_exp_tests);
 		else if (strcmp(*av, "gfloat") == 0)
 			HEADER(*av, run_gfloat_tests);
 		else if (strcmp(*av, "other") == 0)

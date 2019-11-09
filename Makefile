@@ -4,7 +4,7 @@ LIBFT_DIR		= ./libft
 LIBFT_NAME		= libft.a
 LIBFT_PATH		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
-INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR} -I ${SRC_DIR}
+INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR}
 
 PARSE_FILES		= ft_parseint.c ft_parsechar.c ft_parsebase.c ft_parsefloat.c
 PARSE			= $(addprefix parse/, $(PARSE_FILES))
@@ -21,23 +21,25 @@ OBJS			= $(SRC:.c=.o)
 
 TEST_OBJS		= $(TESTER:.c=.o)
 
-CFLAGS			= -Werror -Wextra -Wall -w $(INCLUDES) #-g3 -fsanitize=address 
+CFLAGS			= -g -Werror -Wextra -Wall -w $(INCLUDES) #-g3 -fsanitize=address 
 
-TEST_FLAGS		= 
+TEST_FLAGS		= $(INCLUDES)
 
 CC				= clang
 
-AR				= ar rc
+AR				= ar rcs
 
 RM				= rm -f
 
-NAME			= ft_printf.out
+LIB_OUTPUT		= libftprintf.a
 
-NAME_TEST		= a.out
+TEST_OUTPUT		= a.out
 
 LIBFT_MAKE		= ${MAKE} -C ${LIBFT_DIR}
 
 LIBFT			= -L${LIBFT_DIR} -lft
+
+LIBFTPRINTF		= -L. -lftprintf
 
 TEST_1			= test1.test
 
@@ -48,20 +50,20 @@ DIFF			= diff --text --expand-tabs --left-column --side-by-side
 ARGS			= int uint char string pointer hex float exp other
 
 $(NAME):		libft $(OBJS) ./srcs/ft_printf.h
-				cp ${LIBFT_PATH} ${NAME}
-				${AR} ${NAME} ${OBJS}
-				ranlib ${NAME}
+				cp ${LIBFT_PATH} ${LIB_OUTPUT}
+				${AR} ${LIB_OUTPUT} ${OBJS}
+				ranlib ${LIB_OUTPUT}
 
 all:			$(NAME)
 
-test:			libft $(OBJS) $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
-				${CC} ${CFLAGS} ${TEST_FLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT} -o ${NAME_TEST}
+test:			$(NAME) $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
+				${CC} ${TEST_FLAGS} ${TEST_OBJS} ${LIBFTPRINTF} -o ${TEST_OUTPUT}
 
 run:			test
-				./${NAME_TEST} ${ARGS}
+				./${TEST_OUTPUT} ${ARGS}
 
 compare:		test
-				./${NAME_TEST} 
+				./${TEST_OUTPUT} 
 
 				# ./${NAME_TEST} "1" > ${TEST_2}
 				# $(DIFF) ${TEST_1} ${TEST_2}
@@ -75,11 +77,10 @@ clean:
 				$(RM) $(OBJS) $(TEST_OBJS)
 
 fclean:			clean
-				$(RM) $(NAME) $(NAME_TEST)
+				$(RM) $(NAME) $(TEST_OUTPUT)
 				${LIBFT_MAKE} fclean
 
 re:				fclean all
-				${LIBFT_MAKE} re
 
 retest:			fclean test
 

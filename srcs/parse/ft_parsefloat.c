@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 03:10:17 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 16:50:11 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char
 	len = ft_strlen(whole);
 	if (decim)
 	{
-		// len += digits;
 		decim_len = ft_strlen(decim);
 		len += (mods.trail ? digits : decim_len);
 	}
@@ -70,23 +69,21 @@ char
 
 	w = (int64_t)val;
 	decimstr = NULL;
-	decim = val - w;
+	decim = (val - w) < 0 ? -(val - w) : (val - w);
 	to_reduce = 0;
-	if (decim < 0.0)
-		decim = -decim;
-	if (decim < 0.1 && (to_reduce = 1))
+	if (decim <= 0.1 && (to_reduce = 1))
 		decim += 0.1;
 	decim *= ft_pow(10, dig);
-	decim += 0.5;
+	decim += .5;
+	if ((uint64_t)decim == ft_pow(10, dig) && w++)
+		decim = 0.0;
+	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, w < 0);
 	while (!mods.trail && (uint64_t)decim % 10 == 0)
 		decim /= 10;
-	if ((uint64_t)decim == ft_pow(10, dig))
-		w++;
 	if (dig > 0)
 		decimstr = ft_lluitoa((uint64_t)decim);
-	if (dig > 0 && to_reduce && *decimstr == '1')
+	if (to_reduce && *decimstr == '1')
 		*decimstr = '0';
-	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, w < 0);
 	return (ft_join_decim(wstr, decimstr, dig, mods));
 }
 
@@ -98,40 +95,20 @@ char
 	char		expstr[BUFFER_SIZE];
 	long double	val;
 
-	if (conv == 'g')
-		mods.trail = 0;
+	mods.trail = conv == 'g' ? 0 : 1;
 	exp = 0;
-	val = arg < 0 ? -arg : arg;
-	if (val > 1)
-		while (val > 10.0)
-		{
+	if ((val = arg < 0 ? -arg : arg) > 1)
+		while (val > 1 && val > 10.0 && (exp++ || 1))
 			val /= 10;
-			exp += 1;
-		}
 	else
-		while (val < 1)
-		{
+		while (val < 1 && (exp-- || 1))
 			val *= 10;
-			exp -= 1;
-		}
-	printf("Initial val is %llg\n", arg);
-	if (conv == 'g' && (exp > -4 || exp >= mods.precision))
+	if (conv == 'g' && (exp > -4 || (mods.precision >= 0 && exp >= mods.precision)))
 		return (ft_stringify_float(arg, dig, mods));
 	val = arg < 0 ? -val : val;
 	res = ft_stringify_float(val, dig, mods);
 	ft_sprintf(expstr, "e%+03d", exp);
 	res = ft_then_free(res, ft_strjoin(res, expstr));
-	return (res);
-}
-
-char
-	*ft_apply_float_precision(char *res, t_modifiers mods)
-{
-	if (!(res = ft_strdup(res)))
-		return (NULL);
-	if (mods.sign)
-		res = ft_then_free(res, ft_add_sign(mods.sign, res));
-	res = ft_then_free(res, ft_fill(res, mods.padding, ' ', mods.align_left));
 	return (res);
 }
 

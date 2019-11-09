@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 19:33:40 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 17:12:10 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,17 +183,11 @@ int	run_float_tests()
     PRINT("Hi \'%.f\' you", -127.32435);
     PRINT("Hi \'%'.f\' you", -12744515451.32435);
     PRINT("Hi \'%'020f\' you", -15451.32435);
-    PRINT("Hi \'%e\' you", 151.32);
-    PRINT("Hi \'%e\' you", -151.32);
-    PRINT("Hi \'%e\' you", 0.000042);
-    PRINT("Hi \'%g\' you", 0.000042);
     PRINT("Hi \'%f\' you", 0.0042);
-    PRINT("Hi \'%g\' you", 0.0042);
-}
-
-int	run_other_tests()
-{
-    PRINT("Hi \'%s\' %s %d you %s", "how", "are", 42, "doing?");
+    PRINT("Hi \'%#.18llf\' you", 0.000000000000000046);
+    PRINT("Hi \'%.1f\' you", 3.96);
+    PRINT("Hi \'%.2f\' you", 3.96);
+    PRINT("Hi \'%'10.3f\' you", 1233.96);
 }
 
 int	run_exp_tests()
@@ -201,9 +195,27 @@ int	run_exp_tests()
     PRINT("Hi \'%.4e\' you", -31.991);
     PRINT("Hi \'%.3e\' you", -31.1);
     PRINT("Hi \'%e\' you", 3.999);
+    PRINT("Hi \'%e\' you", 151.32);
+    PRINT("Hi \'%e\' you", -151.32);
+    PRINT("Hi \'%e\' you", 0.000042);
 }
+
+int	run_gfloat_tests()
+{
+    PRINT("Hi \'%g\' you", 0.000042);
+    PRINT("Hi \'%g\' you", 0.0042);
+    PRINT("Hi \'%.5g\' you", 4200.042);
+    PRINT("Hi \'%.4g\' you", 4200.042);
+}
+
+
+int	run_other_tests()
+{
+    PRINT("Hi \'%s\' %s %d you %s", "how", "are", 42, "doing?");
+}
+
 #include <locale.h>
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
     (void)ac;
 	int show_leaks = 0;
@@ -227,6 +239,8 @@ int main(int ac, char **av)
 			HEADER(*av, run_float_tests);
 		else if (strcmp(*av, "exp") == 0)
 			HEADER(*av, run_float_tests);
+		else if (strcmp(*av, "gfloat") == 0)
+			HEADER(*av, run_gfloat_tests);
 		else if (strcmp(*av, "other") == 0)
 			HEADER(*av, run_other_tests);
 		else if (strcmp(*av, "leaks") == 0)
@@ -235,6 +249,8 @@ int main(int ac, char **av)
 	printf("======================================================\n");
 	if (show_leaks)
 		system("leaks a.out");
+    // char *str = ft_itoa_wrapper((uint64_t)(42), '\0', 0);
+    // printf("%s\n", str);
 	// printf("|len=%d\n", printf("%c", 0));
 	// printf("|len=%d\n", printf("%05.3%"));
 	// printf("Hi \'%20.*-5s\' you", 10, "bonjour");

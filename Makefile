@@ -47,7 +47,7 @@ TEST_2			= test2.test
 
 DIFF			= diff --text --expand-tabs --left-column --side-by-side
 
-ARGS			= int uint char string pointer hex float exp other
+ARGS			= int uint char string pointer hex float exp gfloat leaks other
 
 $(NAME):		libft $(OBJS) ./srcs/ft_printf.h
 				cp ${LIBFT_PATH} ${LIB_OUTPUT}

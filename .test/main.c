@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 18:03:55 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 19:08:50 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,6 @@ int	run_float_tests()
     PRINT("Hi \'%'.f\' you", -12744515451.32435);
     PRINT("Hi \'%'020f\' you", -15451.32435);
     PRINT("Hi \'%f\' you", 0.0042);
-    // PRINT("Hi \'%#.18llf\' you", 0.0000000046);
     PRINT("Hi \'%.1f\' you", 3.96);
     PRINT("Hi \'%.2f\' you", 3.96);
     // PRINT("Hi \'%'10.3f\' you", 1233.96);
@@ -212,6 +211,13 @@ int	run_gfloat_tests()
 int	run_other_tests()
 {
     PRINT("Hi \'%s\' %s %d you %s", "how", "are", 42, "doing?");
+    int n;
+    int m;
+    n = 0;
+    m = 0;
+    printf("Hi %n\'%s\' %s %d you %s has %d\n", &n, "how", "are", 42, "doing?", n);
+    ft_printf("Hi %n\'%s\' %s %d you %s has %d\n", &m, "how", "are", 42, "doing?", m);
+    printf("M = %d, N = %d\n", n, m);
 }
 
 #include <locale.h>
@@ -255,5 +261,7 @@ int main(int ac, char **av, char **env)
 	// printf("|len=%d\n", printf("%05.3%"));
 	// printf("Hi \'%20.*-5s\' you", 10, "bonjour");
     // printf("Hi \'%'f\' you\n", -12744515451.32435);
+    // PRINT("Hi \'%#.18llf\' you", 0.0000000046);
+
 	return (0);
 }

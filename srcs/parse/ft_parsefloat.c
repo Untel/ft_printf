@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 20:01:47 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 03:10:17 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ char
 	if (decim)
 	{
 		// len += digits;
-		len += (mods.trail ? digits : decim_len);
 		decim_len = ft_strlen(decim);
+		len += (mods.trail ? digits : decim_len);
 	}
 	if (decim || mods.alt)
 		len += 1;
-	if (!(res = malloc(sizeof(char) * (len + 1))))
+	if (!(res = ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
 	ft_strcat(res, whole);
 	if (decim || mods.alt)
@@ -53,6 +53,7 @@ char
 		while (mods.trail && decim_len++ < digits)
 			ft_strcat(res, "0");
 		ft_memdel(&decim);
+
 	}
 	ft_memdel(&whole);
 	return (res);
@@ -61,39 +62,32 @@ char
 char
 	*ft_stringify_float(long double val, size_t dig, t_modifiers mods)
 {
-	int64_t		whole;
-	uint64_t	pow;
+	int64_t		w;
 	long double	decim;
-	char		*wholestr;
+	char		*wstr;
 	char		*decimstr;
-	char		prev[999];
+	int			to_reduce;
 
-	prev[0] = 0;
-	whole = (int64_t)val;
+	w = (int64_t)val;
 	decimstr = NULL;
-	decim = val - whole;
+	decim = val - w;
+	to_reduce = 0;
 	if (decim < 0.0)
 		decim = -decim;
-	pow = ft_pow(10, dig);
-	while (decim > 0.0 && decim < 1.0)
-	{
-		decim *= 10;
-		dig--;
-		ft_strcat(prev, "0");
-		printf("have to push %s\n", prev);
-	}
-	decim *= pow;
+	if (decim < 0.1 && (to_reduce = 1))
+		decim += 0.1;
+	decim *= ft_pow(10, dig);
 	decim += 0.5;
-	if (!mods.trail)
-		while ((uint64_t)decim % 10 == 0)
-			decim /= 10;
-	if ((uint64_t)decim == pow)
-		whole++;
+	while (!mods.trail && (uint64_t)decim % 10 == 0)
+		decim /= 10;
+	if ((uint64_t)decim == ft_pow(10, dig))
+		w++;
 	if (dig > 0)
-		decimstr = ft_strjoin(prev, ft_lluitoa((uint64_t)decim));
-	wholestr = ft_itoa_wrapper((uint64_t)(whole < 0 ? -whole : whole),
-		mods.sep, whole < 0);
-	return (ft_join_decim(wholestr, decimstr, dig, mods));
+		decimstr = ft_lluitoa((uint64_t)decim);
+	if (dig > 0 && to_reduce && *decimstr == '1')
+		*decimstr = '0';
+	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, w < 0);
+	return (ft_join_decim(wstr, decimstr, dig, mods));
 }
 
 char

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 15:01:29 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 04:44:27 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,14 @@ char
 {
 	char *tmp;
 
-	if (ft_strlen(res) == 1 && *res == '0')
+	if (res && ft_strlen(res) == 1 && *res == '0')
 		res = ft_then_free(res, ft_strdup(""));
-	if (mods.precision > 0)
-	{
+	if (res && mods.precision > 0)
 		res = ft_then_free(res, ft_fill(res, mods.precision, '0', 0));
-	}
-	if (mods.sign)
+	if (res && mods.sign)
 		res = ft_then_free(res, ft_add_sign(mods.sign, res));
-	res = ft_then_free(res, ft_fill(res, mods.padding, ' ', mods.align_left));
+	if (res)
+		res = ft_then_free(res, ft_fill(res, mods.padding, ' ', mods.align_left));
 	return (res);
 }
 
@@ -74,16 +73,17 @@ char
 {
 	if (!(res = ft_strdup(res)))
 		return (NULL);
-	if (mods.precision != -1)
+	if (res && mods.precision != -1)
 		return (ft_apply_int_precision(res, mods));
-	else
+	else if (res)
 	{
 		if (mods.sign && mods.padchar == ' ')
 			res = ft_then_free(res, ft_add_sign(mods.sign, res));
 		else if (mods.sign)
 			mods.padding--;
-		res = ft_then_free(res,
-			ft_fill(res, (mods.padding), mods.padchar, mods.align_left));
+		if (!(res = ft_then_free(res,
+			ft_fill(res, (mods.padding), mods.padchar, mods.align_left))))
+			return (NULL);
 		if (mods.sign && mods.padchar == '0')
 			res = ft_then_free(res, ft_add_sign(mods.sign, res));
 	}
@@ -106,12 +106,13 @@ size_t
 	}
 	else
 		res = ft_itoa_wrapper(ft_get_sized_uint(args, mods), mods.sep, 0);
-	if (*res == '-')
+	if (res && *res == '-')
 	{
 		res = ft_then_free(res, ft_strdup(res + 1));
 		mods.sign = '-';
 	}
-	res = ft_then_free(res, ft_apply_int_flags(res, mods));
+	if (!res || !(res = ft_then_free(res, ft_apply_int_flags(res, mods))))
+		return (-1);
 	len = ft_strcpy(buff, res);
 	ft_memdel(&res);
 	return (len);

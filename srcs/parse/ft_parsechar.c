@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/06 20:58:43 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 04:48:44 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ size_t
 		res = ft_strdup(res);
 	else
 		res = ft_substr(res, 0, DEFINED_VALUE(mods.precision));
-	res = ft_then_free(res,
-		ft_fill(res, mods.padding, mods.padchar, mods.align_left));
+	if (!res || !(res = ft_then_free(res,
+		ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
+		return (-1);
 	len = ft_strcpy(buff, res);
 	ft_memdel(&res);
 	return (len);
@@ -34,13 +35,14 @@ size_t
 size_t
 	ft_parse_char(char buff[BUFFER_SIZE], t_modifiers mods, va_list args)
 {
-	char c[2];
-	char *res;
+	char	c[2];
+	char	*res;
+	size_t	len;
 
 	c[0] = (char)va_arg(args, int);
 	c[1] = 0;
 	res = ft_fill(c, mods.padding, mods.padchar, mods.align_left);
-	ft_strcpy(buff, res);
+	len = res ? ft_strcpy(buff, res) : -1;
 	ft_memdel(&res);
-	return (mods.padding > 1 ? mods.padding : 1);
+	return (len);
 }

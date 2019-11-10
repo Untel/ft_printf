@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 23:59:32 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/09 19:14:44 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int
 			(mods.sep = ',') && i++;
 		else
 			break;
-	ft_convert(str[i], mods, lst, args);
+	if (ft_convert(str[i], mods, lst, args) == -1)
+		return (-1);
 	return (i + 1);
 }

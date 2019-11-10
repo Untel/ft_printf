@@ -6,28 +6,25 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 03:03:19 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 04:57:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 char
-	*ft_apply_base_flags(char *str, t_modifiers mods, char conv)
+	*ft_apply_base_flags(char *res, t_modifiers mods, char conv)
 {
-	char *res;
-
-	res = str;
-	if (mods.precision != -1)
+	if (res && mods.precision != -1)
 		res = ft_then_free(res, ft_fill(res, mods.precision, '0', 0));
-	if (conv == 'p' || (mods.alt && conv == 'x'))
+	if (res && (conv == 'p' || (mods.alt && conv == 'x')))
 		res = ft_then_free(res, ft_strjoin("0x", res));
-	if (mods.alt && conv == 'X')
+	else if (res && mods.alt && conv == 'X')
 		res = ft_then_free(res, ft_strjoin("0X", res));
-	if (mods.alt && conv == 'o')
+	else if (res && mods.alt && conv == 'o')
 		res = ft_then_free(res, ft_strjoin("0", res));
-	return (ft_then_free(res,
-		ft_fill(res, mods.padding, mods.padchar, mods.align_left)));
+	return (res ? ft_then_free(res,
+		ft_fill(res, mods.padding, mods.padchar, mods.align_left)) : NULL);
 }
 
 size_t
@@ -48,40 +45,9 @@ size_t
 		res = ft_nbrbase(val, "0123456789ABCDEF", 16);
 	else if (conv == 'o')
 		res = ft_nbrbase(val, "01234567", 8);
-	res = ft_apply_base_flags(res, mods, conv);
+	if (!res || !(res = ft_apply_base_flags(res, mods, conv)))
+		return (-1);
 	val = ft_strcpy(buff, res);
 	ft_memdel(&res);
 	return (val);
-}
-
-/* to-delete ?*/
-char
-	ft_val_to_hex(int v)
-{
-	if (v >= 0 && v < 10)
-		return ('0' + v);
-	else
-		return ('a' + v - 10);
-}
-
-char
-	*ft_parse_address(t_modifiers mods, uintptr_t p)
-{
-	char			*res;
-	int				i;
-	size_t			n;
-	int				start;
-
-	n = 0;
-	i = (((sizeof(p) << 3) - 4) / 4) + 1;
-	res = malloc(sizeof(char) * (i * 10 + 1));
-	start = 0;
-	while (--i >= 0 && !start)
-		if ((res[n] = ft_val_to_hex((p >> (i * 4)) & 0xf)) != '0' && n++)
-			start = 1;
-	while (--i >= 0)
-		res[n++] = ft_val_to_hex((p >> (i * 4)) & 0xf);
-	res[n] = 0;
-	res = ft_fill_padding(res, mods, 'p');
-	return (res);
 }

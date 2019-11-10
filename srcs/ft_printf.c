@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 18:41:05 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 05:02:39 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ static int
 static void
 	ft_clearfn(t_list *lst)
 {
-	if (lst->content)
-	{
+	if (lst && lst->content)
 		free(lst->content);
-	}
 }
 
 static int
@@ -86,7 +84,11 @@ int
 	va_start(args, str);
 	len = 0;
 	el = 0;
-	ft_split_to_list(str, &el, args);
+	if (!ft_split_to_list(str, &el, args))
+	{
+		ft_lstclear(&el, ft_clearfn);
+		return (-1);
+	}
 	while (el)
 	{
 		len += el->size;
@@ -115,8 +117,6 @@ int
 	while (el)
 	{
 		str = (char *)el->content;
-		if (!*str)
-			break;
 		while (el->size-- > 0)
 			buff[i++] = *str++;
 		el = el->next;

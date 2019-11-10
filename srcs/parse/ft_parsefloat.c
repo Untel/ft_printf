@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 16:50:11 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 04:38:19 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ char
 	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, w < 0);
 	while (!mods.trail && (uint64_t)decim % 10 == 0)
 		decim /= 10;
-	if (dig > 0)
-		decimstr = ft_lluitoa((uint64_t)decim);
+	if (dig > 0 && !(decimstr = ft_lluitoa((uint64_t)decim)))
+		return (NULL);
 	if (to_reduce && *decimstr == '1')
 		*decimstr = '0';
 	return (ft_join_decim(wstr, decimstr, dig, mods));
@@ -106,7 +106,8 @@ char
 	if (conv == 'g' && (exp > -4 || (mods.precision >= 0 && exp >= mods.precision)))
 		return (ft_stringify_float(arg, dig, mods));
 	val = arg < 0 ? -val : val;
-	res = ft_stringify_float(val, dig, mods);
+	if (!(res = ft_stringify_float(val, dig, mods)))
+		return (NULL);
 	ft_sprintf(expstr, "e%+03d", exp);
 	res = ft_then_free(res, ft_strjoin(res, expstr));
 	return (res);
@@ -115,8 +116,9 @@ char
 char
 	*ft_apply_float_flags(char *res, t_modifiers mods)
 {
-	res = ft_fill(res, (mods.sign && mods.padding > 0 ?
-		mods.padding - 1 : mods.padding), mods.padchar, mods.align_left);
+	if (!(res = ft_fill(res, (mods.sign && mods.padding > 0 ?
+		mods.padding - 1 : mods.padding), mods.padchar, mods.align_left)))
+		return (NULL);
 	if (mods.sign)
 		res = ft_then_free(res, ft_add_sign(mods.sign, res));
 	return (res);
@@ -137,12 +139,10 @@ size_t
 		res = ft_stringify_float(val, digits, mods);
 	else if (conv == 'e' || conv == 'g')
 		res = ft_stringify_exp(conv, val, digits, mods);
-	if (res && *res == '-')
-	{
-		res = ft_then_free(res, ft_strdup(res + 1));
+	if (res && *res == '-' && (res = ft_then_free(res, ft_strdup(res + 1))))
 		mods.sign = '-';
-	}
-	res = ft_then_free(res, ft_apply_float_flags(res, mods));
+	if (!res || (!(res = ft_then_free(res, ft_apply_float_flags(res, mods)))))
+		return (-1);
 	len = ft_strcpy(buff, res);
 	ft_memdel(&res);
 	return (len);

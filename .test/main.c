@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 21:27:12 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 22:27:00 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	run_char_tests()
     PRINT("Hi \'%-5.c\' you", 'c');
     PRINT("Hi \'%0*.c\' you", -5, 'c');
     PRINT("Hi \'%0*.c\' you", 5, 'c');
+    PRINT("hello ca%----4c %1c va %10c%-c ??", '\0', '\n', (char)564, 0);
 }
 
 int	run_hex_tests()
@@ -139,7 +140,17 @@ int	run_hex_tests()
     PRINT("Hi \'%-10.3X\' you", 75000);
     PRINT("Hi \'%llx\' you", INT64_MAX);
     PRINT("Hi \'%lx\' you", INT64_MAX);
+    PRINT("%#X", 0);
+    PRINT("%#o", 0);
+    PRINT("%#X", 70);
+    PRINT("%.0x", 0);
+    PRINT("%.1x", 70000);
     PRINT("Hi \'%hx\' you", INT64_MAX);
+    PRINT("t %#7.5X%0006.2x et %lX!", 0xab, 0x876, 0xff11ff11ff1);
+    PRINT("cc%#.4X et %#0012x %#04hX !!", 0xaef, 0xe, (unsigned short)0);
+    PRINT("toto %##.0xet %#.X%###.1x", 0, 0, 0);
+    PRINT("%0#10.0x %0#x", 12345, 0);
+    PRINT("%0#10.0x", 0);
     PRINT("coco et %-#-#--24O titi%#012o", 12, -874);
 }
 int	run_pointer_tests()

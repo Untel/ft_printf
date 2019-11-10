@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 21:34:05 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 22:22:48 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 char
 	*ft_apply_base_flags(char *res, t_modifiers mods, char conv)
 {
+	if (mods.padchar == '0' && mods.precision == -1 && mods.padding)
+		mods.precision = (mods.alt && mods.padding > 2 ?
+			mods.padding - 2 : mods.padding);
+	if (!ft_strncmp(res, "0", 3) && mods.precision == 0)
+		res = ft_then_free(res, ft_strdup(""));
 	if (res && mods.precision != -1)
 		res = ft_then_free(res, ft_fill(res, mods.precision, '0', 0));
 	if (res && (ft_is_conv("pP", conv) || (mods.alt && conv == 'x')))
@@ -24,7 +29,7 @@ char
 	else if (res && mods.alt && ft_is_conv("oO", conv))
 		res = ft_then_free(res, ft_strjoin("0", res));
 	return (res ? ft_then_free(res,
-		ft_fill(res, mods.padding, mods.padchar, mods.align_left)) : NULL);
+		ft_fill(res, mods.padding, ' ', mods.align_left)) : NULL);
 }
 
 int
@@ -39,6 +44,8 @@ int
 		val = (uint64_t)va_arg(args, uintptr_t);
 	else
 		val = ft_get_sized_uint(args, mods);
+	if (val == 0 && mods.alt)
+		mods.alt = 0;
 	if (ft_is_conv("xpP", conv))
 		res = ft_nbrbase(val, "0123456789abcdef", 16);
 	else if (conv == 'X')

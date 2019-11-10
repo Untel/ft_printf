@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 20:34:42 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 22:36:28 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,9 @@ int
 	int		len;
 
 	c[0] = conv == 'c' ? (char)va_arg(args, int) : '%';
-	c[1] = 0;
-	if (!c[0] && mods.padding > 0)
-		mods.padding--;
-	res = ft_fill(c, mods.padding, mods.padchar, mods.align_left);
-	len = res ? ft_strcpy(buff, res) : -1;
-	if (len > -1 && c[0] == 0)
-		len++;
+	res = ft_fill_c(c, 1, mods.padding, mods.padchar, mods.align_left);
+	len = mods.padding > 1 ? mods.padding : 1;
+	ft_memcpy(buff, res, len);
 	ft_memdel((void **)&res);
 	return (len);
 }

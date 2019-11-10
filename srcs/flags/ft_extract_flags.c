@@ -6,16 +6,9 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 18:26:33 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:25:00 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/**
- * Converters: "cspdiuxX%"
- * Modifiers: "-0.*"
- * Converters_bonus: "nfge"
- * Modifiers_bonus: "l ll h hh ’# +"
- */
 
 #include "ft_printf.h"
 
@@ -26,16 +19,19 @@ static size_t
 
 	ret = 1;
 	if (*str == 'l')
+	{
 		if (str[1] == 'l' && ret++)
 			mods->size = LL;
 		else
 			mods->size = L;
+	}
 	else
+	{
 		if (str[1] == 'h' && ret++)
 			mods->size = HH;
 		else
 			mods->size = H;
-
+	}
 	return (ret);
 }
 
@@ -43,6 +39,7 @@ static size_t
 	ft_handle_padding_size(const char *str, t_modifiers *mods, va_list args)
 {
 	int s;
+
 	if (*str == '*')
 	{
 		s = va_arg(args, int);
@@ -109,6 +106,6 @@ int
 		else if (str[i] == '\'')
 			(mods->sep = ',') && i++;
 		else
-			break;
+			break ;
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 19:02:17 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:31:53 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int64_t		ft_get_sized_int(va_list args, t_modifiers mods);
 uint64_t	ft_get_sized_uint(va_list args, t_modifiers mods);
 int			ft_printf(const char *str, ...);
 int			ft_sprintf(char *buffer, const char *str, ...);
-int
-	ft_split_to_list(const char *str, t_list **lst, va_list args);
+int			ft_split_to_list(const char *str, t_list **lst, va_list args);
+char		*ft_stringify_exp(char conv, long double arg,
+	size_t dig, t_modifiers mods);
+char		*ft_stringify_float(long double val, size_t dig, t_modifiers mods);
 #endif
 

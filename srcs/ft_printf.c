@@ -6,18 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 19:06:31 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:21:37 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/**
- * Converters: "cspdiuxX%"
- * Modifiers: "-0.*"
- * Converters_bonus: "nfge"
- * Modifiers_bonus: "l ll h hh ’# +"
- */
 
 static void
 	ft_clearfn(t_list *lst)
@@ -33,7 +26,7 @@ int
 	t_list	*fel;
 	int		len;
 	va_list	args;
-	
+
 	va_start(args, str);
 	len = 0;
 	el = 0;
@@ -67,8 +60,6 @@ int
 	while (el)
 	{
 		str = (char *)el->content;
-		if (!*str)
-			break;
 		while (el->size-- > 0)
 			buff[i++] = *str++;
 		el = el->next;

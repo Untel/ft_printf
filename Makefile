@@ -5,7 +5,7 @@ LIBFT_PATH		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
 INCLUDES		= -I $(LIBFT_DIR) -I $(SRC_DIR) -I.
 
-PARSE_FILES		= ft_parseint.c ft_parsechar.c ft_parsebase.c ft_parsefloat.c
+PARSE_FILES		= ft_parseint.c ft_parsechar.c ft_parsebase.c ft_parsefloat.c ft_parseexp.c
 PARSE			= $(addprefix parse/, $(PARSE_FILES))
 
 UTILS_FILES		= ft_convert_base.c ft_printf_utils.c
@@ -39,6 +39,10 @@ $(NAME):		$(OBJS) libft ./srcs/ft_printf.h
 
 libft:
 				$(LIBFT_MAKE)
+
+
+norme:				
+				norminette $(SRC)
 
 clean:
 				$(RM) $(OBJS)

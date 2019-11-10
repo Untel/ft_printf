@@ -6,14 +6,14 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 18:24:38 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:22:09 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *
-	ft_add_sign(char sign, char *str)
+char
+	*ft_add_sign(char sign, char *str)
 {
 	char *res;
 

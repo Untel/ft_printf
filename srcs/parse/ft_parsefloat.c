@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 18:30:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 20:20:46 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ char
 	size_t	decim_len;
 
 	len = ft_strlen(whole);
-	if (decim)
-	{
-		decim_len = ft_strlen(decim);
+	if (decim && (decim_len = ft_strlen(decim)))
 		len += (mods.trail ? digits : decim_len);
-	}
-	if (decim || mods.alt)
+	while (!mods.trail && decim && decim[--decim_len] == '0')
+		decim[decim_len] = 0;
+	if ((decim && *decim) || mods.alt)
 		len += 1;
 	if (!(res = ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
 	ft_strcat(res, whole);
-	if (decim || mods.alt)
+	if ((decim && *decim) || mods.alt)
 		ft_strcat(res, ".");
 	if (decim)
 	{
@@ -67,6 +66,9 @@ char
 	int			to_reduce;
 
 	w = (int64_t)val;
+	if (mods.trail == 0)
+		dig -= ft_intlen((w < 0 ? -w : w));
+	dig = dig < 0 ? 0 : dig;
 	decimstr = NULL;
 	decim = (val - w) < 0 ? -(val - w) : (val - w);
 	to_reduce = 0;
@@ -75,43 +77,13 @@ char
 	decim *= ft_pow(10, dig);
 	decim += .5;
 	if ((uint64_t)decim == ft_pow(10, dig) && w++)
-		decim = 0.0;
+		decim = 0;
 	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, w < 0);
-	while (!mods.trail && (uint64_t)decim % 10 == 0)
-		decim /= 10;
 	if (dig > 0 && !(decimstr = ft_lluitoa((uint64_t)decim)))
 		return (NULL);
-	if (to_reduce && *decimstr == '1')
+	if (to_reduce && decimstr && *decimstr == '1')
 		*decimstr = '0';
 	return (ft_join_decim(wstr, decimstr, dig, mods));
-}
-
-char
-	*ft_stringify_exp(char conv, long double arg, size_t dig, t_modifiers mods)
-{
-	char		*res;
-	int			exp;
-	char		expstr[BUFFER_SIZE];
-	long double	val;
-
-	mods.trail = conv == 'g' ? 0 : 1;
-	exp = 0;
-	if ((val = arg < 0 ? -arg : arg) > 1)
-		while (val > 1 && val > 10.0 && (exp++ || 1))
-			val /= 10;
-	else
-		while (val < 1 && (exp-- || 1))
-			val *= 10;
-	// printf("expo %d\n", exp);
-	if (conv == 'g' &&
-		((exp < 0 && exp > -4) || (exp > 0 && exp >= mods.precision)))
-		return (ft_stringify_float(arg, dig, mods));
-	val = arg < 0 ? -val : val;
-	if (!(res = ft_stringify_float(val, dig, mods)))
-		return (NULL);
-	ft_sprintf(expstr, "e%+03d", exp);
-	res = ft_then_free(res, ft_strjoin(res, expstr));
-	return (res);
 }
 
 char

@@ -1,11 +1,9 @@
 SRC_DIR			= srcs
-TEST_DIR		= .test
 LIBFT_DIR		= ./libft
-
 LIBFT_NAME		= libft.a
 LIBFT_PATH		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
-INCLUDES		= -I $(LIBFT_DIR) -I ${SRC_DIR}
+INCLUDES		= -I $(LIBFT_DIR) -I $(SRC_DIR) -I.
 
 PARSE_FILES		= ft_parseint.c ft_parsechar.c ft_parsebase.c ft_parsefloat.c
 PARSE			= $(addprefix parse/, $(PARSE_FILES))
@@ -18,65 +16,38 @@ FLAGS			= $(addprefix flags/, $(FLAGS_FILES))
 
 SRC_FILES		= ft_printf.c $(PARSE) $(UTILS) $(FLAGS)
 
-TEST_FILES		= main.c
-
 SRC				= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-TESTER			= $(addprefix $(TEST_DIR)/, $(TEST_FILES))
+
 OBJS			= $(SRC:.c=.o)
 
-TEST_OBJS		= $(TESTER:.c=.o)
-
-CFLAGS			= -g -Werror -Wextra -Wall -w $(INCLUDES) #-g3 -fsanitize=address 
-
-TEST_FLAGS		= $(INCLUDES)
+CFLAGS			= -Werror -Wextra -Wall $(INCLUDES)
 
 CC				= clang
-
-AR				= ar rcs
-
+AR				= ar rc
 RM				= rm -f
 
-LIB_OUTPUT		= libftprintf.a
+NAME			= libftprintf.a
 
-TEST_OUTPUT		= a.out
-
-LIBFT_MAKE		= ${MAKE} -C ${LIBFT_DIR}
-
-LIBFT			= -L${LIBFT_DIR} -lft
-
-LIBFTPRINTF		= -L. -lftprintf
-
-TEST_1			= test1.test
-
-TEST_2			= test2.test
-
-ARGS			= int uint char string pointer hex float exp gfloat leaks other
-
-$(NAME):		libft $(OBJS) ./srcs/ft_printf.h
-				cp ${LIBFT_PATH} ${LIB_OUTPUT}
-				${AR} ${LIB_OUTPUT} ${OBJS}
-				ranlib ${LIB_OUTPUT}
+LIBFT_MAKE		= $(MAKE) -C $(LIBFT_DIR)
 
 all:			$(NAME)
 
-test:			all $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
-				${CC} ${TEST_FLAGS} ${TEST_OBJS} ${LIBFTPRINTF} -o ${TEST_OUTPUT}
+$(NAME):		$(OBJS) libft ./srcs/ft_printf.h
+				cp $(LIBFT_PATH) $(NAME)
+				$(AR) $(NAME) $(OBJS)
+				ranlib $(NAME)
 
-run:			test
-				./${TEST_OUTPUT} ${ARGS}
-
-libft:			
-				git submodule init
-				${LIBFT_MAKE}
+libft:
+				$(LIBFT_MAKE)
 
 clean:
-				$(RM) $(OBJS) $(TEST_OBJS)
+				$(RM) $(OBJS)
+				$(LIBFT_MAKE) clean
 
-fclean:			clean
-				$(RM) $(NAME) $(TEST_OUTPUT)
+fclean:
+				$(RM) $(OBJS) $(NAME)
+				$(LIBFT_MAKE) fclean
 
 re:				fclean all
-
-retest:			fclean test
 
 .PHONY:			all clean fclean re libft retest run

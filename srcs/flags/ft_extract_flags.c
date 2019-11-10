@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 06:12:28 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 18:26:33 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static size_t
 }
 
 int
-	ft_extract_flags(const char *str, t_list **lst, va_list args, t_modifiers *mods)
+	ft_extract_flags(const char *str, va_list args, t_modifiers *mods)
 {
 	int			i;
 

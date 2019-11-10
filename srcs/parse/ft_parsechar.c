@@ -6,13 +6,13 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 06:44:30 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:08:33 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t
+int
 	ft_parse_string(char buff[BUFFER_SIZE], t_modifiers mods, va_list args)
 {
 	char	*res;
@@ -28,12 +28,13 @@ size_t
 		ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
 		return (-1);
 	len = ft_strcpy(buff, res);
-	ft_memdel(&res);
+	ft_memdel((void **)&res);
 	return (len);
 }
 
-size_t
-	ft_parse_char(char buff[BUFFER_SIZE], t_modifiers mods, va_list args, char conv)
+int
+	ft_parse_char(char buff[BUFFER_SIZE],
+		t_modifiers mods, va_list args, char conv)
 {
 	char	c[2];
 	char	*res;
@@ -43,6 +44,6 @@ size_t
 	c[1] = 0;
 	res = ft_fill(c, mods.padding, mods.padchar, mods.align_left);
 	len = res ? ft_strcpy(buff, res) : -1;
-	ft_memdel(&res);
+	ft_memdel((void **)&res);
 	return (len);
 }

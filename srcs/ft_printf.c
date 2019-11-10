@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 05:49:56 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:06:31 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int
 	ft_printf(const char *str, ...)
 {
 	t_list	*el;
+	t_list	*fel;
 	int		len;
 	va_list	args;
 	
@@ -38,13 +39,14 @@ int
 	el = 0;
 	if (!ft_split_to_list(str, &el, args))
 		return (-1);
+	fel = el;
 	while (el)
 	{
 		len += el->size;
 		write(OUTPUT_FD, (char *)el->content, el->size);
 		el = el->next;
 	}
-	ft_lstclear(&el, ft_clearfn);
+	ft_lstclear(&fel, ft_clearfn);
 	va_end(args);
 	return (len);
 }
@@ -55,7 +57,6 @@ int
 	t_list	*el;
 	t_list	*fel;
 	va_list	args;
-	char	*ret;
 	size_t	i;
 
 	va_start(args, str);

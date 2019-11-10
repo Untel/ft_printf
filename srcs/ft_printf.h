@@ -6,16 +6,17 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 06:42:26 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 19:02:17 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include "libft.h"
 # include <stdarg.h>
 # include <stdio.h>
-# include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 # include <locale.h>
 # define NULLABLE_STR(x) (x ? x : "(NULL)")
 # define DEFAULT_VALUE(x, v) (x != -1 ? x : v)
@@ -24,6 +25,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
+# define B BUFFER_SIZE
 
 typedef enum	e_argsize
 {
@@ -44,19 +46,19 @@ typedef	struct	s_modifiers
 
 void		*ft_then_free(void *ptr, void *res);
 int			ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args);
-int			ft_extract_flags(const char *str, t_list **lst, va_list args, t_modifiers *mods);
+int			ft_extract_flags(const char *str, va_list args, t_modifiers *mods);
 char		*ft_nbrbase(uintptr_t nbr, char *base, unsigned int base_size);
 char		*ft_fill(char *str, size_t count, char c, int align_left);
 char 		*ft_add_sign(char sign, char *str);
-size_t		ft_parse_int(char buff[BUFFER_SIZE],
+int			ft_parse_int(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);
-size_t		ft_parse_char(char buff[BUFFER_SIZE],
+int			ft_parse_char(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);
-size_t		ft_parse_string(char buff[BUFFER_SIZE],
+int			ft_parse_string(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args);
-size_t		ft_parse_base(char buff[BUFFER_SIZE],
+int			ft_parse_base(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);
-size_t		ft_parse_float(char buff[BUFFER_SIZE],
+int			ft_parse_float(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);
 int64_t		ft_get_sized_int(va_list args, t_modifiers mods);
 uint64_t	ft_get_sized_uint(va_list args, t_modifiers mods);

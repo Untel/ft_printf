@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 07:04:25 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 18:30:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ long double
 }
 
 char
-	*ft_join_decim(char *whole, char *decim, int digits, t_modifiers mods)
+	*ft_join_decim(char *whole, char *decim, size_t digits, t_modifiers mods)
 {
 	char	*res;
 	size_t	len;
@@ -51,10 +51,9 @@ char
 		ft_strcat(res, decim);
 		while (mods.trail && decim_len++ < digits)
 			ft_strcat(res, "0");
-		ft_memdel(&decim);
-
+		ft_memdel((void **)&decim);
 	}
-	ft_memdel(&whole);
+	ft_memdel((void **)&whole);
 	return (res);
 }
 
@@ -103,8 +102,9 @@ char
 	else
 		while (val < 1 && (exp-- || 1))
 			val *= 10;
-	printf("expo %d\n", exp);
-	if (conv == 'g' && ((exp < 0 && exp > -4) || (exp > 0 && exp >= mods.precision)))
+	// printf("expo %d\n", exp);
+	if (conv == 'g' &&
+		((exp < 0 && exp > -4) || (exp > 0 && exp >= mods.precision)))
 		return (ft_stringify_float(arg, dig, mods));
 	val = arg < 0 ? -val : val;
 	if (!(res = ft_stringify_float(val, dig, mods)))
@@ -125,7 +125,7 @@ char
 	return (res);
 }
 
-size_t
+int
 	ft_parse_float(char buff[BUFFER_SIZE],
 		t_modifiers mods, va_list args, char conv)
 {
@@ -134,6 +134,7 @@ size_t
 	size_t		len;
 	long double	val;
 
+	res = NULL;
 	val = ft_get_sized_double(args, mods);
 	digits = mods.precision == -1 ? 6 : mods.precision;
 	if (conv == 'f')
@@ -145,6 +146,6 @@ size_t
 	if (!res || (!(res = ft_then_free(res, ft_apply_float_flags(res, mods)))))
 		return (-1);
 	len = ft_strcpy(buff, res);
-	ft_memdel(&res);
+	ft_memdel((void **)&res);
 	return (len);
 }

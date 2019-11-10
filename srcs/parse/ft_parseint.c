@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 04:44:27 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 18:29:17 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int64_t
 	int64_t val;
 
 	if (mods.size == HH)
-		val = (int64_t)va_arg(args, char);
+		val = (int64_t)(char)va_arg(args, int);
 	else if (mods.size == H)
-		val = (int64_t)va_arg(args, short int);
+		val = (int64_t)(short int)va_arg(args, int);
 	else if (mods.size == N)
 		val = (int64_t)va_arg(args, int);
 	else if (mods.size == L)
@@ -38,9 +38,9 @@ uint64_t
 	uint64_t val;
 
 	if (mods.size == HH)
-		val = (uint64_t)va_arg(args, unsigned char);
+		val = (uint64_t)(unsigned char)va_arg(args, int);
 	else if (mods.size == H)
-		val = (uint64_t)va_arg(args, unsigned short int);
+		val = (uint64_t)(unsigned short int)va_arg(args, int);
 	else if (mods.size == N)
 		val = (uint64_t)va_arg(args, unsigned int);
 	else if (mods.size == L)
@@ -55,8 +55,6 @@ uint64_t
 char
 	*ft_apply_int_precision(char *res, t_modifiers mods)
 {
-	char *tmp;
-
 	if (res && ft_strlen(res) == 1 && *res == '0')
 		res = ft_then_free(res, ft_strdup(""));
 	if (res && mods.precision > 0)
@@ -64,7 +62,8 @@ char
 	if (res && mods.sign)
 		res = ft_then_free(res, ft_add_sign(mods.sign, res));
 	if (res)
-		res = ft_then_free(res, ft_fill(res, mods.padding, ' ', mods.align_left));
+		res = ft_then_free(res,
+			ft_fill(res, mods.padding, ' ', mods.align_left));
 	return (res);
 }
 
@@ -90,12 +89,11 @@ char
 	return (res);
 }
 
-size_t
+int
 	ft_parse_int(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv)
 {
 	char	*res;
-	char	*tmp;
 	size_t	len;
 	int64_t li;
 
@@ -114,6 +112,6 @@ size_t
 	if (!res || !(res = ft_then_free(res, ft_apply_int_flags(res, mods))))
 		return (-1);
 	len = ft_strcpy(buff, res);
-	ft_memdel(&res);
+	ft_memdel((void **)&res);
 	return (len);
 }

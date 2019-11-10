@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 04:57:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 18:30:06 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ char
 		ft_fill(res, mods.padding, mods.padchar, mods.align_left)) : NULL);
 }
 
-size_t
+int
 	ft_parse_base(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv)
 {
 	char		*res;
-	char		*tmp;
 	uint64_t	val;
 
+	res = NULL;
 	if (conv == 'p')
 		val = (uint64_t)va_arg(args, uintptr_t);
 	else
@@ -48,6 +48,6 @@ size_t
 	if (!res || !(res = ft_apply_base_flags(res, mods, conv)))
 		return (-1);
 	val = ft_strcpy(buff, res);
-	ft_memdel(&res);
-	return (val);
+	ft_memdel((void **)&res);
+	return ((int)val);
 }

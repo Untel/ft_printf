@@ -1,6 +1,7 @@
-SRC_DIR			= ./srcs
+SRC_DIR			= srcs
 TEST_DIR		= .test
 LIBFT_DIR		= ./libft
+
 LIBFT_NAME		= libft.a
 LIBFT_PATH		= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
@@ -11,7 +12,11 @@ PARSE			= $(addprefix parse/, $(PARSE_FILES))
 
 UTILS_FILES		= ft_convert_base.c ft_printf_utils.c
 UTILS			= $(addprefix utils/, $(UTILS_FILES))
-SRC_FILES		= ft_printf.c ft_extract_flags.c ft_convert.c $(PARSE) $(UTILS)
+
+FLAGS_FILES		= ft_extract_flags.c ft_convert.c
+FLAGS			= $(addprefix flags/, $(FLAGS_FILES))
+
+SRC_FILES		= ft_printf.c $(PARSE) $(UTILS) $(FLAGS)
 
 TEST_FILES		= main.c
 

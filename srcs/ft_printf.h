@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/08 19:27:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 06:00:10 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,9 @@ typedef	struct	s_modifiers
 }				t_modifiers;
 
 void		*ft_then_free(void *ptr, void *res);
-char		*ft_char_to_str(char c);
 int			ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args);
-int			ft_extract_flags(const char *str, t_list **lst, va_list args);
+int			ft_extract_flags(const char *str, t_list **lst, va_list args, t_modifiers *mods);
 char		*ft_nbrbase(uintptr_t nbr, char *base, unsigned int base_size);
-
-char		*ft_fill_padding(char *str, t_modifiers mods, char conv);
 char		*ft_fill(char *str, size_t count, char c, int align_left);
 char 		*ft_add_sign(char sign, char *str);
 size_t		ft_parse_int(char buff[BUFFER_SIZE],
@@ -65,5 +62,7 @@ int64_t		ft_get_sized_int(va_list args, t_modifiers mods);
 uint64_t	ft_get_sized_uint(va_list args, t_modifiers mods);
 int			ft_printf(const char *str, ...);
 int			ft_sprintf(char *buffer, const char *str, ...);
+int
+	ft_split_to_list(const char *str, t_list **lst, va_list args);
 #endif
 

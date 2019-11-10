@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 05:33:11 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 05:49:56 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,61 +19,11 @@
  * Modifiers_bonus: "l ll h hh ’# +"
  */
 
-static int
-	ft_freesome(void *a, void *b)
-{
-	if (a)
-		free(a);
-	if (b)
-		free(b);
-	return (0);
-}
-
 static void
 	ft_clearfn(t_list *lst)
 {
 	if (lst->content)
-	{
 		free(lst->content);
-	}
-}
-
-int
-	ft_addstr(const char *str, t_list **lst, int len)
-{
-	char *ptr;
-	t_list	*el;
-
-	if (!(ptr = ft_substr(str, 0, len)))
-		return (0);
-	if (!(el = ft_lstnew((void *)ptr, len)))
-		return (ft_freesome(ptr, NULL));
-	ft_lstadd_back(lst, el);
-	return (1);
-}
-
-static int
-	ft_split_to_list(const char *str, t_list **lst, va_list args)
-{
-	int		i;
-	int		j;
-	size_t	len;
-
-	i = -1;
-	j = 0;
-	len = ft_strlen(str);	
-	while (++i < len)
-		if (str[i] == '%')
-		{
-			if (i - j > 0 && !ft_addstr(&str[j], lst, (i - j)))
-				return (0);
-			if (str[++i] && (j = ft_extract_flags(&str[i], lst, args)) > -1)
-				i += j;
-			if (j == -1)
-				return (0);
-			j = i;
-		}
-	return (str[j] ? ft_addstr(&str[j], lst, (i - j)) : 1);
 }
 
 int

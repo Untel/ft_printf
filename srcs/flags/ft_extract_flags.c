@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 19:14:44 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 06:12:28 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
  */
 
 #include "ft_printf.h"
-
-static size_t
-	ft_handle_padding_zero(t_modifiers *mods)
-{
-	mods->padchar = '0';
-	return (1);
-}
 
 static size_t
 	ft_handle_size(const char *str, t_modifiers *mods)
@@ -93,33 +86,29 @@ static size_t
 }
 
 int
-	ft_extract_flags(const char *str, t_list **lst, va_list args)
+	ft_extract_flags(const char *str, t_list **lst, va_list args, t_modifiers *mods)
 {
 	int			i;
-	t_modifiers mods;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0, .align_left = 0, .precision = -1, .alt = 0, .size = N, .sep = '\0', .trail = 1};
 	i = 0;
 	while (str[i])
 		if (str[i] == '0')
-			i += ft_handle_padding_zero(&mods);
+			(mods->padchar = '0') && i++;
 		else if (ft_isdigit(str[i]) || str[i] == '*')
-			i += ft_handle_padding_size(&str[i], &mods, args);
+			i += ft_handle_padding_size(&str[i], mods, args);
 		else if (str[i] == '.')
-			i += ft_handle_precision_size(&str[i], &mods, args);
+			i += ft_handle_precision_size(&str[i], mods, args);
 		else if (str[i] == '-')
-			i += ft_handle_jusitfy_side(&mods);
+			i += ft_handle_jusitfy_side(mods);
 		else if (str[i] == '+' || str[i] == ' ')
-			mods.sign = str[i++];
+			mods->sign = str[i++];
 		else if (str[i] == '#')
-			(mods.alt = 1) && i++;
+			(mods->alt = 1) && i++;
 		else if (str[i] == 'l' || str[i] == 'h')
-			i += ft_handle_size(&str[i], &mods);
+			i += ft_handle_size(&str[i], mods);
 		else if (str[i] == '\'')
-			(mods.sep = ',') && i++;
+			(mods->sep = ',') && i++;
 		else
 			break;
-	if (ft_convert(str[i], mods, lst, args) == -1)
-		return (-1);
-	return (i + 1);
+	return (i);
 }

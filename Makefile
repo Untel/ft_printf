@@ -45,8 +45,6 @@ TEST_1			= test1.test
 
 TEST_2			= test2.test
 
-DIFF			= diff --text --expand-tabs --left-column --side-by-side
-
 ARGS			= int uint char string pointer hex float exp gfloat leaks other
 
 $(NAME):		libft $(OBJS) ./srcs/ft_printf.h
@@ -56,18 +54,11 @@ $(NAME):		libft $(OBJS) ./srcs/ft_printf.h
 
 all:			$(NAME)
 
-test:			$(NAME) $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
+test:			all $(TEST_OBJS) ${SRC_DIR}/ft_printf.h
 				${CC} ${TEST_FLAGS} ${TEST_OBJS} ${LIBFTPRINTF} -o ${TEST_OUTPUT}
 
 run:			test
 				./${TEST_OUTPUT} ${ARGS}
-
-compare:		test
-				./${TEST_OUTPUT} 
-
-				# ./${NAME_TEST} "1" > ${TEST_2}
-				# $(DIFF) ${TEST_1} ${TEST_2}
-				# $(RM) $(TEST_1) $(TEST_2)
 
 libft:			
 				git submodule init
@@ -78,7 +69,6 @@ clean:
 
 fclean:			clean
 				$(RM) $(NAME) $(TEST_OUTPUT)
-				${LIBFT_MAKE} fclean
 
 re:				fclean all
 

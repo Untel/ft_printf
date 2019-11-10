@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 05:02:39 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 05:33:11 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,24 @@ static int
 static void
 	ft_clearfn(t_list *lst)
 {
-	if (lst && lst->content)
+	if (lst->content)
+	{
 		free(lst->content);
+	}
+}
+
+int
+	ft_addstr(const char *str, t_list **lst, int len)
+{
+	char *ptr;
+	t_list	*el;
+
+	if (!(ptr = ft_substr(str, 0, len)))
+		return (0);
+	if (!(el = ft_lstnew((void *)ptr, len)))
+		return (ft_freesome(ptr, NULL));
+	ft_lstadd_back(lst, el);
+	return (1);
 }
 
 static int
@@ -41,8 +57,6 @@ static int
 {
 	int		i;
 	int		j;
-	char	*ptr;
-	t_list	*el;
 	size_t	len;
 
 	i = -1;
@@ -51,27 +65,15 @@ static int
 	while (++i < len)
 		if (str[i] == '%')
 		{
-			if (i - j > 0)
-			{
-				if (!(ptr = ft_substr(str, j, (i - j))))
-					return (0);
-				if (!(el = ft_lstnew((void *)ptr, i - j)))
-					return (ft_freesome(ptr, NULL));
-				ft_lstadd_back(lst, el);
-			}
-			if (str[++i])
-				i += ft_extract_flags(&str[i], lst, args);
+			if (i - j > 0 && !ft_addstr(&str[j], lst, (i - j)))
+				return (0);
+			if (str[++i] && (j = ft_extract_flags(&str[i], lst, args)) > -1)
+				i += j;
+			if (j == -1)
+				return (0);
 			j = i;
 		}
-	if (str[j])
-	{
-		if (!(ptr = ft_substr(str, j, (i - j))))
-			return (0);
-		if (!(el = ft_lstnew((void *)ptr, i - j)))
-			return (ft_freesome(ptr, NULL));
-		ft_lstadd_back(lst, el);
-	}
-	return (1);
+	return (str[j] ? ft_addstr(&str[j], lst, (i - j)) : 1);
 }
 
 int
@@ -85,10 +87,7 @@ int
 	len = 0;
 	el = 0;
 	if (!ft_split_to_list(str, &el, args))
-	{
-		ft_lstclear(&el, ft_clearfn);
 		return (-1);
-	}
 	while (el)
 	{
 		len += el->size;
@@ -117,6 +116,8 @@ int
 	while (el)
 	{
 		str = (char *)el->content;
+		if (!*str)
+			break;
 		while (el->size-- > 0)
 			buff[i++] = *str++;
 		el = el->next;

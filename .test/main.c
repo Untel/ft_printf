@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/09 19:08:50 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 06:53:19 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,12 @@ int	run_other_tests()
     printf("Hi %n\'%s\' %s %d you %s has %d\n", &n, "how", "are", 42, "doing?", n);
     ft_printf("Hi %n\'%s\' %s %d you %s has %d\n", &m, "how", "are", 42, "doing?", m);
     printf("M = %d, N = %d\n", n, m);
+    printf("Hi \'%05%\' you\n");
+    ft_printf("Hi \'%5%\' you\n");
+
+    printf("Hi \'%.5g' you\n", 4200.042);
+    printf("Hi \'%.2g' you\n", 4200.431);
+
 }
 
 #include <locale.h>

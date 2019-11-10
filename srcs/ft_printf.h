@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 06:00:10 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 06:42:26 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char 		*ft_add_sign(char sign, char *str);
 size_t		ft_parse_int(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);
 size_t		ft_parse_char(char buff[BUFFER_SIZE],
-	t_modifiers mods, va_list args);
+	t_modifiers mods, va_list args, char conv);
 size_t		ft_parse_string(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args);
 size_t		ft_parse_base(char buff[BUFFER_SIZE],

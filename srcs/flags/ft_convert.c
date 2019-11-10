@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 06:34:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 06:50:50 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int
 		len = ft_parse_int(buff, mods, args, conv);
 	else if (conv == 's')
 		len = ft_parse_string(buff, mods, args);
-	else if (conv == 'c')
-		len = ft_parse_char(buff, mods, args);
+	else if (conv == 'c' || conv == '%')
+		len = ft_parse_char(buff, mods, args, conv);
 	else if (conv == 'x' || conv == 'X' || conv == 'o' || conv == 'p')
 		len = ft_parse_base(buff, mods, args, conv);
 	else if (conv == 'f' || conv == 'e' || conv == 'g')

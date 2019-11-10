@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 05:23:30 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 07:04:25 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ char
 	else
 		while (val < 1 && (exp-- || 1))
 			val *= 10;
-	if (conv == 'g' && (exp > -4 || (mods.precision >= 0 && exp >= mods.precision)))
+	printf("expo %d\n", exp);
+	if (conv == 'g' && ((exp < 0 && exp > -4) || (exp > 0 && exp >= mods.precision)))
 		return (ft_stringify_float(arg, dig, mods));
 	val = arg < 0 ? -val : val;
 	if (!(res = ft_stringify_float(val, dig, mods)))

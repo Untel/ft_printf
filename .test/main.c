@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 20:00:26 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:27:12 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	run_int_tests()
     PRINT("Hi \'%lld\' you", INT64_MAX);
     PRINT("Hi \'%'d\' you", 1234567);
     PRINT("Hi \'%'d\' you", 1234567);
+    PRINT("Hi \'%0d\' you", -579);
+    PRINT("%d%d", 4, 2);	
 	//TOFIX
     // PRINT("Hi \'%d\' you", INT32_MAX + 3);
 }
@@ -138,6 +140,7 @@ int	run_hex_tests()
     PRINT("Hi \'%llx\' you", INT64_MAX);
     PRINT("Hi \'%lx\' you", INT64_MAX);
     PRINT("Hi \'%hx\' you", INT64_MAX);
+    PRINT("coco et %-#-#--24O titi%#012o", 12, -874);
 }
 int	run_pointer_tests()
 {

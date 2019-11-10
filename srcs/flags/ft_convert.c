@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 20:26:56 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:32:19 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int
 
 	*buff = 0;
 	len = 0;
-	if (conv == 'd' || conv == 'i' || conv == 'u')
+	if (ft_is_conv("dDiIuU", conv))
 		len = ft_parse_int(buff, mods, args, conv);
-	else if (conv == 's')
+	else if (ft_is_conv("sS", conv))
 		len = ft_parse_string(buff, mods, args);
-	else if (conv == 'c' || conv == '%')
+	else if (ft_is_conv("cC%", conv))
 		len = ft_parse_char(buff, mods, args, conv);
-	else if (conv == 'x' || conv == 'X' || conv == 'o' || conv == 'p')
+	else if (ft_is_conv("xXpPoO", conv))
 		len = ft_parse_base(buff, mods, args, conv);
-	else if (conv == 'f' || conv == 'e' || conv == 'g')
+	else if (ft_is_conv("fFgGeE", conv))
 		len = ft_parse_float(buff, mods, args, conv);
-	else if (conv == 'n')
+	else if (ft_is_conv("nN", conv))
 		*(va_arg(args, int *)) = ft_lst_size(*lst);
 	if (len > -1)
 		ft_lstadd_back(lst, ft_lstnew(ft_strdup(buff), len));
@@ -92,19 +92,21 @@ int
 	int		j;
 	int		len;
 
-	i = -1;
+	i = 0;
 	j = 0;
 	len = ft_strlen(str);
-	while (++i < len)
+	while (i < len)
 		if (str[i] == '%')
 		{
 			if (i - j > 0 && !ft_addstr(&str[j], lst, (i - j)))
 				return (0);
-			if (str[++i] && (j = ft_format(&str[i], lst, args)) > -1)
-				i += j;
+			if (str[i + 1] && (j = ft_format(&str[i + 1], lst, args)) > -1)
+				i += j + 1;
 			else if (j == -1)
 				return (0);
 			j = i;
 		}
+		else
+			i++;
 	return (str[j] ? ft_addstr(&str[j], lst, (i - j)) : 1);
 }

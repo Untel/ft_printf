@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 18:29:17 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:43:39 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ char
 	{
 		if (mods.sign && mods.padchar == ' ')
 			res = ft_then_free(res, ft_add_sign(mods.sign, res));
-		else if (mods.sign)
+		else if (mods.sign && mods.padding > 0)
 			mods.padding--;
-		if (!(res = ft_then_free(res,
-			ft_fill(res, (mods.padding), mods.padchar, mods.align_left))))
+		if (!res || !(res = ft_then_free(res,
+			ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
 			return (NULL);
 		if (mods.sign && mods.padchar == '0')
 			res = ft_then_free(res, ft_add_sign(mods.sign, res));
@@ -97,7 +97,7 @@ int
 	size_t	len;
 	int64_t li;
 
-	if (conv != 'u')
+	if (!ft_is_conv("uU", conv))
 	{
 		li = ft_get_sized_int(args, mods);
 		res = ft_itoa_wrapper((uint64_t)(li < 0 ? -li : li), mods.sep, li < 0);

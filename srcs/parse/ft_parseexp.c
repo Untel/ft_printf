@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 19:25:32 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 19:54:34 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:38:45 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char
 	char		expstr[BUFFER_SIZE];
 	long double	val;
 
-	mods.trail = conv == 'g' ? 0 : 1;
+	mods.trail = ft_is_conv("gG", conv) ? 0 : 1;
 	exp = 0;
 	if ((val = arg < 0 ? -arg : arg) > 1)
 		while (val > 1 && val > 10.0 && (exp++ || 1))
@@ -28,8 +28,7 @@ char
 	else
 		while (val < 1 && (exp-- || 1))
 			val *= 10;
-	printf("Exp %d | is %d\n", exp, exp > -4);
-	if (conv == 'g' &&
+	if (ft_is_conv("gG", conv) &&
 		((exp < 0 && exp > -4) || (exp > 0 && exp <= mods.precision)))
 		return (ft_stringify_float(arg, dig, mods));
 	val = arg < 0 ? -val : val;

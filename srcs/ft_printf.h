@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 19:31:53 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:29:39 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ typedef	struct	s_modifiers
 void		*ft_then_free(void *ptr, void *res);
 int			ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args);
 int			ft_extract_flags(const char *str, va_list args, t_modifiers *mods);
+int			ft_is_conv(char *str, char c);
 char		*ft_nbrbase(uintptr_t nbr, char *base, unsigned int base_size);
 char		*ft_fill(char *str, size_t count, char c, int align_left);
-char 		*ft_add_sign(char sign, char *str);
+char		*ft_add_sign(char sign, char *str);
 int			ft_parse_int(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);
 int			ft_parse_char(char buff[BUFFER_SIZE],

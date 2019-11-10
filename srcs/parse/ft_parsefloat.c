@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 20:20:46 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:32:41 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ int
 	res = NULL;
 	val = ft_get_sized_double(args, mods);
 	digits = mods.precision == -1 ? 6 : mods.precision;
-	if (conv == 'f')
+	if (ft_is_conv("fF", conv))
 		res = ft_stringify_float(val, digits, mods);
-	else if (conv == 'e' || conv == 'g')
+	else if (ft_is_conv("eEgG", conv))
 		res = ft_stringify_exp(conv, val, digits, mods);
 	if (res && *res == '-' && (res = ft_then_free(res, ft_strdup(res + 1))))
 		mods.sign = '-';

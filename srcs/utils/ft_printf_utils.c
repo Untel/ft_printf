@@ -6,11 +6,20 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 19:22:09 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 21:40:34 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int
+	ft_is_conv(char *str, char c)
+{
+	while (*str)
+		if (*str++ == c)
+			return (1);
+	return (0);
+}
 
 char
 	*ft_add_sign(char sign, char *str)

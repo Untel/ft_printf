@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 22:32:19 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:13:47 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <locale.h>
+# include <wchar.h>
 # define NULLABLE_STR(x) (x ? x : "(NULL)")
 # define DEFAULT_VALUE(x, v) (x != -1 ? x : v)
 # define DEFINED_VALUE(x) (x != -2 ? x : 0)
@@ -50,7 +51,7 @@ int			ft_extract_flags(const char *str, va_list args, t_modifiers *mods);
 int			ft_is_conv(char *str, char c);
 char		*ft_nbrbase(uintptr_t nbr, char *base, unsigned int base_size);
 char		*ft_fill(char *str, size_t count, char c, int align_left);
-char		*ft_fill_c(char *str, size_t len, size_t count, char c, int align_left);
+char		*ft_fill_c(char cc, size_t count, char c, int align_left);
 char		*ft_add_sign(char sign, char *str);
 int			ft_parse_int(char buff[BUFFER_SIZE],
 	t_modifiers mods, va_list args, char conv);

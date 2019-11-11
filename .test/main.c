@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 22:27:00 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 23:31:00 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ int	run_char_tests()
     PRINT("Hi \'%0*.c\' you", -5, 'c');
     PRINT("Hi \'%0*.c\' you", 5, 'c');
     PRINT("hello ca%----4c %1c va %10c%-c ??", '\0', '\n', (char)564, 0);
+    PRINT("%lc", 0x4e6);
+    PRINT("%lc", 0x1e40);
+    PRINT("%lc", 0x40501);
+    PRINT("%C", 0x11ffff);
+    PRINT("%C", 0x6f);
+
 }
 
 int	run_hex_tests()

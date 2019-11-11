@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 22:32:31 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/10 23:31:00 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,18 @@ char
 }
 
 char
-	*ft_fill_c(char *str, size_t len, size_t count, char c, int align_left)
+	*ft_fill_c(char cc, size_t count, char c, int align_left)
 {
 	size_t	i;
 	char	*new_str;
 
 	i = 0;
-	if (len >= count)
-		return (ft_strdup(str));
+	count = count > 1 ? count : 1;
 	if (!(new_str = malloc(sizeof(char) * (count + 1))))
 		return (NULL);
-	while (!align_left && i < (count - len))
+	while (!align_left && i < (count - 1))
 		new_str[i++] = c;
-	while (len--)
-		new_str[i++] = *str++;
+	new_str[i++] = cc;
 	while (align_left && i < count)
 		new_str[i++] = ' ';
 	new_str[i] = 0;

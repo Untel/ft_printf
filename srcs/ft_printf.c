@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/11 23:42:57 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 00:48:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int
 	va_start(args, str);
 	len = 0;
 	fel = NULL;
-	if (ft_split_to_list(str, &fel, args) && (el = fel))
+	if (ft_split_to_list(str, &fel, args) && ((el = fel) || 1))
 		while (el)
 		{
 			len += el->size;

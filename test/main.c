@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 00:30:18 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 00:51:07 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,9 @@ int	run_char_tests()
     PRINT("%C", 0x11ffff);
     PRINT("Hey %lc you", 0x11ffff);
     PRINT("%C", 0x6f);
+    PRINT("%lc", 254);
+    PRINT("%lc", 0xdfff);
+    PRINT("%lc", 0xbffe);
 
 }
 

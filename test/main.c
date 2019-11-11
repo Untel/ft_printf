@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/11 23:43:45 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 00:30:18 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,12 @@ int	run_pointer_tests()
     PRINT("Hi \'%hhp\' you", INT64_MIN);
     PRINT("Hi \'%hp\' you", INT64_MIN + 600);
     PRINT("Hi \'%hp\' you", INT64_MIN - 600);
-    // PRINT("Hi \'%020p\' you", init);
-    // PRINT("Hi \'%020p\' you", uninit);
-    // PRINT("Hi \'%25.20p\' you", init);
-    // PRINT("Hi \'%25.20p\' you", uninit);
-    // PRINT("Hi \'%14.5p\' you", init);
-    // PRINT("Hi \'%14.5p\' you", uninit);
+    PRINT("Hi \'%020p\' you", init);
+    PRINT("Hi \'%020p\' you", uninit);
+    PRINT("Hi \'%25.20p\' you", init);
+    PRINT("Hi \'%25.20p\' you", uninit);
+    PRINT("Hi \'%14.5p\' you", init);
+    PRINT("Hi \'%14.5p\' you", uninit);
 }
 
 int	run_float_tests()
@@ -201,7 +201,7 @@ int	run_float_tests()
     PRINT("Hi \'%.15f\' you", 3.999999999999999);
     PRINT("Hi \'%.15f\' you", 3.9999999999999999);
     PRINT("Hi \'%.16f\' you", 3.999999999999999);
-    PRINT("Hi \'%.18f\' you", 3.99999999999999999);
+    // PRINT("Hi \'%.18f\' you", 3.99999999999999999);
     PRINT("Hi \'%020f\' you", -127.32435);
     PRINT("Hi \'%.f\' you", -127.32435);
     PRINT("Hi \'%'.f\' you", -12744515451.32435);
@@ -209,7 +209,7 @@ int	run_float_tests()
     PRINT("Hi \'%f\' you", 0.0042);
     PRINT("Hi \'%.1f\' you", 3.96);
     PRINT("Hi \'%.2f\' you", 3.96);
-    // PRINT("Hi \'%'10.3f\' you", 1233.96);
+    PRINT("Hi \'%'10.3f\' you", 1233.96);
 }
 
 int	run_exp_tests()

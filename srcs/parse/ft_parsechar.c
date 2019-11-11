@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 00:02:50 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 00:29:32 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int
 	char	*res;
 	size_t	len;
 
-	if (mods.size <= N)
+	if (mods.size != L)
 		res = va_arg(args, char *);
 	else
 	{
@@ -28,7 +28,7 @@ int
 		if (ptr && (len = ft_wchars_to_str(buff, ptr)) == -1)
 			return (-1);
 	}
-	res = ft_strdup(NULLABLE_STR((mods.size <= N ? res : buff)));
+	res = ft_strdup(NULLABLE_STR((mods.size == L ? buff : res)));
 	if (mods.precision > -1)
 		res = ft_then_free(res,
 			ft_substr(res, 0, DEFINED_VALUE(mods.precision)));
@@ -48,6 +48,7 @@ int
 	char	*res;
 	int		len;
 
+	mods.size = conv == 'C' ? L : mods.size;
 	c = ft_is_conv("cC", conv) ? va_arg(args, int) : '%';
 	if (mods.size <= N && (len = mods.padding > 1 ? mods.padding : 1))
 		res = ft_fill_c(c, mods.padding, mods.padchar, mods.align_left);

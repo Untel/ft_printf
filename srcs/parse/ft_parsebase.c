@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 22:22:48 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 00:37:15 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 char
 	*ft_apply_base_flags(char *res, t_modifiers mods, char conv)
 {
+	size_t prefixlen;
+
+	prefixlen = (ft_is_conv("oO", conv) ? 1 : 2);
 	if (mods.padchar == '0' && mods.precision == -1 && mods.padding)
-		mods.precision = (mods.alt && mods.padding > 2 ?
-			mods.padding - 2 : mods.padding);
+		mods.precision = ((mods.alt || conv == 'p')
+			&& mods.padding > prefixlen ?
+				mods.padding - (prefixlen) : mods.padding);
 	if (!ft_strncmp(res, "0", 3) && mods.precision == 0)
 		res = ft_then_free(res, ft_strdup(""));
 	if (res && mods.precision != -1)

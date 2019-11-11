@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/11 00:13:47 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/11 22:28:30 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef enum	e_argsize
 {
 	H, HH, N, L, LL
 }				t_argsize;
+
 typedef	struct	s_modifiers
 {
 	size_t		padding;

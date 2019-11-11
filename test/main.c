@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 23:31:00 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/11 22:59:03 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	run_string_tests()
     PRINT("Hi \'%12.8s\' you", "-Bonjour a tous");
     PRINT("Hi \'%12.8hhs\' you", "-Bonjour a tous");
     PRINT("Hi \'%12.8lls\' you", "-Bonjour a tous");
+    PRINT("Hi \'%ls\' you", L"I will display À ♠");
     // PRINT("Hi \'%5.5-5s\' you", 10, 16, "bonjour");
 }
 int	run_char_tests()
@@ -122,10 +123,12 @@ int	run_char_tests()
     PRINT("Hi \'%0*.c\' you", -5, 'c');
     PRINT("Hi \'%0*.c\' you", 5, 'c');
     PRINT("hello ca%----4c %1c va %10c%-c ??", '\0', '\n', (char)564, 0);
-    PRINT("%lc", 0x4e6);
+    PRINT("%05lc", 0x20AC);
+    PRINT("%05c", 0x20AC);
     PRINT("%lc", 0x1e40);
     PRINT("%lc", 0x40501);
     PRINT("%C", 0x11ffff);
+    PRINT("Hey %lc you", 0x11ffff);
     PRINT("%C", 0x6f);
 
 }

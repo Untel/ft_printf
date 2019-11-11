@@ -17,11 +17,9 @@ FLAGS			= $(addprefix flags/, $(FLAGS_FILES))
 SRC_FILES		= ft_printf.c $(PARSE) $(UTILS) $(FLAGS)
 
 SRC				= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-
 OBJS			= $(SRC:.c=.o)
 
 CFLAGS			= -Werror -Wextra -Wall $(INCLUDES)
-
 CC				= clang
 AR				= ar rc
 RM				= rm -f
@@ -39,7 +37,6 @@ $(NAME):		$(OBJS) libft ./srcs/ft_printf.h
 
 libft:
 				$(LIBFT_MAKE)
-
 
 norme:				
 				norminette $(SRC)

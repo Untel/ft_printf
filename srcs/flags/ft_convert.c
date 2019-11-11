@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 21:32:19 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/11 23:09:57 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int
 			if (str[i + 1] && (j = ft_format(&str[i + 1], lst, args)) > -1)
 				i += j + 1;
 			else if (j == -1)
+			{
+				printf("error wo\n");
 				return (0);
+			}
 			j = i;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:47:04 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char
 }
 
 void
-	*ft_then_free(void *ptr, void *res)
+	*ft_f(void *ptr, void *res)
 {
 	ft_memdel(&ptr);
 	return (res);

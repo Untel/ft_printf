@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ char
 			&& mods.padding > prefixlen ?
 				mods.padding - (prefixlen) : mods.padding);
 	if (!ft_strncmp(res, "0", 3) && mods.precision == 0)
-		res = ft_then_free(res, ft_strdup(""));
+		res = ft_f(res, ft_strdup(""));
 	if (res && mods.precision != -1)
-		res = ft_then_free(res, ft_fill(res, mods.precision, '0', 0));
+		res = ft_f(res, ft_fill(res, mods.precision, '0', 0));
 	if (res && (ft_is_conv("pP", conv) || (mods.alt && conv == 'x')))
-		res = ft_then_free(res, ft_strjoin("0x", res));
+		res = ft_f(res, ft_strjoin("0x", res));
 	else if (res && mods.alt && conv == 'X')
-		res = ft_then_free(res, ft_strjoin("0X", res));
+		res = ft_f(res, ft_strjoin("0X", res));
 	else if (res && mods.alt && ft_is_conv("oO", conv))
-		res = ft_then_free(res, ft_strjoin("0", res));
-	return (res ? ft_then_free(res,
+		res = ft_f(res, ft_strjoin("0", res));
+	return (res ? ft_f(res,
 		ft_fill(res, mods.padding, ' ', mods.align_left)) : NULL);
 }
 

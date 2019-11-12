@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 01:02:36 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:35:29 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	run_uint_tests()
     PRINT("Hi \'%hu\' you", INT32_MIN - 6000);
     PRINT("Hi \'%hhu\' you", INT32_MIN - 6000);
     PRINT("Hi \'%'u\' you", INT32_MIN - 6000);
+    PRINT("%llu", (unsigned long long)-12345612220);
 	//TOFIX
     PRINT("Hi \'%d\' you", INT32_MAX + 3);
 }

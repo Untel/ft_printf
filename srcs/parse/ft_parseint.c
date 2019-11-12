@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 23:18:38 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ char
 	*ft_apply_int_precision(char *res, t_modifiers mods)
 {
 	if (res && ft_strlen(res) == 1 && *res == '0')
-		res = ft_then_free(res, ft_strdup(""));
+		res = ft_f(res, ft_strdup(""));
 	if (res && mods.precision > 0)
-		res = ft_then_free(res, ft_fill(res, mods.precision, '0', 0));
+		res = ft_f(res, ft_fill(res, mods.precision, '0', 0));
 	if (res && mods.sign)
-		res = ft_then_free(res, ft_add_sign(mods.sign, res));
+		res = ft_f(res, ft_add_sign(mods.sign, res));
 	if (res)
-		res = ft_then_free(res,
+		res = ft_f(res,
 			ft_fill(res, mods.padding, ' ', mods.align_left));
 	return (res);
 }
@@ -77,21 +77,20 @@ char
 	else if (res)
 	{
 		if (mods.sign && mods.padchar == ' ')
-			res = ft_then_free(res, ft_add_sign(mods.sign, res));
+			res = ft_f(res, ft_add_sign(mods.sign, res));
 		else if (mods.sign && mods.padding > 0)
 			mods.padding--;
-		if (!res || !(res = ft_then_free(res,
+		if (!res || !(res = ft_f(res,
 			ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
 			return (NULL);
 		if (mods.sign && mods.padchar == '0')
-			res = ft_then_free(res, ft_add_sign(mods.sign, res));
+			res = ft_f(res, ft_add_sign(mods.sign, res));
 	}
 	return (res);
 }
 
 int
-	ft_parse_int(char *buff,
-	t_modifiers mods, va_list args, char conv)
+	ft_parse_int(char *buff, t_modifiers mods, va_list args, char conv)
 {
 	char	*res;
 	size_t	len;
@@ -104,12 +103,9 @@ int
 	}
 	else
 		res = ft_itoa_wrapper(ft_get_sized_uint(args, mods), mods.sep, 0);
-	if (res && *res == '-')
-	{
-		res = ft_then_free(res, ft_strdup(res + 1));
+	if (res && *res == '-' && (res = ft_f(res, ft_strdup(res + 1))))
 		mods.sign = '-';
-	}
-	if (!res || !(res = ft_then_free(res, ft_apply_int_flags(res, mods))))
+	if (!res || !(res = ft_f(res, ft_apply_int_flags(res, mods))))
 		return (-1);
 	len = ft_strcpy(buff, res);
 	ft_memdel((void **)&res);

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:47:04 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 21:37:36 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int
 	if (ft_is_conv("dDiIuU", conv))
 		len = ft_parse_int(buff, mods, args, conv);
 	else if (ft_is_conv("sS", conv))
-		len = ft_parse_string(buff, mods, args);
+		len = ft_parse_string(buff, mods, args, conv);
 	else if (ft_is_conv("cC%", conv))
 		len = ft_parse_char(buff, mods, args, conv);
 	else if (ft_is_conv("xXpPoO", conv))

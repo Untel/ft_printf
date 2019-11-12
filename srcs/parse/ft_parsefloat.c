@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char
 		mods.padding - 1 : mods.padding), mods.padchar, mods.align_left)))
 		return (NULL);
 	if (mods.sign)
-		res = ft_then_free(res, ft_add_sign(mods.sign, res));
+		res = ft_f(res, ft_add_sign(mods.sign, res));
 	return (res);
 }
 
@@ -113,9 +113,9 @@ int
 		res = ft_stringify_float(val, digits, mods);
 	else if (ft_is_conv("eEgG", conv))
 		res = ft_stringify_exp(conv, val, digits, mods);
-	if (res && *res == '-' && (res = ft_then_free(res, ft_strdup(res + 1))))
+	if (res && *res == '-' && (res = ft_f(res, ft_strdup(res + 1))))
 		mods.sign = '-';
-	if (!res || (!(res = ft_then_free(res, ft_apply_float_flags(res, mods)))))
+	if (!res || (!(res = ft_f(res, ft_apply_float_flags(res, mods)))))
 		return (-1);
 	len = ft_strcpy(buff, res);
 	ft_memdel((void **)&res);

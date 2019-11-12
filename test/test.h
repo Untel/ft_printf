@@ -6,17 +6,17 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 19:22:15 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:52:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:33:21 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_H
 # define TEST_H
 # include "ft_printf.h"
+# include "ft_printf_internal.h"
 # include <stdio.h>
 # include "libft.h"
 # include <unistd.h>
-
 int		g_size1;
 int		g_size2;
 char 	g_flush1[BUFFER_SIZE];

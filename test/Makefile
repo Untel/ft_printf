@@ -2,7 +2,7 @@ PRINTF_PATH			= ..
 TEST_DIR			= .
 TEST_FILES			= main.c
 TESTER				= $(addprefix $(TEST_DIR)/, $(TEST_FILES))
-INCLUDES			= -I . -I $(PRINTF_PATH)/srcs -I $(PRINTF_PATH)/libft
+INCLUDES			= -I . -I $(PRINTF_PATH) -I $(PRINTF_PATH)/srcs -I $(PRINTF_PATH)/libft
 CFLAGS				= -w -g $(INCLUDES)
 LIBFTPRINTF_MAKE	= $(MAKE) -C $(PRINTF_PATH)
 # $(TEST_FILES)/%.o: $(TEST_FILES)/%.c
@@ -22,11 +22,11 @@ run:				all
 
 clean:
 					$(RM) $(OBJS) $(TEST_OBJS)
-					$(LIBFT_MAKE) clean
+					$(LIBFTPRINTF_MAKE) clean
 fclean:
 					$(RM) $(OBJS) $(TEST_OBJS)
 					$(RM) $(NAME) $(TEST_OUTPUT)
-					$(LIBFT_MAKE) fclean
+					$(LIBFTPRINTF_MAKE) fclean
 
 re:					fclean all
 

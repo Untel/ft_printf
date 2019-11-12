@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 19:25:32 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:47:04 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ char
 	if (!(res = ft_stringify_float(val, dig, mods)))
 		return (NULL);
 	ft_sprintf(expstr, "e%+03d", exp);
-	res = ft_then_free(res, ft_strjoin(res, expstr));
+	res = ft_f(res, ft_strjoin(res, expstr));
 	return (res);
 }

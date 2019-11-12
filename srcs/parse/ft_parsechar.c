@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include <wchar.h>
 
 int
-	ft_parse_string(char *buff, t_modifiers mods, va_list args)
+	ft_parse_string(char *buff,
+		t_modifiers mods, va_list args, char conv)
 {
 	wchar_t	*ptr;
 	char	*res;
 	size_t	len;
 
+	mods.size = conv == 'S' ? L : mods.size;
 	if (mods.size != L)
 		res = va_arg(args, char *);
 	else
@@ -30,9 +32,9 @@ int
 	}
 	res = ft_strdup(NULLABLE_STR((mods.size == L ? buff : res)));
 	if (mods.precision > -1)
-		res = ft_then_free(res,
+		res = ft_f(res,
 			ft_substr(res, 0, DEFINED_VALUE(mods.precision)));
-	if (!res || !(res = ft_then_free(res,
+	if (!res || !(res = ft_f(res,
 		ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
 		return (-1);
 	len = ft_strcpy(buff, res);

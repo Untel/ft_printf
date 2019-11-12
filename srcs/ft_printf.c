@@ -6,11 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 00:48:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:47:04 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 static void
 	ft_clearfn(t_list *lst)

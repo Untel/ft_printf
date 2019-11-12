@@ -6,11 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 00:37:15 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 char
 	*ft_apply_base_flags(char *res, t_modifiers mods, char conv)
@@ -37,7 +37,7 @@ char
 }
 
 int
-	ft_parse_base(char buff[BUFFER_SIZE],
+	ft_parse_base(char *buff,
 	t_modifiers mods, va_list args, char conv)
 {
 	char		*res;

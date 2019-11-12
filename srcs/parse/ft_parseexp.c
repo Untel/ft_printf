@@ -6,11 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 19:25:32 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 21:38:45 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:47:04 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 char
 	*ft_stringify_exp(char conv, long double arg, size_t dig, t_modifiers mods)

@@ -30,7 +30,7 @@ LIBFT_MAKE		= $(MAKE) -C $(LIBFT_DIR)
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS) libft ./srcs/ft_printf.h
+$(NAME):		$(OBJS) libft ./srcs/ft_printf_internal.h
 				cp $(LIBFT_PATH) $(NAME)
 				$(AR) $(NAME) $(OBJS)
 				ranlib $(NAME)

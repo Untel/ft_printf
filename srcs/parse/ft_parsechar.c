@@ -6,15 +6,15 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 00:29:32 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 #include <wchar.h>
 
 int
-	ft_parse_string(char buff[BUFFER_SIZE], t_modifiers mods, va_list args)
+	ft_parse_string(char *buff, t_modifiers mods, va_list args)
 {
 	wchar_t	*ptr;
 	char	*res;
@@ -41,7 +41,7 @@ int
 }
 
 int
-	ft_parse_char(char buff[BUFFER_SIZE],
+	ft_parse_char(char *buff,
 		t_modifiers mods, va_list args, char conv)
 {
 	int		c;

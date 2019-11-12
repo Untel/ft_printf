@@ -6,11 +6,11 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/10 21:43:39 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:51:13 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
 int64_t
 	ft_get_sized_int(va_list args, t_modifiers mods)
@@ -90,7 +90,7 @@ char
 }
 
 int
-	ft_parse_int(char buff[BUFFER_SIZE],
+	ft_parse_int(char *buff,
 	t_modifiers mods, va_list args, char conv)
 {
 	char	*res;

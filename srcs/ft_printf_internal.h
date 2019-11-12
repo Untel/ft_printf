@@ -6,12 +6,13 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:23:04 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:52:25 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/12 19:05:39 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_INTERNAL_H
 # define FT_PRINTF_INTERNAL_H
+# include "ft_printf.h"
 # include "libft.h"
 # include <stdarg.h>
 # include <stdio.h>

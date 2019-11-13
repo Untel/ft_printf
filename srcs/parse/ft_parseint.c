@@ -6,14 +6,14 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 23:18:38 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_internal.h"
 
 int64_t
-	ft_get_sized_int(va_list args, t_modifiers mods)
+	ft_get_sized_int(va_list args, t_mod mods)
 {
 	int64_t val;
 
@@ -33,7 +33,7 @@ int64_t
 }
 
 uint64_t
-	ft_get_sized_uint(va_list args, t_modifiers mods)
+	ft_get_sized_uint(va_list args, t_mod mods)
 {
 	uint64_t val;
 
@@ -53,7 +53,7 @@ uint64_t
 }
 
 char
-	*ft_apply_int_precision(char *res, t_modifiers mods)
+	*ft_apply_int_precision(char *res, t_mod mods)
 {
 	if (res && ft_strlen(res) == 1 && *res == '0')
 		res = ft_f(res, ft_strdup(""));
@@ -68,7 +68,7 @@ char
 }
 
 char
-	*ft_apply_int_flags(char *res, t_modifiers mods)
+	*ft_apply_int_flags(char *res, t_mod mods)
 {
 	if (!(res = ft_strdup(res)))
 		return (NULL);
@@ -90,7 +90,7 @@ char
 }
 
 int
-	ft_parse_int(char *buff, t_modifiers mods, va_list args, char conv)
+	ft_parse_int(char *buff, t_mod mods, va_list args, char conv)
 {
 	char	*res;
 	size_t	len;

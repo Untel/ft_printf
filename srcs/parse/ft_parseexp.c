@@ -6,14 +6,14 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 19:25:32 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_internal.h"
 
 char
-	*ft_stringify_exp(char conv, long double arg, size_t dig, t_modifiers mods)
+	*ft_stringify_exp(char conv, long double arg, size_t dig, t_mod mods)
 {
 	char		*res;
 	int			exp;

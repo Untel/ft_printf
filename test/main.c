@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 22:35:29 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 00:34:14 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ int	run_string_tests()
     PRINT("Hi \'%12.8hhs\' you", "-Bonjour a tous");
     PRINT("Hi \'%12.8lls\' you", "-Bonjour a tous");
     PRINT("Hi \'%ls\' you", L"I will display À ♠");
+    PRINT("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256);
+    PRINT("test %-7C %007d%-10.2ls!!", 0xd777, 0x45, L"〻");
+    PRINT("%010.2ls!!", L"〻");
     // PRINT("Hi \'%5.5-5s\' you", 10, 16, "bonjour");
 }
 int	run_char_tests()
@@ -243,15 +246,14 @@ int	run_other_tests()
     int m;
     n = 0;
     m = 0;
+	// TEST %n
     printf("Hi %n\'%s\' %s %d you %s has %d\n", &n, "how", "are", 42, "doing?", n);
     ft_printf("Hi %n\'%s\' %s %d you %s has %d\n", &m, "how", "are", 42, "doing?", m);
     printf("M = %d, N = %d\n", n, m);
-    printf("Hi \'%05%\' you\n");
-    ft_printf("Hi \'%5%\' you\n");
 
-    printf("Hi \'%.5g' you\n", 4200.042);
-    printf("Hi \'%.2g' you\n", 4200.431);
-
+	//SANDBOX
+    printf(" (ret = %d)\n", printf("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256));
+    printf(" (ret = %d)\n", ft_printf("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256));
 }
 
 #include <locale.h>

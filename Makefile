@@ -38,8 +38,9 @@ $(NAME):		$(OBJS) libft ./srcs/ft_printf_internal.h
 libft:
 				$(LIBFT_MAKE)
 
-norme:				
-				norminette $(SRC)
+norme:
+				$(LIBFT_MAKE) norme
+				norminette $(SRC) ft_printf.h ./srcs/ft_printf_internal.h
 
 clean:
 				$(RM) $(OBJS)
@@ -51,4 +52,4 @@ fclean:
 
 re:				fclean all
 
-.PHONY:			all clean fclean re libft retest run
+.PHONY:			all clean fclean re libft norme

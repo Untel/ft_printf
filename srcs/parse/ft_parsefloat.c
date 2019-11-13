@@ -6,14 +6,14 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_internal.h"
 
 long double
-	ft_get_sized_double(va_list args, t_modifiers mods)
+	ft_get_sized_double(va_list args, t_mod mods)
 {
 	long double val;
 
@@ -27,7 +27,7 @@ long double
 }
 
 char
-	*ft_join_decim(char *whole, char *decim, size_t digits, t_modifiers mods)
+	*ft_join_decim(char *whole, char *decim, size_t digits, t_mod mods)
 {
 	char	*res;
 	size_t	len;
@@ -57,7 +57,7 @@ char
 }
 
 char
-	*ft_stringify_float(long double val, size_t dig, t_modifiers mods)
+	*ft_stringify_float(long double val, size_t dig, t_mod mods)
 {
 	int64_t		w;
 	long double	decim;
@@ -87,7 +87,7 @@ char
 }
 
 char
-	*ft_apply_float_flags(char *res, t_modifiers mods)
+	*ft_apply_float_flags(char *res, t_mod mods)
 {
 	if (!(res = ft_fill(res, (mods.sign && mods.padding > 0 ?
 		mods.padding - 1 : mods.padding), mods.padchar, mods.align_left)))
@@ -99,7 +99,7 @@ char
 
 int
 	ft_parse_float(char *buff,
-		t_modifiers mods, va_list args, char conv)
+		t_mod mods, va_list args, char conv)
 {
 	int			digits;
 	char		*res;

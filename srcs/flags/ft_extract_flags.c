@@ -6,14 +6,14 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 18:47:04 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_internal.h"
 
 static size_t
-	ft_handle_size(const char *str, t_modifiers *mods)
+	ft_handle_size(const char *str, t_mod *mods)
 {
 	size_t ret;
 
@@ -36,7 +36,7 @@ static size_t
 }
 
 static size_t
-	ft_handle_padding_size(const char *str, t_modifiers *mods, va_list args)
+	ft_handle_padding_size(const char *str, t_mod *mods, va_list args)
 {
 	int s;
 
@@ -57,7 +57,7 @@ static size_t
 }
 
 static size_t
-	ft_handle_jusitfy_side(t_modifiers *mods)
+	ft_handle_jusitfy_side(t_mod *mods)
 {
 	mods->align_left = 1;
 	mods->padchar = ' ';
@@ -65,7 +65,7 @@ static size_t
 }
 
 static size_t
-	ft_handle_precision_size(const char *str, t_modifiers *mods, va_list args)
+	ft_handle_precision_size(const char *str, t_mod *mods, va_list args)
 {
 	str += 1;
 	if (*str == '*')
@@ -83,7 +83,7 @@ static size_t
 }
 
 int
-	ft_extract_flags(const char *str, va_list args, t_modifiers *mods)
+	ft_extract_flags(const char *str, va_list args, t_mod *mods)
 {
 	int			i;
 

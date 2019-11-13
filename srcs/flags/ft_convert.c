@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 21:37:36 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:01:47 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t
 }
 
 int
-	ft_convert(char conv, t_modifiers mods, t_list **lst, va_list args)
+	ft_convert(char conv, t_mod mods, t_list **lst, va_list args)
 {
 	char	buff[BUFFER_SIZE];
 	int		len;
@@ -73,12 +73,14 @@ static int
 int
 	ft_format(const char *str, t_list **lst, va_list args)
 {
-	t_modifiers mods;
+	t_mod		mods;
 	int			i;
 
-	mods = (t_modifiers){ .padding = 0, .padchar = ' ', .sign = 0,
+	mods = (t_mod) {
+		.padding = 0, .padchar = ' ', .sign = 0,
 		.align_left = 0, .precision = -1, .alt = 0, .size = N,
-		.sep = '\0', .trail = 1 };
+		.sep = '\0', .trail = 1
+	};
 	i = ft_extract_flags(str, args, &mods);
 	if (i == -1 || ft_convert(*(str + i), mods, lst, args) == -1)
 		return (-1);

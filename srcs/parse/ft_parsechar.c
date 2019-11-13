@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/12 22:39:08 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int
 	ft_parse_string(char *buff,
-		t_modifiers mods, va_list args, char conv)
+		t_mod mods, va_list args, char conv)
 {
 	wchar_t	*ptr;
 	char	*res;
@@ -32,8 +32,7 @@ int
 	}
 	res = ft_strdup(NULLABLE_STR((mods.size == L ? buff : res)));
 	if (mods.precision > -1)
-		res = ft_f(res,
-			ft_substr(res, 0, DEFINED_VALUE(mods.precision)));
+		res = ft_f(res, ft_subwstr(res, 0, DEFINED_VALUE(mods.precision)));
 	if (!res || !(res = ft_f(res,
 		ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
 		return (-1);
@@ -44,7 +43,7 @@ int
 
 int
 	ft_parse_char(char *buff,
-		t_modifiers mods, va_list args, char conv)
+		t_mod mods, va_list args, char conv)
 {
 	int		c;
 	char	*res;

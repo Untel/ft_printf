@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 21:45:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 22:17:18 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ int
 {
 	char	buff[BUFFER_SIZE];
 	int		len;
+	char	*res;
 
 	*buff = 0;
 	len = 0;
+	res = 0;
 	if (ft_is_conv("dDiIuU", conv))
 		len = ft_parse_int(buff, mods, args, conv);
 	else if (ft_is_conv("sS", conv))
@@ -48,9 +50,12 @@ int
 		len = ft_parse_float(buff, mods, args, conv);
 	else if (ft_is_conv("nN", conv))
 		*(va_arg(args, int *)) = ft_lst_size(*lst);
-	if (len > -1)
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup(buff), len));
-	return (len);
+	if (len > -1 && (res = malloc(sizeof(char) * len)))
+	{
+		ft_memcpy(res, buff, len);
+		ft_lstadd_back(lst, ft_lstnew(res, len));
+	}
+	return (res ? len : -1);
 }
 
 static int

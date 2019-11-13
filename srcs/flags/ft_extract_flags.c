@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 21:55:01 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,23 @@ static size_t
 static size_t
 	ft_handle_precision_size(const char *str, t_mod *mods, va_list args)
 {
-	str += 1;
+	char *ptr;
+
+	ptr = (char *)str;
+	str++;
 	if (*str == '*')
 	{
 		mods->precision = (int)va_arg(args, int);
+		if (mods->precision < 0)
+			mods->precision = -1;
 		return (2);
 	}
+	while (*str == '0')
+		str++;
 	if (!ft_isdigit(*str))
-	{
-		mods->precision = 0;
-		return (1);
-	}
+		return ((mods->precision = 0) || 1);
 	mods->precision = ft_atoi(str);
-	return (1 + ft_intlen(mods->precision));
+	return ((str - ptr) + ft_intlen(mods->precision));
 }
 
 int

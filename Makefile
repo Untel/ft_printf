@@ -35,6 +35,8 @@ $(NAME):		$(OBJS) libft ./srcs/ft_printf_internal.h
 				$(AR) $(NAME) $(OBJS)
 				ranlib $(NAME)
 
+bonus:			all
+
 libft:
 				$(LIBFT_MAKE)
 

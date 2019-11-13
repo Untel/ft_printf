@@ -12,8 +12,8 @@ Support `l ll h hh` size flags.
 
 This tester require an implementation of `ft_sprintf(char *buffer, const char str...);` to work.
 
-Copy test folder into your own repository, and cd in.
+Copy `test` folder into your own repository, and cd in.
 
-Run `make run` to run all tests, with leaks check.
+Run `make run` to run all tests, with memory leaks check.
 
 Run `make ARGS="int uint char string pointer hex float exp gfloat leaks other" run` to run only some tests.

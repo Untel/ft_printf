@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 00:34:14 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 01:12:46 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ int	run_string_tests()
     PRINT("Hi \'%ls\' you", L"I will display À ♠");
     PRINT("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256);
     PRINT("test %-7C %007d%-10.2ls!!", 0xd777, 0x45, L"〻");
-    PRINT("%010.2ls!!", L"〻");
+    PRINT("%05.2ls!!", L"〻");
+    PRINT("%9.6ls %S", L"㪼#@$%^&*()_S", L"a");
+    PRINT("%ls", L"🤬");
     // PRINT("Hi \'%5.5-5s\' you", 10, 16, "bonjour");
 }
 int	run_char_tests()

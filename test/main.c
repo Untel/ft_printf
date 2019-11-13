@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 01:12:46 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 02:29:43 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ int	run_string_tests()
     PRINT("test %-7C %007d%-10.2ls!!", 0xd777, 0x45, L"〻");
     PRINT("%05.2ls!!", L"〻");
     PRINT("%9.6ls %S", L"㪼#@$%^&*()_S", L"a");
-    PRINT("%ls", L"🤬");
-    // PRINT("Hi \'%5.5-5s\' you", 10, 16, "bonjour");
+    PRINT("I am hap%-8ls", L"py 😋");
 }
 int	run_char_tests()
 {

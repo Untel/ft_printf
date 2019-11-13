@@ -10,7 +10,7 @@ Support `l ll h hh` size flags.
 # Tester
 ![alt text](https://raw.githubusercontent.com/untel/ft_printf/master/test/demo.png)
 
-This tester require an implementation of `s_printf(char *buffer, const char str...);` to work.
+This tester require an implementation of `ft_sprintf(char *buffer, const char str...);` to work.
 
 Copy test folder into your own repository, and cd in.
 

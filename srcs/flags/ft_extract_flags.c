@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 21:55:01 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 00:21:49 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ static size_t
 }
 
 static size_t
+	ft_handle_jusitfy_side(t_mod *mods)
+{
+	mods->align_left = 1;
+	mods->padchar = ' ';
+	return (1);
+}
+
+static size_t
 	ft_handle_padding_size(const char *str, t_mod *mods, va_list args)
 {
 	int s;
@@ -47,21 +55,13 @@ static size_t
 			mods->padding = (size_t)s;
 		else
 		{
-			mods->align_left = 1;
+			ft_handle_jusitfy_side(mods);
 			mods->padding = (size_t)(s * -1);
 		}
 		return (1);
 	}
 	mods->padding = ft_atoi(str);
 	return (ft_intlen(mods->padding));
-}
-
-static size_t
-	ft_handle_jusitfy_side(t_mod *mods)
-{
-	mods->align_left = 1;
-	mods->padchar = ' ';
-	return (1);
 }
 
 static size_t
@@ -78,12 +78,15 @@ static size_t
 			mods->precision = -1;
 		return (2);
 	}
-	while (*str == '0')
-		str++;
 	if (!ft_isdigit(*str))
-		return ((mods->precision = 0) || 1);
+	{
+		mods->precision = 0;
+		return (str - ptr);
+	}
 	mods->precision = ft_atoi(str);
-	return ((str - ptr) + ft_intlen(mods->precision));
+	while (ft_isdigit(*str))
+		str++;
+	return ((str - ptr));
 }
 
 int

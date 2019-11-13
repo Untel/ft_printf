@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 23:53:13 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 00:30:20 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,8 +257,7 @@ int	run_other_tests()
 	// TEST %n
     printf("Hi %n%%n\'%s\' %s %d you %s has %d\n", &n, "how", "are", 42, "doing?", n);
     ft_printf("Hi %n%%n\'%s\' %s %d you %s has %d\n", &m, "how", "are", 42, "doing?", m);
-	if (n == m)
-		printf("\e[0;32m");
+	printf(n == m ? "\e[0;32m" : "\e[0;31m");
     printf("Orig %%n = %d, Your %%n = %d\n", n, m);
 	printf("\e[0m");
 
@@ -270,7 +269,23 @@ int	run_other_tests()
     PRINT("|%-5..-.10k|");
     PRINT("%@@@%10");
     PRINT("%✈️@@🗿@%-25⛱");
-
+    PRINT("pC4IqXzMQ%0*xpi9U7", -6, 0);
+    PRINT("pC4IqXzMQ%0*.-5xpi9U7", -6, 0);
+	PRINT("eHEtK8hgt%7.0s%i%-x%0d", "8PkQQbbMw5Lx45nlSfnS9gYh85nMBuxPcjQHERVOmpgd2OS7IKX9AvvQfVfaBvMShJMHd16", 2147483647, 2147483647, 0);
+	PRINT("cxCiLwP b%16.0u", 2147483647);
+	PRINT("zTKIqO%.0x%-*.3X%c%*c8z1ufquH4m%-x", 0, -8, 2147483647, '\0', 0, 'r', 2147483647);
+	n = printf("zTKIqO%.0x%-*.3X%c%*c8z1ufquH4m%-x\n", 0, -8, 2147483647, '\0', 0, 'r', 2147483647);
+	m = ft_printf("zTKIqO%.0x%-*.3X%c%*c8z1ufquH4m%-x\n", 0, -8, 2147483647, '\0', 0, 'r', 2147483647);
+	if (n == m)
+		printf("\e[0;32m");
+    printf("Orig %%n = %d, Your %%n = %d\n", n, m);
+	printf("\e[0m");
+	PRINT("ovjCxNv%*c%018xhG9NP%c%0xmbSroi%%", 6, 'Y', -102219787, 'u', -542704649);
+	PRINT("pvIPqX0uI0%10s%-*.0s%0.3d0v", NULL, 3, "", -2147483647);
+	PRINT("%0.5x", 0);
+	PRINT("%%%%A nu%-11.3XEj2ny%%", -2147483647);
+	PRINT("DU23Ql%.0ikOeIQ", 2147483647);
+	PRINT("F31%19x", 2147483647);
 }
 
 #include <locale.h>

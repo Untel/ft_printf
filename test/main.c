@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 22:00:12 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:53:13 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,37 +249,28 @@ int	run_gfloat_tests()
 
 int	run_other_tests()
 {
-    PRINT("Hi \'%s\' %s %d you %s", "how", "are", 42, "doing?");
+    PRINT("Hi %%n\'%s\' %s %d you %s", "how", "are", 42, "doing?");
     int n;
     int m;
     n = 0;
     m = 0;
 	// TEST %n
-    printf("Hi %n\'%s\' %s %d you %s has %d\n", &n, "how", "are", 42, "doing?", n);
-    ft_printf("Hi %n\'%s\' %s %d you %s has %d\n", &m, "how", "are", 42, "doing?", m);
-    printf("M = %d, N = %d\n", n, m);
+    printf("Hi %n%%n\'%s\' %s %d you %s has %d\n", &n, "how", "are", 42, "doing?", n);
+    ft_printf("Hi %n%%n\'%s\' %s %d you %s has %d\n", &m, "how", "are", 42, "doing?", m);
+	if (n == m)
+		printf("\e[0;32m");
+    printf("Orig %%n = %d, Your %%n = %d\n", n, m);
+	printf("\e[0m");
 
 	//SANDBOX
-    printf(" (ret = %d)\n", printf("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256));
-    printf(" (ret = %d)\n", ft_printf("%-+-12.7Dt%0 4i %04.2% et %lc titi", 125, 124, 256));
     PRINT("Hello %d %", 1);
     PRINT("Hello %.*d %", -10, 1);
     PRINT("Hello %.*f %", -4, 123.456789);
+    PRINT("|%%%%%%%|");
+    PRINT("|%-5..-.10k|");
+    PRINT("%@@@%10");
+    PRINT("%✈️@@🗿@%-25⛱");
 
-	ft_printf("Hi \'%c\' you\n", '\0');
-	printf("Hi \'%c\' you\n\n", '\0');
-    ft_printf("Hi \'%05c\' you\n", '\0');
-    printf("Hi \'%05c\' you\n\n", '\0');
-    ft_printf("Hi \'%-5c\' you\n", '\0');
-    printf("Hi \'%-5c\' you\n\n", '\0');
-    ft_printf("Hi \'%'5c\' you\n", '\0');
-    printf("Hi \'%'5c\' you\n\n", '\0');
-    ft_printf("Hi \'%#5c\' you\n", '\0');
-    printf("Hi \'%#5c\' you\n\n", '\0');
-    ft_printf("Hi \'%0.5c\' you\n", '\0');
-    printf("Hi \'%0.5c\' you\n\n", '\0');
-    ft_printf("Hi \'%#-5.4c\' you\n", '\0');
-    printf("Hi \'%#-5.4c\' you\n\n", '\0');
 }
 
 #include <locale.h>

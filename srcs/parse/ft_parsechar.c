@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:47:52 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,14 @@ int
 }
 
 int
-	ft_parse_char(char *buff,
-		t_mod mods, va_list args, char conv)
+	ft_parse_char(char *buff, t_mod mods, va_list args, char conv)
 {
 	int		c;
 	char	*res;
 	int		len;
 
-	mods.size = conv == 'C' ? L : mods.size;
-	c = ft_is_conv("cC", conv) ? va_arg(args, int) : '%';
+	mods.size = (ft_isupper(conv) && mods.size == N) ? L : mods.size;
+	c = ft_is_conv("cC", conv) ? va_arg(args, int) : conv;
 	if (mods.size <= N && (len = mods.padding > 1 ? mods.padding : 1))
 		res = ft_fill_c(c, mods.padding, mods.padchar, mods.align_left);
 	else

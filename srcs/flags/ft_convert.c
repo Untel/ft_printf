@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 22:17:18 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/13 23:35:22 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ int
 		len = ft_parse_int(buff, mods, args, conv);
 	else if (ft_is_conv("sS", conv))
 		len = ft_parse_string(buff, mods, args, conv);
-	else if (ft_is_conv("cC%", conv))
-		len = ft_parse_char(buff, mods, args, conv);
-	else if (ft_is_conv("xXpPoO", conv))
+	else if (ft_is_conv("xXpPpoO", conv))
 		len = ft_parse_base(buff, mods, args, conv);
 	else if (ft_is_conv("fFgGeE", conv))
 		len = ft_parse_float(buff, mods, args, conv);
 	else if (ft_is_conv("nN", conv))
 		*(va_arg(args, int *)) = ft_lst_size(*lst);
+	else
+		len = ft_parse_char(buff, mods, args, conv);
 	if (len > -1 && (res = malloc(sizeof(char) * len)))
 	{
 		ft_memcpy(res, buff, len);
 		ft_lstadd_back(lst, ft_lstnew(res, len));
 	}
-	return (res ? len : -1);
+	return (len);
 }
 
 static int
@@ -87,6 +87,8 @@ int
 		.sep = '\0', .trail = 1
 	};
 	i = ft_extract_flags(str, args, &mods);
+	if (i > -1 && !str[i])
+		return (i);
 	if (i == -1 || ft_convert(*(str + i), mods, lst, args) == -1)
 		return (-1);
 	return (i + 1);

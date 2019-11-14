@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:39:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 23:35:22 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 02:16:26 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,27 @@ static size_t
 }
 
 int
-	ft_convert(char conv, t_mod mods, t_list **lst, va_list args)
+	ft_convert(t_mod mods, t_list **lst, va_list args)
 {
-	char	buff[BUFFER_SIZE];
+	char	*buff;
 	int		len;
-	char	*res;
 
-	*buff = 0;
 	len = 0;
-	res = 0;
-	if (ft_is_conv("dDiIuU", conv))
-		len = ft_parse_int(buff, mods, args, conv);
-	else if (ft_is_conv("sS", conv))
-		len = ft_parse_string(buff, mods, args, conv);
-	else if (ft_is_conv("xXpPpoO", conv))
-		len = ft_parse_base(buff, mods, args, conv);
-	else if (ft_is_conv("fFgGeE", conv))
-		len = ft_parse_float(buff, mods, args, conv);
-	else if (ft_is_conv("nN", conv))
+	buff = NULL;
+	if (ft_is_conv("dDiIuU", mods.conv))
+		len = ft_parse_int(&buff, mods, args);
+	else if (ft_is_conv("sS", mods.conv))
+		len = ft_parse_string(&buff, mods, args);
+	else if (ft_is_conv("xXpPpoO", mods.conv))
+		len = ft_parse_base(&buff, mods, args);
+	else if (ft_is_conv("fFgGeE", mods.conv))
+		len = ft_parse_float(&buff, mods, args);
+	else if (ft_is_conv("nN", mods.conv))
 		*(va_arg(args, int *)) = ft_lst_size(*lst);
 	else
-		len = ft_parse_char(buff, mods, args, conv);
-	if (len > -1 && (res = malloc(sizeof(char) * len)))
-	{
-		ft_memcpy(res, buff, len);
-		ft_lstadd_back(lst, ft_lstnew(res, len));
-	}
+		len = ft_parse_char(&buff, mods, args);
+	if (len > -1 && buff)
+		ft_lstadd_back(lst, ft_lstnew(buff, len));
 	return (len);
 }
 
@@ -84,12 +79,12 @@ int
 	mods = (t_mod) {
 		.padding = 0, .padchar = ' ', .sign = 0,
 		.align_left = 0, .precision = -1, .alt = 0, .size = N,
-		.sep = '\0', .trail = 1
+		.sep = '\0', .trail = 1, .conv = 0
 	};
 	i = ft_extract_flags(str, args, &mods);
 	if (i > -1 && !str[i])
 		return (i);
-	if (i == -1 || ft_convert(*(str + i), mods, lst, args) == -1)
+	if (i == -1 || ft_convert(mods, lst, args) == -1)
 		return (-1);
 	return (i + 1);
 }

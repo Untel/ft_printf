@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:07:39 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 23:47:52 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 02:15:46 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,59 @@
 #include <wchar.h>
 
 int
-	ft_parse_string(char *buff,
-		t_mod mods, va_list args, char conv)
+	ft_parse_string(char **buff, t_mod mods, va_list args)
 {
 	wchar_t	*ptr;
 	char	*res;
 	size_t	len;
+	char	b[BUFFER_SIZE];
 
-	mods.size = conv == 'S' ? L : mods.size;
+	*b = 0;
+	res = NULL;
+	mods.size = mods.conv == 'S' ? L : mods.size;
 	if (mods.size != L)
 		res = va_arg(args, char *);
 	else
 	{
 		ptr = va_arg(args, wchar_t *);
-		if (ptr && (len = ft_wchars_to_str(buff, ptr)) == -1)
+		if (ptr && (len = ft_wchars_to_str(b, ptr)) == -1)
 			return (-1);
 	}
-	res = ft_strdup(NULLABLE_STR((mods.size == L ? buff : res)));
+	res = ft_strdup(NULLABLE_STR((mods.size == L ? b : res)));
 	if (mods.precision > -1)
 		res = ft_f(res, ft_subwstr(res, 0, DEFINED_VALUE(mods.precision)));
 	if (!res || !(res = ft_f(res,
 		ft_fill(res, mods.padding, mods.padchar, mods.align_left))))
 		return (-1);
-	len = ft_strcpy(buff, res);
-	ft_memdel((void **)&res);
-	return (len);
+	*buff = res;
+	return (ft_strlen(res));
 }
 
 int
-	ft_parse_char(char *buff, t_mod mods, va_list args, char conv)
+	ft_parse_char(char **buff, t_mod mods, va_list args)
 {
 	int		c;
 	char	*res;
 	int		len;
+	char	b[BUFFER_SIZE];
 
-	mods.size = (ft_isupper(conv) && mods.size == N) ? L : mods.size;
-	c = ft_is_conv("cC", conv) ? va_arg(args, int) : conv;
-	if (mods.size <= N && (len = mods.padding > 1 ? mods.padding : 1))
+	*b = 0;
+	len = 0;
+	mods.size = (ft_isupper(mods.conv) && mods.size == N) ? L : mods.size;
+	c = ft_is_conv("cC", mods.conv) ? va_arg(args, int) : mods.conv;
+	len = mods.padding > 1 ? mods.padding : 1;
+	if (mods.size <= N)
 		res = ft_fill_c(c, mods.padding, mods.padchar, mods.align_left);
 	else
 	{
-		len = ft_wchar_to_char(buff, c);
+		len = ft_wchar_to_char(b, c);
 		if (len > -1)
 		{
-			res = ft_fill(buff, mods.padding, mods.padchar, mods.align_left);
+			res = ft_fill(b, mods.padding, mods.padchar, mods.align_left);
 			len = (int)((int)mods.padding > len ? mods.padding : len);
 		}
 	}
 	if (len > -1)
-	{
-		ft_memcpy(buff, res, len);
-		ft_memdel((void **)&res);
-	}
+		*buff = res;
 	return (len);
 }

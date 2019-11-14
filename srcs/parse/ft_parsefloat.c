@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/14 01:26:31 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 02:05:50 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,10 @@ char
 }
 
 int
-	ft_parse_float(char *buff,
-		t_mod mods, va_list args, char conv)
+	ft_parse_float(char **buff, t_mod mods, va_list args)
 {
 	int			digits;
 	char		*res;
-	size_t		len;
 	long double	val;
 
 	res = NULL;
@@ -116,13 +114,12 @@ int
 	digits = mods.precision == -1 ? 6 : mods.precision;
 	if (val < 0)
 		mods.sign = '-';
-	if (ft_is_conv("fF", conv))
+	if (ft_is_conv("fF", mods.conv))
 		res = ft_stringify_float(val < 0 ? -val : val, digits, mods);
-	else if (ft_is_conv("eEgG", conv))
-		res = ft_stringify_exp(conv, val < 0 ? -val : val, digits, mods);
+	else if (ft_is_conv("eEgG", mods.conv))
+		res = ft_stringify_exp(val < 0 ? -val : val, digits, mods);
 	if (!res || (!(res = ft_apply_float_flags(res, mods))))
 		return (-1);
-	len = ft_strcpy(buff, res);
-	ft_memdel((void **)&res);
-	return (len);
+	*buff = res;
+	return (ft_strlen(res));
 }

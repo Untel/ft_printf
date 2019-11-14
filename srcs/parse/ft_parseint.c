@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 02:02:08 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,12 @@ char
 }
 
 int
-	ft_parse_int(char *buff, t_mod mods, va_list args, char conv)
+	ft_parse_int(char **buff, t_mod mods, va_list args)
 {
 	char	*res;
-	size_t	len;
 	int64_t li;
 
-	if (!ft_is_conv("uU", conv))
+	if (!ft_is_conv("uU", mods.conv))
 	{
 		li = ft_get_sized_int(args, mods);
 		res = ft_itoa_wrapper((uint64_t)(li < 0 ? -li : li), mods.sep, li < 0);
@@ -107,7 +106,6 @@ int
 		mods.sign = '-';
 	if (!res || !(res = ft_f(res, ft_apply_int_flags(res, mods))))
 		return (-1);
-	len = ft_strcpy(buff, res);
-	ft_memdel((void **)&res);
-	return (len);
+	*buff = res;
+	return (ft_strlen(*buff));
 }

@@ -7,6 +7,8 @@ Support `- 0.*#+` modifier flags.
 
 Support `l ll h hh` size flags.
 
+Bonus don't pass the moulinette 😭...
+
 # Tester
 ![alt text](https://raw.githubusercontent.com/untel/ft_printf/master/test/demo.png)
 

@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/13 01:00:20 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 01:11:59 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char
 
 	w = (int64_t)val;
 	if (mods.trail == 0)
-		dig -= ft_intlen((w < 0 ? -w : w));
+		dig -= ft_uintlen((w < 0 ? -w : w));
 	dig = dig < 0 ? 0 : dig;
 	decimstr = NULL;
 	decim = (val - w) < 0 ? -(val - w) : (val - w);
@@ -76,9 +76,9 @@ char
 		decim += 0.1;
 	decim *= ft_pow(10, dig);
 	decim += .5;
-	if ((uint64_t)decim == ft_pow(10, dig) && w++)
+	if ((uint64_t)decim == ft_pow(10, dig) && (w += (val < 0 ? -1 : 1)))
 		decim = 0;
-	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, w < 0);
+	wstr = ft_itoa_wrapper((uint64_t)(w < 0 ? -w : w), mods.sep, val < 0);
 	if (dig > 0 && !(decimstr = ft_lluitoa((uint64_t)decim)))
 		return (NULL);
 	if (to_reduce && decimstr && *decimstr == '1')

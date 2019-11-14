@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 20:17:59 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/14 00:21:49 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 01:32:53 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static size_t
 	size_t ret;
 
 	ret = 1;
-	if (*str == 'l')
+	if (ft_is_conv("lL", *str))
 	{
-		if (str[1] == 'l' && ret++)
+		if (ft_is_conv("lL", *(str + 1)) && ret++)
 			mods->size = LL;
 		else
 			mods->size = L;
 	}
 	else
 	{
-		if (str[1] == 'h' && ret++)
+		if (ft_is_conv("hH", *(str + 1)) && ret++)
 			mods->size = HH;
 		else
 			mods->size = H;
@@ -108,7 +108,7 @@ int
 			mods->sign = str[i++];
 		else if (str[i] == '#')
 			(mods->alt = 1) && i++;
-		else if (str[i] == 'l' || str[i] == 'h')
+		else if (ft_is_conv("lLhH", str[i]))
 			i += ft_handle_size(&str[i], mods);
 		else if (str[i] == '\'')
 			(mods->sep = ',') && i++;

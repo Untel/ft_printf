@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 19:41:54 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/14 01:13:22 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/14 01:30:40 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ int	run_float_tests()
     PRINT("Hi \'%.2f\' you", 3.96);
     PRINT("Hi \'%'10.3f\' you", 1233.96);
     PRINT("%f", -5.9999999);
+	PRINT("%5.0f", -7.3)
 }
 
 int	run_exp_tests()
@@ -289,6 +290,9 @@ int	run_other_tests()
 	PRINT("F31%19x", 2147483647);
 	PRINT("%f", -0.00032);
 	PRINT("%f", -0.00032);
+	PRINT("%5.0f", -7.3);
+	PRINT("%5.1f", -7.3);
+	PRINT("%Lf", 1.99999949l);
 }
 
 #include <locale.h>

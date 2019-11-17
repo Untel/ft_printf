@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 16:32:41 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/14 02:05:50 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/17 17:20:07 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,25 @@ char
 	size_t	decim_len;
 
 	len = ft_strlen(whole);
-	if (decim && (decim_len = ft_strlen(decim)))
+	if (decim)
+	{
+		decim_len = ft_strlen(decim);
+		while (!mods.trail && decim[--decim_len] == '0')
+			decim[decim_len] = 0;
+		decim_len = ft_strlen(decim);
 		len += (mods.trail ? digits : decim_len);
-	while (!mods.trail && decim && decim[--decim_len] == '0')
-		decim[decim_len] = 0;
+	}
 	if ((decim && *decim) || mods.alt)
 		len += 1;
 	if (!(res = ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
-	ft_strcat(res, whole);
-	if ((decim && *decim) || mods.alt)
-		ft_strcat(res, ".");
+	if ((len = ft_strcpy(res, whole)) && (mods.alt || decim))
+		res[len++] = '.';
 	if (decim)
 	{
-		ft_strcat(res, decim);
+		len += ft_strcpy(&res[len], decim);
 		while (mods.trail && decim_len++ < digits)
-			ft_strcat(res, "0");
+			res[len++] = '0';
 		ft_memdel((void **)&decim);
 	}
 	ft_memdel((void **)&whole);

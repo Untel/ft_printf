@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:26:07 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/14 01:57:21 by adda-sil         ###   ########.fr       */
+/*   Updated: 2019/11/17 17:21:32 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char
 		mods.precision = ((mods.alt || mods.conv == 'p')
 			&& mods.padding > prefixlen ?
 				mods.padding - (prefixlen) : mods.padding);
-	if (!ft_strncmp(res, "0", 3) && mods.precision == 0)
+	if (res && !ft_strncmp(res, "0", 3) && mods.precision == 0)
 		res = ft_f(res, ft_strdup(""));
 	if (res && mods.precision != -1)
 		res = ft_f(res, ft_fill(res, mods.precision, '0', 0));

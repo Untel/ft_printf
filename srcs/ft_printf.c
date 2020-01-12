@@ -6,7 +6,7 @@
 /*   By: adda-sil <adda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 20:20:55 by adda-sil          #+#    #+#             */
-/*   Updated: 2019/11/14 02:16:38 by adda-sil         ###   ########.fr       */
+/*   Updated: 2020/01/11 19:28:02 by adda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,31 @@ int
 {
 	t_list	*el;
 	t_list	*fel;
+	va_list	args;
+	int		len;
+
+	va_start(args, str);
+	len = 0;
+	fel = NULL;
+	if (ft_split_to_list(str, &fel, args) && ((el = fel) || 1))
+		while (el)
+		{
+			len += el->size;
+			write(OUTPUT_FD, (char *)el->content, el->size);
+			el = el->next;
+		}
+	else
+		len = -1;
+	ft_lstclear(&fel, ft_clearfn);
+	va_end(args);
+	return (len);
+}
+
+int
+	ft_fprintf(int fd, const char *str, ...)
+{
+	t_list	*el;
+	t_list	*fel;
 	int		len;
 	va_list	args;
 
@@ -34,7 +59,7 @@ int
 		while (el)
 		{
 			len += el->size;
-			write(OUTPUT_FD, (char *)el->content, el->size);
+			write(fd, (char *)el->content, el->size);
 			el = el->next;
 		}
 	else
